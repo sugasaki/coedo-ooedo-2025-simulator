@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  RaceData,
-  RaceParticipantBase,
-  getFinishTime,
-  getPace,
-} from '../types/race';
+import { RaceData, RaceParticipantBase } from '../types/race';
+import { getFinishTime, getPace } from '../utils/raceHelpers';
 import { loadRaceData, getParticipantsData } from '../utils/raceDataLoader';
 
 /**

@@ -10,7 +10,6 @@ import { RaceData } from '../types/race';
  */
 export async function loadRaceData(path: string): Promise<RaceData> {
   try {
-    // Viteでは、importを使用してJSONファイルを直接インポートすることもできます
     const data = (await import(/* @vite-ignore */ path).then(
       module => module.default
     )) as RaceData;
@@ -38,9 +37,11 @@ export function getCategoryData(data: RaceData, categoryName: string) {
  * @returns 参加者データの配列
  */
 export function getParticipantsData(data: RaceData, categoryName: string) {
-  const category = getCategoryData(data, categoryName);
-  if (!category) return [];
+  const categoryData = data.find(
+    category => category.category === categoryName
+  );
+  if (!categoryData) return [];
 
   // 最初の要素はヘッダー行なので除外
-  return category.results.slice(1);
+  return categoryData.results.slice(1);
 }

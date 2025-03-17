@@ -17,24 +17,20 @@ export function RaceDataViewer() {
       try {
         setLoading(true);
 
-        // すべてのレースデータを読み込む
-        const data200km = await loadRaceData('../data/race_6681_short.json');
-        const data230km = await loadRaceData('../data/race_6682_short.json');
-        const data260km = await loadRaceData('../data/race_6683_short.json');
-        const data90km = await loadRaceData('../data/race_6684_short.json');
-        const data115km = await loadRaceData('../data/race_6685_short.json');
+        // 新しいデータファイルを読み込む
+        const raceData = await loadRaceData(
+          '../data/results_coedo_ooedo_2025_short.json'
+        );
 
         // データを保存
-        setRaceData({
-          小江戸大江戸200km: data200km,
-          小江戸大江戸230km: data230km,
-          小江戸大江戸260km: data260km,
-          小江戸90km: data90km,
-          大江戸ナイトラン115km: data115km,
-        });
+        const formattedData = raceData.reduce((acc, race) => {
+          acc[race.category] = [race];
+          return acc;
+        }, {} as Record<string, RaceData>);
 
+        setRaceData(formattedData);
         // 最初のレースを選択
-        setSelectedRace('小江戸大江戸200km');
+        setSelectedRace(raceData[0].category);
 
         setError(null);
       } catch (err) {

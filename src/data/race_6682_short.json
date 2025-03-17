@@ -91,9 +91,21 @@
           "time_second": 83054,
           "comment": "1位"
         },
-        "column_17": "23:10:42(1位)",
-        "column_18": "24:57:32(1位)",
-        "column_19": "26:45:06(1位)",
+        "column_17": {
+          "time": "23:10:42",
+          "time_second": 83442,
+          "comment": "1位"
+        },
+        "column_18": {
+          "time": "24:57:32",
+          "time_second": "24:57:32",
+          "comment": "1位"
+        },
+        "column_19": {
+          "time": "26:45:06",
+          "time_second": "26:45:06",
+          "comment": "1位"
+        },
         "column_20": "06:47.56"
       },
       {
@@ -162,10 +174,106 @@
           "time_second": "24:34:23",
           "comment": "3位"
         },
-        "column_17": "24:36:44(3位)",
-        "column_18": "26:10:02(2位)",
-        "column_19": "27:58:06(2位)",
+        "column_17": {
+          "time": "24:36:44",
+          "time_second": "24:36:44",
+          "comment": "3位"
+        },
+        "column_18": {
+          "time": "26:10:02",
+          "time_second": "26:10:02",
+          "comment": "2位"
+        },
+        "column_19": {
+          "time": "27:58:06",
+          "time_second": "27:58:06",
+          "comment": "2位"
+        },
         "column_20": "07:06.09"
+      },
+      {
+        "column_0": "3",
+        "column_1": "122",
+        "column_2": "門脇　健児",
+        "column_3": "ドリパス",
+        "column_4": "男子：3",
+        "column_5": {
+          "time": "02:01:26",
+          "time_second": 7286,
+          "comment": "2位"
+        },
+        "column_6": {
+          "time": "03:02:59",
+          "time_second": 10979,
+          "comment": "2位"
+        },
+        "column_7": {
+          "time": "04:44:48",
+          "time_second": 17088,
+          "comment": "2位"
+        },
+        "column_8": {
+          "time": "06:48:10",
+          "time_second": 24490,
+          "comment": "3位"
+        },
+        "column_9": {
+          "time": "08:50:01",
+          "time_second": 31801,
+          "comment": "3位"
+        },
+        "column_10": {
+          "time": "09:10:32",
+          "time_second": 33032,
+          "comment": "2位"
+        },
+        "column_11": {
+          "time": "13:21:38",
+          "time_second": 48098,
+          "comment": "2位"
+        },
+        "column_12": {
+          "time": "15:56:31",
+          "time_second": 57391,
+          "comment": "2位"
+        },
+        "column_13": {
+          "time": "17:37:00",
+          "time_second": 63420,
+          "comment": "2位"
+        },
+        "column_14": {
+          "time": "20:29:02",
+          "time_second": 73742,
+          "comment": "2位"
+        },
+        "column_15": {
+          "time": "22:17:18",
+          "time_second": 80238,
+          "comment": "2位"
+        },
+        "column_16": {
+          "time": "24:27:05",
+          "time_second": "24:27:05",
+          "comment": "2位"
+        },
+        "column_17": {
+          "time": "24:35:10",
+          "time_second": "24:35:10",
+          "comment": "2位"
+        },
+        "column_18": {
+          "time": "26:19:22",
+          "time_second": "26:19:22",
+          "comment": "3位"
+        },
+        "column_19": {
+          "time": "27:59:58",
+          "time_second": "27:59:58",
+          "comment": "3位"
+        },
+        "column_20": "07:06.56"
       }
+    ]
   }
 ]

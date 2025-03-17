@@ -93,11 +93,31 @@
           "time_second": 82362,
           "comment": "1位"
         },
-        "column_17": "23:14:28(1位)",
-        "column_18": "24:44:19(1位)",
-        "column_19": "26:04:09(1位)",
-        "column_20": "27:25:48(1位)",
-        "column_21": "29:17:17(1位)",
+        "column_17": {
+          "time": "23:14:28",
+          "time_second": 83668,
+          "comment": "1位"
+        },
+        "column_18": {
+          "time": "24:44:19",
+          "time_second": "24:44:19",
+          "comment": "1位"
+        },
+        "column_19": {
+          "time": "26:04:09",
+          "time_second": "26:04:09",
+          "comment": "1位"
+        },
+        "column_20": {
+          "time": "27:25:48",
+          "time_second": "27:25:48",
+          "comment": "1位"
+        },
+        "column_21": {
+          "time": "29:17:17",
+          "time_second": "29:17:17",
+          "comment": "1位"
+        },
         "column_22": "06:43.35"
       },
       {
@@ -166,12 +186,125 @@
           "time_second": 84883,
           "comment": "2位"
         },
-        "column_17": "23:56:24(2位)",
-        "column_18": "25:29:38(2位)",
-        "column_19": "26:57:32(2位)",
-        "column_20": "28:32:03(2位)",
-        "column_21": "30:44:33(2位)",
+        "column_17": {
+          "time": "23:56:24",
+          "time_second": 86184,
+          "comment": "2位"
+        },
+        "column_18": {
+          "time": "25:29:38",
+          "time_second": "25:29:38",
+          "comment": "2位"
+        },
+        "column_19": {
+          "time": "26:57:32",
+          "time_second": "26:57:32",
+          "comment": "2位"
+        },
+        "column_20": {
+          "time": "28:32:03",
+          "time_second": "28:32:03",
+          "comment": "2位"
+        },
+        "column_21": {
+          "time": "30:44:33",
+          "time_second": "30:44:33",
+          "comment": "2位"
+        },
         "column_22": "07:03.38"
+      },
+      {
+        "column_0": "3",
+        "column_1": "24",
+        "column_2": "袴田　訓史",
+        "column_3": "",
+        "column_4": "男子：3",
+        "column_5": {
+          "time": "02:04:05",
+          "time_second": 7445,
+          "comment": "3位"
+        },
+        "column_6": {
+          "time": "03:07:29",
+          "time_second": 11249,
+          "comment": "3位"
+        },
+        "column_7": {
+          "time": "04:52:32",
+          "time_second": 17552,
+          "comment": "2位"
+        },
+        "column_8": {
+          "time": "07:06:12",
+          "time_second": 25572,
+          "comment": "2位"
+        },
+        "column_9": {
+          "time": "09:07:40",
+          "time_second": 32860,
+          "comment": "3位"
+        },
+        "column_10": {
+          "time": "09:33:49",
+          "time_second": 34429,
+          "comment": "4位"
+        },
+        "column_11": {
+          "time": "13:43:18",
+          "time_second": 49398,
+          "comment": "3位"
+        },
+        "column_12": {
+          "time": "16:02:49",
+          "time_second": 57769,
+          "comment": "3位"
+        },
+        "column_13": {
+          "time": "17:41:31",
+          "time_second": 63691,
+          "comment": "2位"
+        },
+        "column_14": {
+          "time": "20:31:12",
+          "time_second": 73872,
+          "comment": "2位"
+        },
+        "column_15": {
+          "time": "22:06:19",
+          "time_second": 79579,
+          "comment": "3位"
+        },
+        "column_16": {
+          "time": "24:07:47",
+          "time_second": "24:07:47",
+          "comment": "3位"
+        },
+        "column_17": {
+          "time": "24:59:50",
+          "time_second": "24:59:50",
+          "comment": "3位"
+        },
+        "column_18": {
+          "time": "26:42:32",
+          "time_second": "26:42:32",
+          "comment": "3位"
+        },
+        "column_19": {
+          "time": "28:17:02",
+          "time_second": "28:17:02",
+          "comment": "3位"
+        },
+        "column_20": {
+          "time": "29:58:59",
+          "time_second": "29:58:59",
+          "comment": "3位"
+        },
+        "column_21": {
+          "time": "32:13:30",
+          "time_second": "32:13:30",
+          "comment": "3位"
+        },
+        "column_22": "07:23.80"
       }
     ]
   }

@@ -5,77 +5,122 @@
 // チェックポイントでの記録データ
 export interface CheckpointRecord {
   time: string; // 通過時間（HH:MM:SS形式）
-  time_second: number | string; // 通過時間（秒）または文字列形式のペース
-  comment?: string; // コメント（順位など）- オプショナル
+  time_second: number | string; // 通過時間（秒）または文字列形式
+  comment: string; // コメント（順位など）
 }
 
-// ペースデータ（小江戸90kmのcolumn_10など）
+// ペースデータ
 export interface PaceRecord {
   time: string; // ペース（MM:SS.mm形式）
   time_second: string; // 同じペース値（文字列形式）
 }
 
-// レース参加者の結果データ（部分的な型定義）
+// レース参加者の基本データ（すべてのレースに共通）
 export interface RaceParticipantBase {
   column_0: string; // 順位
   column_1: string; // ゼッケン
   column_2: string; // 氏名
   column_3: string; // 所属
   column_4: string; // 部門順位
-  column_5: CheckpointRecord | string; // 21.4km
-  column_6: CheckpointRecord | string; // 32.7km
-  column_7: CheckpointRecord | string; // 52.2km
-  column_8: CheckpointRecord | string; // 72.6km
-  column_9: CheckpointRecord | string; // 91.7km
+  [key: string]: string | CheckpointRecord | PaceRecord | undefined; // その他のカラム（動的に追加）
 }
-
-// 小江戸大江戸200kmの参加者データ
-export interface RaceParticipant200km extends RaceParticipantBase {
-  column_10: CheckpointRecord | string; // 92.0km
-  column_11: CheckpointRecord | string; // 128.6km
-  column_12: CheckpointRecord | string; // 146.5km
-  column_13: CheckpointRecord | string; // 159.4km
-  column_14: CheckpointRecord | string; // 181.3km
-  column_15: CheckpointRecord | string; // 193.1km
-  column_16: CheckpointRecord | string; // 207.5km
-  column_17: string; // ペース(分/㎞)
-}
-
-// 小江戸90kmの参加者データ
-export interface RaceParticipant90km extends RaceParticipantBase {
-  column_10: PaceRecord | string; // ペース(分/㎞)
-}
-
-// 大江戸ナイトラン115kmの参加者データ
-export interface RaceParticipant115km extends RaceParticipantBase {
-  column_10: CheckpointRecord | string; // 115.1km
-  column_11: PaceRecord | string; // ペース(分/㎞)
-}
-
-// 共用型として定義
-export type RaceParticipant =
-  | RaceParticipant200km
-  | RaceParticipant90km
-  | RaceParticipant115km;
 
 // レースカテゴリーのデータ
 export interface RaceCategory {
   category: string; // カテゴリー名
-  results: RaceParticipant[]; // 参加者の結果リスト
+  results: RaceParticipantBase[]; // 参加者の結果リスト
 }
 
 // レースデータ全体
 export type RaceData = RaceCategory[];
 
-// レースの種類を判別するヘルパー関数
-export function is200kmRace(category: string): boolean {
-  return category.includes('200km');
+/**
+ * レースの種類を判別するヘルパー関数
+ */
+export function getRaceType(category: string): string {
+  if (category.includes('200km')) return '200km';
+  if (category.includes('230km')) return '230km';
+  if (category.includes('260km')) return '260km';
+  if (category.includes('90km')) return '90km';
+  if (category.includes('115km')) return '115km';
+  return 'unknown';
 }
 
-export function is90kmRace(category: string): boolean {
-  return category.includes('90km');
+/**
+ * ゴールタイムを取得するヘルパー関数
+ * @param participant 参加者データ
+ * @param category レースカテゴリー
+ * @returns ゴールタイム
+ */
+export function getFinishTime(
+  participant: RaceParticipantBase,
+  category: string
+): string {
+  const raceType = getRaceType(category);
+
+  switch (raceType) {
+    case '200km':
+      return getTimeValue(participant.column_16);
+    case '230km':
+      return getTimeValue(participant.column_19);
+    case '260km':
+      return getTimeValue(participant.column_21);
+    case '90km':
+      return getTimeValue(participant.column_9);
+    case '115km':
+      return getTimeValue(participant.column_10);
+    default:
+      return '';
+  }
 }
 
-export function is115kmRace(category: string): boolean {
-  return category.includes('115km');
+/**
+ * ペースを取得するヘルパー関数
+ * @param participant 参加者データ
+ * @param category レースカテゴリー
+ * @returns ペース
+ */
+export function getPace(
+  participant: RaceParticipantBase,
+  category: string
+): string {
+  const raceType = getRaceType(category);
+
+  switch (raceType) {
+    case '200km':
+      return participant.column_17 as string;
+    case '230km':
+      return participant.column_20 as string;
+    case '260km':
+      return participant.column_22 as string;
+    case '90km':
+      return participant.column_10 as string;
+    case '115km':
+      return getTimeValue(participant.column_11);
+    default:
+      return '';
+  }
+}
+
+/**
+ * チェックポイントデータまたは文字列から時間値を取得するヘルパー関数
+ * @param value チェックポイントデータまたは文字列
+ * @returns 時間値
+ */
+function getTimeValue(
+  value: string | CheckpointRecord | PaceRecord | undefined
+): string {
+  if (!value) return '';
+
+  if (typeof value === 'object' && value.time) {
+    return value.time;
+  }
+
+  if (typeof value === 'string') {
+    // 文字列の場合、括弧内の順位情報を削除
+    const match = value.match(/^([^(]+)/);
+    return match ? match[1].trim() : value;
+  }
+
+  return String(value);
 }

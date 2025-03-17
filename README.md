@@ -7,6 +7,16 @@
 https://github.com/sugasaki/simulator-data-geter
 
 
+## Deploy
+
+Github Pagesへデプロイしています。
+
+編集は以下
+
+```
+.github/workflows/deploy-gh-pages.yml
+```
+
 
 # React + TypeScript + Vite
 

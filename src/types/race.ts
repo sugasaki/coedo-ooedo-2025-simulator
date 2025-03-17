@@ -25,9 +25,15 @@ export interface RaceParticipantBase {
   [key: string]: string | CheckpointRecord | PaceRecord | undefined; // その他のカラム（動的に追加）
 }
 
+// レースカテゴリーのヘッダー
+export interface RaceHeader {
+  [key: string]: string; // 動的なヘッダーカラム
+}
+
 // レースカテゴリーのデータ
 export interface RaceCategory {
   category: string; // カテゴリー名
+  header: RaceHeader; // ヘッダー情報
   results: RaceParticipantBase[]; // 参加者の結果リスト
 }
 

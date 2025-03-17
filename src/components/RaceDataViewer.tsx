@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { RaceData, RaceParticipantBase } from '../types/race';
 import { getFinishTime, getPace } from '../utils/raceHelpers';
 import { loadRaceData, getParticipantsData } from '../utils/raceDataLoader';
+import { ParticipantDetail } from './ParticipantDetail';
 
 /**
  * レースデータを表示するコンポーネント
@@ -11,13 +12,15 @@ export function RaceDataViewer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedRace, setSelectedRace] = useState<string>('');
+  const [selectedParticipant, setSelectedParticipant] =
+    useState<RaceParticipantBase | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
 
-        // 新しいデータファイルを読み込む
+        // 新しいデータファイルを読み込む.json'
         const raceData = await loadRaceData(
           '../data/results_coedo_ooedo_2025_short.json'
         );
@@ -87,7 +90,11 @@ export function RaceDataViewer() {
         </thead>
         <tbody>
           {participants.map((participant: RaceParticipantBase, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              onClick={() => setSelectedParticipant(participant)}
+              style={{ cursor: 'pointer' }}
+            >
               <td>{participant.column_0}</td>
               <td>{participant.column_1}</td>
               <td>{participant.column_2}</td>
@@ -99,6 +106,13 @@ export function RaceDataViewer() {
           ))}
         </tbody>
       </table>
+
+      {selectedParticipant && (
+        <ParticipantDetail
+          participant={selectedParticipant}
+          onClose={() => setSelectedParticipant(null)}
+        />
+      )}
     </div>
   );
 }

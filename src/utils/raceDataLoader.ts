@@ -42,6 +42,6 @@ export function getParticipantsData(data: RaceData, categoryName: string) {
   );
   if (!categoryData) return [];
 
-  // 最初の要素はヘッダー行なので除外
-  return categoryData.results.slice(1);
+  // ヘッダー行のスキップが不要になったため、そのまま返す
+  return categoryData.results;
 }

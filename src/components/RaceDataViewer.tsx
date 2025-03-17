@@ -110,6 +110,7 @@ export function RaceDataViewer() {
       {selectedParticipant && (
         <ParticipantDetail
           participant={selectedParticipant}
+          header={raceData[selectedRace][0].header}
           onClose={() => setSelectedParticipant(null)}
         />
       )}

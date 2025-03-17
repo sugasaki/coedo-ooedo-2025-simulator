@@ -1,12 +1,14 @@
-import { RaceParticipantBase } from '../types/race';
+import { RaceParticipantBase, RaceHeader } from '../types/race';
 
 interface ParticipantDetailProps {
   participant: RaceParticipantBase;
+  header: RaceHeader;
   onClose: () => void;
 }
 
 export function ParticipantDetail({
   participant,
+  header,
   onClose,
 }: ParticipantDetailProps) {
   return (
@@ -19,10 +21,11 @@ export function ParticipantDetail({
         <table>
           <tbody>
             {Object.entries(participant).map(([key, value]) => {
+              const headerLabel = header[key] || key;
               if (typeof value === 'object' && value !== null) {
                 return (
                   <tr key={key}>
-                    <td>{key}</td>
+                    <td>{headerLabel}</td>
                     <td>
                       時刻: {value.time}
                       <br />
@@ -33,7 +36,7 @@ export function ParticipantDetail({
               }
               return (
                 <tr key={key}>
-                  <td>{key}</td>
+                  <td>{headerLabel}</td>
                   <td>{value}</td>
                 </tr>
               );

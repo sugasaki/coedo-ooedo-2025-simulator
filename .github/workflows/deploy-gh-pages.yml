@@ -10,24 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    steps:
-      - uses: actions/checkout@v4
+      steps:
+        - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+        - name: Setup Node
+          uses: actions/setup-node@v4
+          with:
+            node-version: '24'
 
-      - name: Install dependencies
-        run: npm install
+        - name: Get yarn cache
+          id: yarn-cache
+          run: echo "YARN_CACHE_DIR=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
 
-      - name: Build
-        env:
-          VITE_MAPBOX_ACCESS_TOKEN: ${{ secrets.VITE_MAPBOX_ACCESS_TOKEN }}
-        run: npm run build
+        - name: Cache dependencies
+          uses: actions/cache@v4
+          with:
+            path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
+            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-yarn-
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+        - run: yarn install --frozen-lockfile
+        - run: yarn build
+        - run: yarn export
+
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v4
+          if: github.ref == 'refs/heads/main'
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./out
+

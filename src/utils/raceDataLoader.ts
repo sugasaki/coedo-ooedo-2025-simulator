@@ -10,9 +10,11 @@ import { RaceData } from '../types/race';
  */
 export async function loadRaceData(path: string): Promise<RaceData> {
   try {
-    const data = (await import(/* @vite-ignore */ path).then(
-      module => module.default
-    )) as RaceData;
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = (await response.json()) as RaceData;
     return data;
   } catch (error) {
     console.error('レースデータの読み込み中にエラーが発生しました:', error);

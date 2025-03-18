@@ -20,9 +20,9 @@ export function RaceDataViewer() {
       try {
         setLoading(true);
 
-        // 新しいデータファイルを読み込む.json'
+        // 新しいデータファイルを読み込む
         const raceData = await loadRaceData(
-          '../data/results_coedo_ooedo_2025_short.json'
+          '/data/results_coedo_ooedo_2025_short.json'
         );
 
         // データを保存

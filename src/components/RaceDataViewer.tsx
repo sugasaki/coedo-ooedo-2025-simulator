@@ -3,37 +3,34 @@ import { RaceData, RaceParticipantBase } from '../types/race';
 import { getFinishTime, getPace } from '../utils/raceHelpers';
 import { loadRaceData, getParticipantsData } from '../utils/raceDataLoader';
 import { ParticipantDetail } from './ParticipantDetail';
+import { useStore } from '../store/store';
 
-/**
- * レースデータを表示するコンポーネント
- */
 export function RaceDataViewer() {
   const [raceData, setRaceData] = useState<Record<string, RaceData>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedRace, setSelectedRace] = useState<string>('');
   const [selectedParticipant, setSelectedParticipant] =
     useState<RaceParticipantBase | null>(null);
+  const { category, setCategory } = useStore();
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-
-        // 新しいデータファイルを読み込む
         const raceData = await loadRaceData(
           './data/results_coedo_ooedo_2025_short.json'
         );
-
-        // データを保存
         const formattedData = raceData.reduce((acc, race) => {
           acc[race.category] = [race];
           return acc;
         }, {} as Record<string, RaceData>);
 
         setRaceData(formattedData);
-        // 最初のレースを選択
-        setSelectedRace(raceData[0].category);
+
+        // カテゴリーの初期設定
+        if (!formattedData[category]) {
+          setCategory(raceData[0].category);
+        }
 
         setError(null);
       } catch (err) {
@@ -45,12 +42,12 @@ export function RaceDataViewer() {
     }
 
     fetchData();
-  }, []);
+  }, [setCategory]); // categoryを依存配列から削除
 
   // 選択されたレースの参加者データを取得
   const participants =
-    selectedRace && raceData[selectedRace]
-      ? getParticipantsData(raceData[selectedRace], selectedRace)
+    category && raceData[category]
+      ? getParticipantsData(raceData[category], category)
       : [];
 
   if (loading) return <div>データを読み込み中...</div>;
@@ -63,8 +60,8 @@ export function RaceDataViewer() {
         <label htmlFor="race-select">レース選択: </label>
         <select
           id="race-select"
-          value={selectedRace}
-          onChange={e => setSelectedRace(e.target.value)}
+          value={category}
+          onChange={e => setCategory(e.target.value)}
         >
           {Object.keys(raceData).map(race => (
             <option key={race} value={race}>
@@ -74,7 +71,7 @@ export function RaceDataViewer() {
         </select>
       </div>
 
-      <h2>レース結果: {selectedRace}</h2>
+      <h2>レース結果: {category}</h2>
 
       <table>
         <thead>
@@ -100,8 +97,8 @@ export function RaceDataViewer() {
               <td>{participant.column_2}</td>
               <td>{participant.column_3}</td>
               <td>{participant.column_4}</td>
-              <td>{getFinishTime(participant, selectedRace)}</td>
-              <td>{getPace(participant, selectedRace)}</td>
+              <td>{getFinishTime(participant, category)}</td>
+              <td>{getPace(participant, category)}</td>
             </tr>
           ))}
         </tbody>
@@ -110,7 +107,7 @@ export function RaceDataViewer() {
       {selectedParticipant && (
         <ParticipantDetail
           participant={selectedParticipant}
-          header={raceData[selectedRace][0].header}
+          header={raceData[category][0].header}
           onClose={() => setSelectedParticipant(null)}
         />
       )}

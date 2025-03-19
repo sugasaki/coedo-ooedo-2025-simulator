@@ -7,6 +7,10 @@ type State = {
   raceData: Record<string, RaceData>;
   isRaceDataLoading: boolean;
   raceDataError: string | null;
+  animationFrame: number;
+  animationFrameMax: number;
+  animationSpeed: number;
+  isPlaying: boolean;
 };
 
 export const useStore = create<
@@ -16,6 +20,10 @@ export const useStore = create<
     setRaceData: (data: Record<string, RaceData>) => void;
     setRaceDataLoading: (isLoading: boolean) => void;
     setRaceDataError: (error: string | null) => void;
+    setAnimationFrame: (frame: number) => void;
+    setAnimationFrameMax: (max: number) => void;
+    setPlaying: (isPlaying: boolean) => void;
+    setAnimationSpeed: (speed: number) => void;
   }
 >(set => ({
   runnerIds: [],
@@ -23,9 +31,17 @@ export const useStore = create<
   raceData: {},
   isRaceDataLoading: true,
   raceDataError: null,
+  animationFrame: 0,
+  animationFrameMax: 100,
+  isPlaying: false,
+  animationSpeed: 10,
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategory: category => set({ category }),
   setRaceData: data => set({ raceData: data }),
   setRaceDataLoading: isLoading => set({ isRaceDataLoading: isLoading }),
   setRaceDataError: error => set({ raceDataError: error }),
+  setAnimationFrame: frame => set({ animationFrame: frame }),
+  setAnimationFrameMax: max => set({ animationFrameMax: max }),
+  setPlaying: isPlaying => set({ isPlaying: isPlaying }),
+  setAnimationSpeed: speed => set({ animationSpeed: speed }),
 }));

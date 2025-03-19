@@ -47,7 +47,7 @@ export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
       >
         <DeckGLOverlay layers={layers} />
       </Map>
-      <AnimationFrame />
+      <AnimationFrame min={0} />
     </>
   );
 };

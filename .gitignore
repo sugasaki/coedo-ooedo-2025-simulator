@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .clinerules
+.env
+.env.local
+
+

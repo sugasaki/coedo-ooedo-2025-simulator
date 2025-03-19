@@ -1,11 +1,7 @@
-import { useSearchParams } from 'react-router';
 import './App.css';
 import { RaceDataViewer } from './components/RaceDataViewer';
 
 function App() {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('search');
-  console.log(query);
   return (
     <div className="p-8 space-y-12 dark:bg-gray-900 dark:text-white">
       <div className="text-3xl font-bold dark:text-white">

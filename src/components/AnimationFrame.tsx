@@ -16,13 +16,17 @@ export const AnimationFrame = ({ min = 0 }: Props) => {
     setPlaying,
   } = store;
 
+  console.log('AnimationFrame.tsx: isPlaying:', isPlaying);
+  console.log('AnimationFrame.tsx: animationFrame:', animationFrame);
+
   // prettier-ignore
   useEffect(() => {
-    let animation: number | undefined;
+    let animation: number;
 
     if (isPlaying) {
       animation = requestAnimationFrame(() => {
         let nextValue = animationFrame + animationSpeed;
+        console.log("nextValue", nextValue)
         if (nextValue > animationFrameMax) {
           nextValue = min;
         }
@@ -30,17 +34,28 @@ export const AnimationFrame = ({ min = 0 }: Props) => {
       });
     }
 
-    return () => {
-      if (animation !== undefined) {
-        cancelAnimationFrame(animation);
-      }
-    };
-  }, []);
+    return () => animation && cancelAnimationFrame(animation);
+  });
 
-  useEffect(() => {
-    // 2秒後にアニメーションを開始
-    setTimeout(() => setPlaying(true), 2000);
-  }, []);
+  // useEffect(() => {
+  //   let animation: number;
 
-  return <div>AnimationFrame</div>;
+  //   if (isPlaying) {
+  //     animation = requestAnimationFrame(() => {
+  //       let nextValue = animationFrame + animationSpeed;
+  //       if (nextValue > animationFrameMax) {
+  //         nextValue = min;
+  //       }
+  //       setAnimationFrame(nextValue);
+  //   }
+
+  //   return () => animation && cancelAnimationFrame(animation);
+  // });
+
+  // useEffect(() => {
+  //   // 2秒後にアニメーションを開始
+  //   setTimeout(() => setPlaying(true), 2000);
+  // }, []);
+
+  return <div>{animationFrame}</div>;
 };

@@ -33,7 +33,7 @@ export const useStore = create<
   raceDataError: null,
   animationFrame: 0,
   animationFrameMax: 100,
-  isPlaying: false,
+  isPlaying: true,
   animationSpeed: 10,
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategory: category => set({ category }),

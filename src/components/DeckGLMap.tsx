@@ -1,4 +1,5 @@
 import { Map } from 'react-map-gl/maplibre';
+import { DeckGLOverlay } from './DeckGLOverlay';
 
 const mapStyle = `https://api.maptiler.com/maps/streets/style.json?key=${
   import.meta.env.VITE_MAPTILER_KEY
@@ -26,10 +27,14 @@ export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
   return (
     <>
       <Map
+        reuseMaps
+        id="map"
         initialViewState={IMPERIAL_PALACE_LOCATION}
         mapStyle={mapStyle}
         style={mapViewStyle}
-      ></Map>
+      >
+        <DeckGLOverlay />
+      </Map>
     </>
   );
 };

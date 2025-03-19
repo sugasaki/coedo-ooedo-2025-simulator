@@ -2,6 +2,7 @@
  * レースデータを読み込むためのユーティリティ関数
  */
 import { RaceData } from '../types/race';
+import { useStore } from '../store/store';
 
 /**
  * 指定されたJSONファイルからレースデータを読み込む
@@ -20,6 +21,53 @@ export async function loadRaceData(path: string): Promise<RaceData> {
     console.error('レースデータの読み込み中にエラーが発生しました:', error);
     throw error;
   }
+}
+
+/**
+ * レースデータを読み込み、ストアに保存する
+ * @param path JSONファイルのパス
+ */
+export async function fetchAndStoreRaceData(path: string): Promise<void> {
+  const store = useStore.getState();
+  const {
+    setRaceData,
+    setRaceDataLoading,
+    setRaceDataError,
+    setCategory,
+    category,
+  } = store;
+
+  try {
+    setRaceDataLoading(true);
+    const raceData = await loadRaceData(path);
+    const formattedData = formatRaceData(raceData);
+
+    setRaceData(formattedData);
+
+    // カテゴリーの初期設定
+    if (!formattedData[category] && Object.keys(formattedData).length > 0) {
+      setCategory(raceData[0].category);
+    }
+
+    setRaceDataError(null);
+  } catch (err) {
+    setRaceDataError('レースデータの読み込みに失敗しました');
+    console.error(err);
+  } finally {
+    setRaceDataLoading(false);
+  }
+}
+
+/**
+ * レースデータをカテゴリーごとにフォーマットする
+ * @param raceData 元のレースデータ
+ * @returns カテゴリーごとにフォーマットされたデータ
+ */
+export function formatRaceData(raceData: RaceData): Record<string, RaceData> {
+  return raceData.reduce((acc, race) => {
+    acc[race.category] = [race];
+    return acc;
+  }, {} as Record<string, RaceData>);
 }
 
 /**

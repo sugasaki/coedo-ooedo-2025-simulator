@@ -1,48 +1,15 @@
-import { useEffect, useState } from 'react';
-import { RaceData, RaceParticipantBase } from '../types/race';
+import { useState } from 'react';
+import { RaceParticipantBase } from '../types/race';
 import { getFinishTime, getPace } from '../utils/raceHelpers';
-import { loadRaceData, getParticipantsData } from '../utils/raceDataLoader';
+import { getParticipantsData } from '../utils/raceDataLoader';
 import { ParticipantDetail } from './ParticipantDetail';
 import { useStore } from '../store/store';
 
 export function RaceDataViewer() {
-  const [raceData, setRaceData] = useState<Record<string, RaceData>>({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [selectedParticipant, setSelectedParticipant] =
     useState<RaceParticipantBase | null>(null);
-  const { category, setCategory } = useStore();
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const raceData = await loadRaceData(
-          './data/results_coedo_ooedo_2025_short.json'
-        );
-        const formattedData = raceData.reduce((acc, race) => {
-          acc[race.category] = [race];
-          return acc;
-        }, {} as Record<string, RaceData>);
-
-        setRaceData(formattedData);
-
-        // カテゴリーの初期設定
-        if (!formattedData[category]) {
-          setCategory(raceData[0].category);
-        }
-
-        setError(null);
-      } catch (err) {
-        setError('データの読み込みに失敗しました');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, [setCategory]); // categoryを依存配列から削除
+  const { category, setCategory, raceData, isRaceDataLoading, raceDataError } =
+    useStore();
 
   // 選択されたレースの参加者データを取得
   const participants =
@@ -50,8 +17,8 @@ export function RaceDataViewer() {
       ? getParticipantsData(raceData[category], category)
       : [];
 
-  if (loading) return <div>データを読み込み中...</div>;
-  if (error) return <div>エラー: {error}</div>;
+  if (isRaceDataLoading) return <div>レースデータを読み込み中...</div>;
+  if (raceDataError) return <div>エラー: {raceDataError}</div>;
   if (Object.keys(raceData).length === 0) return <div>データがありません</div>;
 
   return (

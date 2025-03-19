@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import './App.css';
 import { RaceDataViewer } from './components/RaceDataViewer';
 import { fetchAndStoreRaceData } from './utils/raceDataLoader';
+import { DeckGLMap } from './components/DeckGLMap';
+import './App.css';
 
 const url = './data/results_coedo_ooedo_2025_short.json';
 
@@ -16,9 +17,16 @@ function App() {
         小江戸大江戸2025シミュレーター
       </div>
 
+      {/* 地図コンポーネント */}
+      <div className="mt-8">
+        <h2 className="text-3xl font-bold dark:text-white mb-4">コース地図</h2>
+        {/* <MapComponent height="500px" /> */}
+        <DeckGLMap />
+      </div>
+
       <h2 className="text-3xl font-bold dark:text-white">レースデータ</h2>
 
-      <div className="mt-16">
+      <div className="mt-8">
         <RaceDataViewer />
       </div>
     </div>

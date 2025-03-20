@@ -3,25 +3,7 @@
  */
 import { RaceData } from '../types/race';
 import { useStore } from '../store/store';
-
-/**
- * 指定されたJSONファイルからレースデータを読み込む
- * @param path JSONファイルのパス
- * @returns レースデータのPromise
- */
-export async function loadRaceData(path: string): Promise<RaceData> {
-  try {
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = (await response.json()) as RaceData;
-    return data;
-  } catch (error) {
-    console.error('レースデータの読み込み中にエラーが発生しました:', error);
-    throw error;
-  }
-}
+import { loadRaceData } from './fetcher';
 
 /**
  * レースデータを読み込み、ストアに保存する
@@ -39,15 +21,23 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
 
   try {
     setRaceDataLoading(true);
+
+    console.log('fetchAndStoreRaceData');
+
     const raceData = await loadRaceData(path);
+
+    console.log('loadRaceData');
+
     const formattedData = formatRaceData(raceData);
+
+    console.log('formattedData', formattedData);
 
     setRaceData(formattedData);
 
-    // カテゴリーの初期設定
-    if (!formattedData[category] && Object.keys(formattedData).length > 0) {
-      setCategory(raceData[0].category);
-    }
+    // // カテゴリーの初期設定
+    // if (!formattedData[category] && Object.keys(formattedData).length > 0) {
+    //   setCategory(raceData[0].category);
+    // }
 
     setRaceDataError(null);
   } catch (err) {

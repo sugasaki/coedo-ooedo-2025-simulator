@@ -1,3 +1,5 @@
+import { RaceData } from '../types/race-json';
+
 /**
  * 指定されたJSONファイルからレースデータを読み込む
  * @param path JSONファイルのパス

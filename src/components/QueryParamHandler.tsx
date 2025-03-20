@@ -9,7 +9,7 @@ export const QueryParamHandler = () => {
     const store = useStore.getState();
     // URLパラメータから値を取得
     const runnerIds = searchParams.getAll('runnerid');
-    const category = searchParams.get('category') || '';
+    const categoryNo = searchParams.get('categoryNo') || '';
 
     // デバッグログ
     // console.log('URL Parameters:', {
@@ -21,8 +21,8 @@ export const QueryParamHandler = () => {
     if (runnerIds.length > 0) {
       store.setRunnerIds(runnerIds);
     }
-    if (category) {
-      store.setCategory(category);
+    if (categoryNo) {
+      store.setCategoryNo(Number(categoryNo));
     }
   }, [searchParams]);
 

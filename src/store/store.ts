@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { RaceData } from '../types/race';
+import { ConvertedRaceData } from '../types/race';
 
 type State = {
   runnerIds: string[];
-  category: string;
-  raceData: Record<string, RaceData>;
+  categoryNo: number;
+  raceData: ConvertedRaceData;
   isRaceDataLoading: boolean;
   raceDataError: string | null;
   animationFrameValue: number; // アニメーションの現在のフレーム
@@ -17,8 +17,8 @@ type State = {
 export const useStore = create<
   State & {
     setRunnerIds: (ids: string[]) => void;
-    setCategory: (category: string) => void;
-    setRaceData: (data: Record<string, RaceData>) => void;
+    setCategoryNo: (category: number) => void;
+    setRaceData: (data: ConvertedRaceData) => void;
     setRaceDataLoading: (isLoading: boolean) => void;
     setRaceDataError: (error: string | null) => void;
     setAnimationFrame: (frame: number) => void;
@@ -31,8 +31,8 @@ export const useStore = create<
   }
 >(set => ({
   runnerIds: [],
-  category: '',
-  raceData: {},
+  categoryNo: 0,
+  raceData: [],
   isRaceDataLoading: true,
   raceDataError: null,
   animationFrameValue: 0,
@@ -41,7 +41,7 @@ export const useStore = create<
   animationSpeed: 10,
   personLocation: null,
   setRunnerIds: ids => set({ runnerIds: ids }),
-  setCategory: category => set({ category }),
+  setCategoryNo: categoryNo => set({ categoryNo }),
   setRaceData: data => set({ raceData: data }),
   setRaceDataLoading: isLoading => set({ isRaceDataLoading: isLoading }),
   setRaceDataError: error => set({ raceDataError: error }),

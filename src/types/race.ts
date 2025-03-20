@@ -1,41 +1,36 @@
-/**
- * レース結果データの型定義
- */
-
-// チェックポイントでの記録データ
-export interface CheckpointRecord {
-  time: string; // 通過時間（HH:MM:SS形式）
-  time_second: number | string; // 通過時間（秒）または文字列形式
-  comment: string; // コメント（順位など）
-}
-
 // ペースデータ
 export interface PaceRecord {
   time: string; // ペース（MM:SS.mm形式）
   time_second: string; // 同じペース値（文字列形式）
 }
 
-// レース参加者の基本データ（すべてのレースに共通）
-export interface RaceParticipantBase {
-  column_0: string; // 順位
-  column_1: string; // ゼッケン
-  column_2: string; // 氏名
-  column_3: string; // 所属
-  column_4: string; // 部門順位
-  [key: string]: string | CheckpointRecord | PaceRecord | undefined; // その他のカラム（動的に追加）
+// チェックポイントでの記録データ（変換後）
+export interface RaceTimeResult {
+  leng: number; // 距離
+  length_prev: number;
+  time: string; // 通過時間（HH:MM:SS形式）
+  time_second: number; // 通過時間（秒）
+  time_second_prev: number;
+  comment: string; // コメント（順位など）
+  speed: number; // 区間の平均時速（km/h）
 }
 
-// レースカテゴリーのヘッダー
-export interface RaceHeader {
-  [key: string]: string; // 動的なヘッダーカラム
+// 変換後の参加者データ
+export interface ConvertedRaceParticipant {
+  順位: string;
+  ゼッケン: string;
+  氏名: string;
+  所属: string;
+  部門順位: string;
+  result: RaceTimeResult[]; // チェックポイントごとの記録
+  pace: string; // ペース
 }
 
-// レースカテゴリーのデータ
-export interface RaceCategory {
-  category: string; // カテゴリー名
-  header: RaceHeader; // ヘッダー情報
-  results: RaceParticipantBase[]; // 参加者の結果リスト
+// 変換後のレースカテゴリーのデータ
+export interface ConvertedRaceCategory {
+  category: string;
+  results: ConvertedRaceParticipant[];
 }
 
-// レースデータ全体
-export type RaceData = RaceCategory[];
+// 変換後のレースデータ全体
+export type ConvertedRaceData = ConvertedRaceCategory[];

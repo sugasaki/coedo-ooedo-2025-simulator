@@ -1,7 +1,10 @@
 import { PersonInfoType } from '../types/personInfo';
 
-export const createData = (raceData, time: number): PersonInfoType[] => {
+export const createData = (raceData: any, time: number): PersonInfoType[] => {
   // console.log(time, 'time');
+
+  console.log(raceData, 'raceData');
+  console.log(time, 'time');
 
   //   if (!sp) return [];
 
@@ -15,5 +18,5 @@ export const createData = (raceData, time: number): PersonInfoType[] => {
   //   // console.log(returndata, 'returndata');
   //   setPersonLocationData(returndata);
   //   console.log(time);
-  return null;
+  return [];
 };

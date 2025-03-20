@@ -2,7 +2,7 @@ import { useStore } from '../store/store';
 // import { createData } from '../utils/raceData';
 
 export const useResultData = () => {
-  const { raceData, setPersonLocationData } = useStore();
+  const { setPersonLocationData } = useStore();
 
   const createResultData = (time: number): any => {
     // const result = createData(raceData, time);
@@ -15,6 +15,7 @@ export const useResultData = () => {
     ];
 
     console.log(data, 'data');
+    console.log(time, 'time');
 
     setPersonLocationData(data);
   };

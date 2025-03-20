@@ -6,7 +6,7 @@ export const useScatterplotLayer = () => {
 
   const getScatterplotLayer = () => {
     //
-    const id = Math.random().toString(32).substring(2);
+    // const id = Math.random().toString(32).substring(2);
     //
     const scatterplotLayer = new ScatterplotLayer({
       id: 'scatterplot-layer',

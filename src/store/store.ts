@@ -24,6 +24,8 @@ export const useStore = create<
     setAnimationFrameMax: (max: number) => void;
     setPlaying: (isPlaying: boolean) => void;
     setAnimationSpeed: (speed: number) => void;
+    playingStart: () => void;
+    playingStop: () => void;
   }
 >(set => ({
   runnerIds: [],
@@ -33,7 +35,7 @@ export const useStore = create<
   raceDataError: null,
   animationFrameValue: 0,
   animationFrameMax: 10000,
-  isPlaying: true,
+  isPlaying: false,
   animationSpeed: 10,
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategory: category => set({ category }),
@@ -44,4 +46,6 @@ export const useStore = create<
   setAnimationFrameMax: max => set({ animationFrameMax: max }),
   setPlaying: isPlaying => set({ isPlaying: isPlaying }),
   setAnimationSpeed: speed => set({ animationSpeed: speed }),
+  playingStart: () => set({ isPlaying: true }),
+  playingStop: () => set({ isPlaying: false }),
 }));

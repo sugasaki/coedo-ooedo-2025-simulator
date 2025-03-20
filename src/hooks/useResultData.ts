@@ -1,5 +1,5 @@
 import { useStore } from '../store/store';
-import { createData } from '../utils/raceData';
+// import { createData } from '../utils/raceData';
 
 export const useResultData = () => {
   const { raceData, setPersonLocationData } = useStore();

@@ -2,7 +2,6 @@ import { ScatterplotLayer } from 'deck.gl';
 import { useStore } from '../store/store';
 
 export const useScatterplotLayer = () => {
-  const ballSize = 10;
   const { personLocation } = useStore();
 
   const getScatterplotLayer = () => {

@@ -7,7 +7,7 @@ type State = {
   raceData: Record<string, RaceData>;
   isRaceDataLoading: boolean;
   raceDataError: string | null;
-  animationFrameValue: number; // アニメーションの
+  animationFrameValue: number; // アニメーションの現在のフレーム
   animationFrameMax: number; // アニメーションの最大フレーム数
   animationSpeed: number; // アニメーションの速度
   isPlaying: boolean; // animetionの再生状態

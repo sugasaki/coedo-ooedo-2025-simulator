@@ -11,6 +11,7 @@ type State = {
   animationFrameMax: number; // アニメーションの最大フレーム数
   animationSpeed: number; // アニメーションの速度
   isPlaying: boolean; // animetionの再生状態
+  personLocation: any;
 };
 
 export const useStore = create<
@@ -26,6 +27,7 @@ export const useStore = create<
     setAnimationSpeed: (speed: number) => void;
     playingStart: () => void;
     playingStop: () => void;
+    setPersonLocationData: (value: any) => void;
   }
 >(set => ({
   runnerIds: [],
@@ -37,6 +39,7 @@ export const useStore = create<
   animationFrameMax: 10000,
   isPlaying: false,
   animationSpeed: 10,
+  personLocation: null,
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategory: category => set({ category }),
   setRaceData: data => set({ raceData: data }),
@@ -48,4 +51,5 @@ export const useStore = create<
   setAnimationSpeed: speed => set({ animationSpeed: speed }),
   playingStart: () => set({ isPlaying: true }),
   playingStop: () => set({ isPlaying: false }),
+  setPersonLocationData: (value: any) => set({ personLocation: value }),
 }));

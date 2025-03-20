@@ -1,8 +1,7 @@
 import { useStore } from '../store/store';
 
 export const AnimationControls = () => {
-  const store = useStore();
-  const { playingStart, playingStop, isPlaying } = store;
+  const { playingStart, playingStop, isPlaying } = useStore();
 
   return (
     <div style={{ margin: '10px 0' }}>

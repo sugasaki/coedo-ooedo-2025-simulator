@@ -1,8 +1,9 @@
 import { Map } from 'react-map-gl/maplibre';
 import { DeckGLOverlay } from './DeckGLOverlay';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { useScatterplotLayer } from '../hooks/useScatterplotLayer';
 
-const mapStyle = `https://api.maptiler.com/maps/streets/style.json?key=${
+const mapStyle = `https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json?key=${
   import.meta.env.VITE_MAPTILER_KEY
 }`;
 
@@ -35,6 +36,7 @@ export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
     height,
     position: 'relative' as const,
   };
+
   return (
     <>
       <Map

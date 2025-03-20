@@ -2,15 +2,25 @@ import { useEffect } from 'react';
 import { RaceDataViewer } from './components/RaceDataViewer';
 import { fetchAndStoreRaceData } from './utils/raceDataLoader';
 import { DeckGLMap } from './components/DeckGLMap';
-import './App.css';
 import { AnimationFrame } from './components/AnimationFrame';
+import { useStore } from './store/store';
+import './App.css';
+import { useResultData } from './hooks/useResultData';
 
 const url = './data/results_coedo_ooedo_2025_short.json';
 
 function App() {
+  const { animationFrameValue } = useStore();
+  const { createResultData } = useResultData();
+
   useEffect(() => {
     fetchAndStoreRaceData(url);
   }, []);
+
+  useEffect(() => {
+    // animationFrameValueに応じた各選手の位置情報を計算
+    createResultData(animationFrameValue);
+  }, [animationFrameValue]);
 
   return (
     <div className="p-8 space-y-12 dark:bg-gray-900 dark:text-white">

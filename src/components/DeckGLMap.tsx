@@ -1,7 +1,6 @@
 import { Map } from 'react-map-gl/maplibre';
 import { DeckGLOverlay } from './DeckGLOverlay';
 import { useScatterplotLayer } from '../hooks/useScatterplotLayer';
-import { AnimationFrame } from './AnimationFrame';
 
 const mapStyle = `https://api.maptiler.com/maps/streets/style.json?key=${
   import.meta.env.VITE_MAPTILER_KEY

@@ -1,7 +1,7 @@
 import { Map } from 'react-map-gl/maplibre';
 import { DeckGLOverlay } from './DeckGLOverlay';
-import { useScatterplotLayer } from '../hooks/useScatterplotLayer';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { useScatterplotLayer } from '../hooks/useScatterplotLayer';
 
 const mapStyle = `https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json?key=${
   import.meta.env.VITE_MAPTILER_KEY

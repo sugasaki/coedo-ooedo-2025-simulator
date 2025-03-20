@@ -7,12 +7,11 @@ export const useResultData = () => {
   const createResultData = (time: number): any => {
     // const result = createData(raceData, time);
 
+    // サンプルデータ
     const data = [
-      [139.27528, 35.97901, 110.0],
-      [139.27528, 35.9793, 114.0],
-      [139.27528, 35.97961, 119.0],
-      [139.27564, 35.97962, 121.0],
-      [139.276, 35.97962, 121.0],
+      { position: [139.7528, 35.6852], size: 100 },
+      { position: [139.7628, 35.6952], size: 100 },
+      { position: [139.7428, 35.6752], size: 100 },
     ];
 
     console.log(data, 'data');

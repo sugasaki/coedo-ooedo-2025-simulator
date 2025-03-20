@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useStore } from '../store/store';
 import { useAnimationFrame } from '../hooks/useAnimationFrame';
 import { AnimationControls } from './AnimationControls';
@@ -8,23 +7,12 @@ interface Props {
 }
 
 export const AnimationFrame = ({ min = 0 }: Props) => {
-  // 新しいuseAnimationFrameフックを使用
   const { isPlaying } = useAnimationFrame({
     min,
-    autoStart: false, // ボタンで制御するため自動開始はオフ
+    autoStart: false,
   });
 
-  // zustandのストアから現在のフレーム値を取得
   const animationFrameValue = useStore(state => state.animationFrameValue);
-
-  // デバッグ用のログ
-  useEffect(() => {
-    console.log('AnimationFrame: animationFrameValue =', animationFrameValue);
-  }, [animationFrameValue]);
-
-  useEffect(() => {
-    console.log('AnimationFrame: isPlaying =', isPlaying);
-  }, [isPlaying]);
 
   return (
     <div>

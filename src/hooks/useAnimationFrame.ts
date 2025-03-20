@@ -11,16 +11,11 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
   const { min = 0, autoStart = false, autoStartDelay = 0 } = options;
   const animationRef = useRef<number | undefined>(undefined);
 
-  // 状態を直接購読するように変更
   const isPlaying = useStore(state => state.isPlaying);
   const setAnimationFrame = useStore(state => state.setAnimationFrame);
   const setPlaying = useStore(state => state.setPlaying);
 
-  // デバッグ用のログ
-  console.log('useAnimationFrame: isPlaying =', isPlaying);
-
   const updateAnimationFrame = () => {
-    // 最新の状態を取得
     const store = useStore.getState();
     const {
       isPlaying: currentIsPlaying,
@@ -28,14 +23,6 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
       animationSpeed,
       animationFrameMax,
     } = store;
-
-    // デバッグ用のログ
-    console.log('updateAnimationFrame:', {
-      currentIsPlaying,
-      animationFrameValue,
-      animationSpeed,
-      animationFrameMax,
-    });
 
     let nextValue = animationFrameValue + animationSpeed;
     if (nextValue > animationFrameMax) nextValue = min;
@@ -48,20 +35,15 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
   };
 
   useEffect(() => {
-    console.log('isPlaying changed to:', isPlaying);
-
     if (isPlaying) {
-      console.log('Starting animation');
       animationRef.current = requestAnimationFrame(updateAnimationFrame);
     } else if (animationRef.current) {
-      console.log('Stopping animation');
       cancelAnimationFrame(animationRef.current);
       animationRef.current = undefined;
     }
 
     return () => {
       if (animationRef.current) {
-        console.log('Cleaning up animation');
         cancelAnimationFrame(animationRef.current);
         animationRef.current = undefined;
       }
@@ -70,32 +52,15 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
 
   useEffect(() => {
     if (autoStart) {
-      console.log(`Auto-starting animation in ${autoStartDelay}ms`);
-      const timer = setTimeout(() => {
-        console.log('Auto-start timeout triggered');
-        setPlaying(true);
-      }, autoStartDelay);
-
-      return () => {
-        console.log('Clearing auto-start timer');
-        clearTimeout(timer);
-      };
+      const timer = setTimeout(() => setPlaying(true), autoStartDelay);
+      return () => clearTimeout(timer);
     }
   }, [autoStart, autoStartDelay, setPlaying]);
 
   return {
-    startAnimation: () => {
-      console.log('startAnimation called');
-      setPlaying(true);
-    },
-    stopAnimation: () => {
-      console.log('stopAnimation called');
-      setPlaying(false);
-    },
-    resetAnimation: () => {
-      console.log('resetAnimation called');
-      setAnimationFrame(min);
-    },
+    startAnimation: () => setPlaying(true),
+    stopAnimation: () => setPlaying(false),
+    resetAnimation: () => setAnimationFrame(min),
     isPlaying,
   };
 };

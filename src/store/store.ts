@@ -7,10 +7,10 @@ type State = {
   raceData: Record<string, RaceData>;
   isRaceDataLoading: boolean;
   raceDataError: string | null;
-  animationFrame: number;
-  animationFrameMax: number;
-  animationSpeed: number;
-  isPlaying: boolean;
+  animationFrameValue: number; // アニメーションの
+  animationFrameMax: number; // アニメーションの最大フレーム数
+  animationSpeed: number; // アニメーションの速度
+  isPlaying: boolean; // animetionの再生状態
 };
 
 export const useStore = create<
@@ -31,8 +31,8 @@ export const useStore = create<
   raceData: {},
   isRaceDataLoading: true,
   raceDataError: null,
-  animationFrame: 0,
-  animationFrameMax: 100,
+  animationFrameValue: 0,
+  animationFrameMax: 10000,
   isPlaying: true,
   animationSpeed: 10,
   setRunnerIds: ids => set({ runnerIds: ids }),
@@ -40,7 +40,7 @@ export const useStore = create<
   setRaceData: data => set({ raceData: data }),
   setRaceDataLoading: isLoading => set({ isRaceDataLoading: isLoading }),
   setRaceDataError: error => set({ raceDataError: error }),
-  setAnimationFrame: frame => set({ animationFrame: frame }),
+  setAnimationFrame: frame => set({ animationFrameValue: frame }),
   setAnimationFrameMax: max => set({ animationFrameMax: max }),
   setPlaying: isPlaying => set({ isPlaying: isPlaying }),
   setAnimationSpeed: speed => set({ animationSpeed: speed }),

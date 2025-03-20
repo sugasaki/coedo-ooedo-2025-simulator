@@ -1,4 +1,7 @@
 import { Map } from 'react-map-gl/maplibre';
+import { DeckGLOverlay } from './DeckGLOverlay';
+import { useScatterplotLayer } from '../hooks/useScatterplotLayer';
+import { AnimationFrame } from './AnimationFrame';
 
 const mapStyle = `https://api.maptiler.com/maps/streets/style.json?key=${
   import.meta.env.VITE_MAPTILER_KEY
@@ -17,6 +20,16 @@ const IMPERIAL_PALACE_LOCATION = {
 };
 
 export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
+  const { getScatterplotLayer } = useScatterplotLayer();
+  const scatterplotLayer = getScatterplotLayer();
+
+  const layers = [
+    scatterplotLayer,
+    // aidIconLayer, //
+    // iconLayer,
+    // cp,
+  ];
+
   // マップコンテナのスタイル
   const mapViewStyle = {
     width,
@@ -26,10 +39,15 @@ export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
   return (
     <>
       <Map
+        reuseMaps
+        id="map"
         initialViewState={IMPERIAL_PALACE_LOCATION}
         mapStyle={mapStyle}
         style={mapViewStyle}
-      ></Map>
+      >
+        <DeckGLOverlay layers={layers} />
+      </Map>
+      <AnimationFrame min={0} />
     </>
   );
 };

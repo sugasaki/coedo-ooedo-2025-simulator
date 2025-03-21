@@ -14,7 +14,10 @@ function App() {
   const { createResultData } = useResultData();
 
   useEffect(() => {
-    fetchAndStoreRaceData(url);
+    (async () => {
+      console.log(url, 'url');
+      await fetchAndStoreRaceData(url);
+    })();
   }, []);
 
   useEffect(() => {

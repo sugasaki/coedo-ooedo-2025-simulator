@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import { RaceParticipantBase } from '../types/race';
-import { getFinishTime, getPace } from '../utils/raceHelpers';
-import { getParticipantsData } from '../utils/raceDataLoader';
-import { ParticipantDetail } from './ParticipantDetail';
+import { RaceParticipantBase } from '../types/race-json';
 import { useStore } from '../store/store';
 
 export function RaceDataViewer() {
-  const [selectedParticipant, setSelectedParticipant] =
-    useState<RaceParticipantBase | null>(null);
-  const { category, setCategory, raceData, isRaceDataLoading, raceDataError } =
-    useStore();
+  const [] = useState<RaceParticipantBase | null>(null);
+  const {
+    categoryNo,
+    setCategoryNo,
+    raceData,
+    isRaceDataLoading,
+    raceDataError,
+  } = useStore();
 
   // 選択されたレースの参加者データを取得
-  const participants =
-    category && raceData[category]
-      ? getParticipantsData(raceData[category], category)
-      : [];
+  // const participants = raceData[categoryNo];
 
   if (isRaceDataLoading) return <div>レースデータを読み込み中...</div>;
   if (raceDataError) return <div>エラー: {raceDataError}</div>;
@@ -27,8 +25,8 @@ export function RaceDataViewer() {
         <label htmlFor="race-select">レース選択: </label>
         <select
           id="race-select"
-          value={category}
-          onChange={e => setCategory(e.target.value)}
+          value={categoryNo}
+          onChange={e => setCategoryNo(Number(e.target.value))}
         >
           {Object.keys(raceData).map(race => (
             <option key={race} value={race}>
@@ -38,7 +36,7 @@ export function RaceDataViewer() {
         </select>
       </div>
 
-      <h2>レース結果: {category}</h2>
+      <h2>レース結果: {categoryNo}</h2>
 
       <table>
         <thead>
@@ -53,31 +51,27 @@ export function RaceDataViewer() {
           </tr>
         </thead>
         <tbody>
-          {participants.map((participant: RaceParticipantBase, index) => (
-            <tr
-              key={index}
-              onClick={() => setSelectedParticipant(participant)}
-              style={{ cursor: 'pointer' }}
-            >
-              <td>{participant.column_0}</td>
-              <td>{participant.column_1}</td>
-              <td>{participant.column_2}</td>
-              <td>{participant.column_3}</td>
-              <td>{participant.column_4}</td>
-              <td>{getFinishTime(participant, category)}</td>
-              <td>{getPace(participant, category)}</td>
-            </tr>
-          ))}
+          {/* {participants.results.map(
+            (participant: RaceParticipantBase, index: number) => (
+              <tr key={index} style={{ cursor: 'pointer' }}>
+                <td>{participant.column_0}</td>
+                <td>{participant.column_1}</td>
+                <td>{participant.column_2}</td>
+                <td>{participant.column_3}</td>
+                <td>{participant.column_4}</td>
+                <td>{getFinishTime(participant, categoryNo)}</td>
+              </tr>
+            )
+          )} */}
         </tbody>
       </table>
 
-      {selectedParticipant && (
+      {/* {selectedParticipant && (
         <ParticipantDetail
           participant={selectedParticipant}
-          header={raceData[category][0].header}
           onClose={() => setSelectedParticipant(null)}
         />
-      )}
+      )} */}
     </div>
   );
 }

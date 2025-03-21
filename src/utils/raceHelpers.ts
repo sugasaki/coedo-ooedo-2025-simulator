@@ -5,19 +5,7 @@ import {
   RaceParticipantBase,
   CheckpointRecord,
   PaceRecord,
-} from '../types/race';
-
-/**
- * レースの種類を判別するヘルパー関数
- */
-export function getRaceType(category: string): string {
-  if (category.includes('200km')) return '200km';
-  if (category.includes('230km')) return '230km';
-  if (category.includes('260km')) return '260km';
-  if (category.includes('90km')) return '90km';
-  if (category.includes('115km')) return '115km';
-  return 'unknown';
-}
+} from '../types/race-json';
 
 /**
  * ゴールタイムを取得するヘルパー関数
@@ -27,49 +15,21 @@ export function getRaceType(category: string): string {
  */
 export function getFinishTime(
   participant: RaceParticipantBase,
-  category: string
+  categoryNo: number
 ): string {
-  const raceType = getRaceType(category);
+  // const raceType = getRaceType(categoryNo);
 
-  switch (raceType) {
-    case '200km':
+  switch (categoryNo) {
+    case 0:
       return getTimeValue(participant.column_16);
-    case '230km':
+    case 1:
       return getTimeValue(participant.column_19);
-    case '260km':
+    case 2:
       return getTimeValue(participant.column_21);
-    case '90km':
+    case 3:
       return getTimeValue(participant.column_9);
-    case '115km':
+    case 4:
       return getTimeValue(participant.column_10);
-    default:
-      return '';
-  }
-}
-
-/**
- * ペースを取得するヘルパー関数
- * @param participant 参加者データ
- * @param category レースカテゴリー
- * @returns ペース
- */
-export function getPace(
-  participant: RaceParticipantBase,
-  category: string
-): string {
-  const raceType = getRaceType(category);
-
-  switch (raceType) {
-    case '200km':
-      return participant.column_17 as string;
-    case '230km':
-      return participant.column_20 as string;
-    case '260km':
-      return participant.column_22 as string;
-    case '90km':
-      return participant.column_10 as string;
-    case '115km':
-      return getTimeValue(participant.column_11);
     default:
       return '';
   }

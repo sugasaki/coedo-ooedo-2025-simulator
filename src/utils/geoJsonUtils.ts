@@ -8,7 +8,7 @@ import { GeoJsonLayer } from 'deck.gl';
  */
 export const createGeoJsonLayer = (
   geojson: any,
-  options: Partial<Parameters<typeof GeoJsonLayer>[0]> = {}
+  options: Partial<ConstructorParameters<typeof GeoJsonLayer>[0]> = {}
 ) => {
   const id = Math.random().toString(32).substring(2);
 
@@ -47,7 +47,7 @@ export const createAidPointLayer = (
   id: string = '',
   color: number[] = [255, 0, 0, 200],
   radius: number = 300,
-  options: Partial<Parameters<typeof GeoJsonLayer>[0]> = {}
+  options: Partial<ConstructorParameters<typeof GeoJsonLayer>[0]> = {}
 ) => {
   return new GeoJsonLayer({
     id: 'aid-layer' + id,
@@ -56,9 +56,11 @@ export const createAidPointLayer = (
     stroked: false,
     filled: true,
     extruded: true,
-    pointType: 'circle',
+    getFillColor: () => color as [number, number, number, number],
+    fillColor: color,
     getPointRadius: radius,
-    getFillColor: color,
+    pointRadiusMinPixels: 2,
+    pointRadiusMaxPixels: 100,
     opacity: 0.5,
     ...options,
   });

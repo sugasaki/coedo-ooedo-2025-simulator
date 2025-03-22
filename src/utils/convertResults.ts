@@ -32,74 +32,54 @@ function convertParticipant(
   result: Record<string, any>,
   headerMapping: Record<string, string>
 ): ConvertedRaceParticipant {
-  const converted: Partial<ConvertedRaceParticipant> = {
-    result: [
-      // 初期値（スタート地点）を追加
-      {
-        time: '',
-        time_second: 0,
-        time_second_prev: 0,
-        comment: '',
-        leng: 0,
-        length_prev: 0,
-        speed: 0,
-      },
-    ],
-  };
-
+  const converted: Partial<ConvertedRaceParticipant> = {};
   const timeResults: RaceTimeResult[] = [];
 
-  // 距離データを収集
   Object.entries(result).forEach(([key, value]) => {
-    const headerKey = headerMapping[key];
-    if (!headerKey) return;
-    
-    // ヘッダーから距離を抽出 - より柔軟な正規表現を使用
-    // 例: "5km", "5km再計測" などから "5" を抽出
-    const distanceMatch = headerKey.match(/^(\d+\.?\d*)km/);
-    if (distanceMatch) {
-      const distance = parseFloat(distanceMatch[1]);
-      timeResults.push({
-        ...value,
-        leng: distance,
-        length_prev: 0,
-        time_second_prev: 0,
-        speed: 0, // デフォルト値を設定
-        name: headerKey // ヘッダー名も保存して区別できるようにする
-      });
-    } else if (headerKey === 'ペース(分/㎞)') {
+    if (key === 'result') {
+      return; // "result"は後で処理する
+    }
+    const headerKey = headerMapping[key] || key;
+    if (headerKey === 'ペース(分/㎞)') {
       converted.pace = value;
     } else {
       converted[headerKey as keyof ConvertedRaceParticipant] = value;
     }
   });
 
-  // 距離順にソート
-  timeResults.sort((a, b) => a.leng - b.leng);
+  // "result" プロパティが存在する場合、その配列を利用する
+  if (Array.isArray(result.result)) {
+    result.result.forEach((checkpoint: any) => {
+      timeResults.push(checkpoint);
+    });
+  }
 
-  // length_prev、time_second_prev、speedを設定
-  timeResults.forEach((result, index) => {
-    result.length_prev = index === 0 ? 0 : timeResults[index - 1].leng;
-    result.time_second_prev =
+  // 距離順にソートし、前回の値と速度を設定
+  timeResults.sort((a, b) => a.leng - b.leng);
+  timeResults.forEach((checkpoint, index) => {
+    checkpoint.length_prev = index === 0 ? 0 : timeResults[index - 1].leng;
+    checkpoint.time_second_prev =
       index === 0 ? 0 : timeResults[index - 1].time_second;
-    result.speed = calculateSpeed(
-      result.leng,
-      result.length_prev,
-      result.time_second,
-      result.time_second_prev
+    checkpoint.speed = calculateSpeed(
+      checkpoint.leng,
+      checkpoint.length_prev,
+      checkpoint.time_second,
+      checkpoint.time_second_prev
     );
   });
-
-  // 初期値の配列が確実に存在することを確認して結合
-  converted.result = (converted.result || []).concat(timeResults);
+  converted.result = timeResults;
   return converted as ConvertedRaceParticipant;
 }
 
 export function convertResults(formattedData: RaceData): ConvertedRaceData {
-  return formattedData.map(race => ({
+  // 修正: formattedData が配列でない場合、categories プロパティを利用。存在しない場合は空配列でフォールバック
+  const dataArray = Array.isArray(formattedData)
+    ? formattedData
+    : formattedData.categories || [];
+  return dataArray.map(race => ({
     category: race.category,
     results: race.results.map(result =>
-      convertParticipant(result, createHeaderMapping(race.header))
+      convertParticipant(result, createHeaderMapping(race.header || {}))
     ),
   }));
 }

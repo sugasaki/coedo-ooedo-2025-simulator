@@ -14,18 +14,6 @@ function createHeaderMapping(
   }, {} as Record<string, string>);
 }
 
-function convertTimeResult(
-  value: any,
-  distance: number,
-  prevDistance: number
-): RaceTimeResult {
-  return {
-    ...value,
-    leng: distance,
-    length_prev: prevDistance,
-  };
-}
-
 function calculateSpeed(
   currentDistance: number,
   prevDistance: number,
@@ -33,10 +21,8 @@ function calculateSpeed(
   prevTimeSeconds: number
 ): number {
   if (currentTimeSeconds === prevTimeSeconds) return 0;
-
   const distanceDiff = currentDistance - prevDistance; // km
   const timeDiffHours = (currentTimeSeconds - prevTimeSeconds) / 3600; // 秒を時間に変換
-
   return timeDiffHours === 0
     ? 0
     : Number((distanceDiff / timeDiffHours).toFixed(2));
@@ -67,8 +53,10 @@ function convertParticipant(
   Object.entries(result).forEach(([key, value]) => {
     const headerKey = headerMapping[key];
     if (!headerKey) return;
-
-    const distanceMatch = headerKey.match(/^(\d+\.?\d*)km$/);
+    
+    // ヘッダーから距離を抽出 - より柔軟な正規表現を使用
+    // 例: "5km", "5km再計測" などから "5" を抽出
+    const distanceMatch = headerKey.match(/^(\d+\.?\d*)km/);
     if (distanceMatch) {
       const distance = parseFloat(distanceMatch[1]);
       timeResults.push({
@@ -76,6 +64,8 @@ function convertParticipant(
         leng: distance,
         length_prev: 0,
         time_second_prev: 0,
+        speed: 0, // デフォルト値を設定
+        name: headerKey // ヘッダー名も保存して区別できるようにする
       });
     } else if (headerKey === 'ペース(分/㎞)') {
       converted.pace = value;
@@ -100,8 +90,8 @@ function convertParticipant(
     );
   });
 
-  converted.result = [...converted.result, ...timeResults];
-
+  // 初期値の配列が確実に存在することを確認して結合
+  converted.result = (converted.result || []).concat(timeResults);
   return converted as ConvertedRaceParticipant;
 }
 

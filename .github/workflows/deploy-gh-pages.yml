@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: unit test
+        run: pnpm test
+
       - name: Build
         run: pnpm build
         env:

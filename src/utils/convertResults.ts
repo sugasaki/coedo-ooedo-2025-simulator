@@ -14,18 +14,6 @@ function createHeaderMapping(
   }, {} as Record<string, string>);
 }
 
-function convertTimeResult(
-  value: any,
-  distance: number,
-  prevDistance: number
-): RaceTimeResult {
-  return {
-    ...value,
-    leng: distance,
-    length_prev: prevDistance,
-  };
-}
-
 function calculateSpeed(
   currentDistance: number,
   prevDistance: number,
@@ -100,7 +88,8 @@ function convertParticipant(
     );
   });
 
-  converted.result = [...converted.result, ...timeResults];
+  // 初期値の配列が確実に存在することを確認して結合
+  converted.result = (converted.result || []).concat(timeResults);
 
   return converted as ConvertedRaceParticipant;
 }

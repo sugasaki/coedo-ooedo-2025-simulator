@@ -7,10 +7,10 @@ export interface PaceRecord {
 // チェックポイントでの記録データ（変換後）
 export interface RaceTimeResult {
   leng: number; // 距離
-  length_prev: number;
+  length_prev: number; // 前のチェックポイントまでの距離
   time: string; // 通過時間（HH:MM:SS形式）
   time_second: number; // 通過時間（秒）
-  time_second_prev: number;
+  time_second_prev: number; // 前のチェックポイントの通過時間（秒）
   comment: string; // コメント（順位など）
   speed: number; // 区間の平均時速（km/h）
 }

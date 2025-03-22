@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { GeoJSONFeature } from 'maplibre-gl';
 import {
   calculate3DDistance,
   calculate3DDistanceFast,
@@ -6,33 +7,28 @@ import {
   getPositionAtDistance,
   getTotalPathDistance,
 } from '../../utils/pathUtils';
-import { Coordinate3D, GeoJSON, PositionAtDistance } from '../../types/geo';
+import { Coordinate3D, PositionAtDistance } from '../../types/geo';
 
 // モックデータの準備
-const mockGeoJSON: GeoJSON = {
-  type: 'FeatureCollection',
-  features: [
-    {
-      type: 'Feature',
-      properties: { name: 'テストコース' },
-      geometry: {
-        type: 'LineString',
-        coordinates: [
-          [139.0, 35.0, 10.0], // 始点
-          [139.001, 35.0, 10.0], // 東に約111m、標高変化なし
-          [139.001, 35.001, 20.0], // 北に約111m、標高+10m
-          [139.002, 35.001, 20.0], // 東に約111m、標高変化なし
-          [139.002, 35.002, 0.0], // 北に約111m、標高-20m
-        ],
-      },
-    },
-  ],
+const mockGeoJSON = {
+  type: 'Feature',
+  properties: { name: 'テストコース' },
+  geometry: {
+    type: 'LineString',
+    coordinates: [
+      [139.0, 35.0, 10.0], // 始点
+      [139.001, 35.0, 10.0], // 東に約111m、標高変化なし
+      [139.001, 35.001, 20.0], // 北に約111m、標高+10m
+      [139.002, 35.001, 20.0], // 東に約111m、標高変化なし
+      [139.002, 35.002, 0.0], // 北に約111m、標高-20m
+    ],
+  },
 };
 
 // 無効なGeoJSONデータ
-const invalidGeoJSON: Partial<GeoJSON> = {
-  type: 'FeatureCollection',
-  features: [],
+const invalidGeoJSON: Partial<GeoJSONFeature> = {
+  type: 'Feature',
+  properties: {},
 };
 
 describe('pathUtils', () => {
@@ -120,7 +116,7 @@ describe('pathUtils', () => {
     });
 
     it('複数点の累積距離を正しく計算する', () => {
-      const coordinates = mockGeoJSON.features[0].geometry
+      const coordinates: Coordinate3D[] = mockGeoJSON.geometry
         .coordinates as Coordinate3D[];
       const result = calculateCumulativeDistances(coordinates);
 
@@ -141,7 +137,9 @@ describe('pathUtils', () => {
 
   describe('getPositionAtDistance', () => {
     it('無効なGeoJSONに対してnullを返す', () => {
-      expect(getPositionAtDistance(invalidGeoJSON as GeoJSON, 100)).toBeNull();
+      expect(
+        getPositionAtDistance(invalidGeoJSON as GeoJSONFeature, 100)
+      ).toBeNull();
       expect(console.error).toHaveBeenCalled();
     });
 
@@ -150,7 +148,7 @@ describe('pathUtils', () => {
         mockGeoJSON,
         -10
       );
-      expect(result).toEqual(mockGeoJSON.features[0].geometry.coordinates[0]);
+      expect(result).toEqual(mockGeoJSON.geometry.coordinates[0]);
     });
 
     it('距離がコース総距離を超える場合は終点の座標を返す', () => {
@@ -158,7 +156,7 @@ describe('pathUtils', () => {
         mockGeoJSON,
         10000
       );
-      expect(result).toEqual(mockGeoJSON.features[0].geometry.coordinates[4]);
+      expect(result).toEqual(mockGeoJSON.geometry.coordinates[4]);
     });
 
     it('コース途中の位置を線形補間で計算する', () => {
@@ -193,7 +191,7 @@ describe('pathUtils', () => {
 
   describe('getTotalPathDistance', () => {
     it('無効なGeoJSONに対して-1を返す', () => {
-      expect(getTotalPathDistance(invalidGeoJSON as GeoJSON)).toBe(-1);
+      expect(getTotalPathDistance(invalidGeoJSON as GeoJSONFeature)).toBe(-1);
       expect(console.error).toHaveBeenCalled();
     });
 

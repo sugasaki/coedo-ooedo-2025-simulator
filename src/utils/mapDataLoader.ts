@@ -5,6 +5,7 @@ import aidPointsJson from '../data/2025-小江戸大江戸-CP.json';
  * コースのGeoJSONデータ
  */
 export const courseData = courseGeoJson;
+export const featureData = courseData.features[0];
 
 /**
  * エイドポイントのGeoJSONデータ

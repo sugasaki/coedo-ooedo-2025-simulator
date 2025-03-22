@@ -3,8 +3,16 @@ import {
   ConvertedRaceParticipant,
   RaceTimeResult,
 } from '../types/race';
-import { RaceData } from '../types/race-json';
+import {
+  RaceData,
+  RaceCategory,
+  RaceParticipantBase,
+  CheckpointRecord,
+} from '../types/race-json';
 
+/**
+ * ヘッダーマッピングを作成する
+ */
 function createHeaderMapping(
   header: Record<string, string>
 ): Record<string, string> {
@@ -14,6 +22,9 @@ function createHeaderMapping(
   }, {} as Record<string, string>);
 }
 
+/**
+ * 速度を計算する
+ */
 function calculateSpeed(
   currentDistance: number,
   prevDistance: number,
@@ -28,29 +39,90 @@ function calculateSpeed(
     : Number((distanceDiff / timeDiffHours).toFixed(2));
 }
 
+/**
+ * チェックポイントデータを作成する
+ */
+function createCheckpoint(
+  distance: number,
+  checkpointData: CheckpointRecord
+): RaceTimeResult {
+  return {
+    leng: distance,
+    length_prev: 0, // 後で計算
+    time: checkpointData.time || '',
+    time_second:
+      typeof checkpointData.time_second === 'string'
+        ? parseInt(checkpointData.time_second, 10)
+        : checkpointData.time_second || 0,
+    time_second_prev: 0, // 後で計算
+    comment: checkpointData.comment || '',
+    speed: 0, // 後で計算
+  };
+}
+
+/**
+ * 参加者データを変換する
+ */
 function convertParticipant(
-  result: Record<string, any>,
+  result: RaceParticipantBase,
   headerMapping: Record<string, string>
 ): ConvertedRaceParticipant {
   const converted: Partial<ConvertedRaceParticipant> = {};
   const timeResults: RaceTimeResult[] = [];
 
+  // スタート地点を追加（時間0、距離0）
+  timeResults.push({
+    leng: 0,
+    length_prev: 0,
+    time: '00:00:00',
+    time_second: 0,
+    time_second_prev: 0,
+    comment: 'スタート',
+    speed: 0,
+  });
+
   Object.entries(result).forEach(([key, value]) => {
     if (key === 'result') {
       return; // "result"は後で処理する
     }
+
     const headerKey = headerMapping[key] || key;
-    if (headerKey === 'ペース(分/㎞)') {
-      converted.pace = value;
+
+    // チェックポイントデータの処理
+    if (
+      key.startsWith('column_') &&
+      typeof value === 'object' &&
+      value !== null &&
+      'time_second' in value
+    ) {
+      // ヘッダーからチェックポイントの距離を抽出（例: "5km" -> 5）
+      const distanceMatch = headerKey.match(/(\d+(\.\d+)?)km/);
+      const distance = distanceMatch ? parseFloat(distanceMatch[1]) : 0;
+
+      // チェックポイントデータを作成
+      const checkpoint = createCheckpoint(distance, value as CheckpointRecord);
+      timeResults.push(checkpoint);
+    } else if (headerKey === 'ペース(分/㎞)') {
+      converted.pace = value as string;
     } else {
-      converted[headerKey as keyof ConvertedRaceParticipant] = value;
+      // 基本プロパティの処理
+      if (
+        headerKey === '順位' ||
+        headerKey === 'ゼッケン' ||
+        headerKey === '氏名' ||
+        headerKey === '所属' ||
+        headerKey === '部門順位'
+      ) {
+        // 型安全な方法で代入
+        (converted as Record<string, string>)[headerKey] = value as string;
+      }
     }
   });
 
   // "result" プロパティが存在する場合、その配列を利用する
-  if (Array.isArray(result.result)) {
-    result.result.forEach((checkpoint: any) => {
-      timeResults.push(checkpoint);
+  if ('result' in result && Array.isArray(result.result)) {
+    (result.result as RaceTimeResult[]).forEach(checkpoint => {
+      timeResults.push({ ...checkpoint });
     });
   }
 
@@ -67,18 +139,19 @@ function convertParticipant(
       checkpoint.time_second_prev
     );
   });
+
   converted.result = timeResults;
   return converted as ConvertedRaceParticipant;
 }
 
+/**
+ * レースデータを変換する
+ */
 export function convertResults(formattedData: RaceData): ConvertedRaceData {
-  // 修正: formattedData が配列でない場合、categories プロパティを利用。存在しない場合は空配列でフォールバック
-  const dataArray = Array.isArray(formattedData)
-    ? formattedData
-    : formattedData.categories || [];
-  return dataArray.map(race => ({
+  // RaceDataは常に配列なので、そのまま使用
+  return formattedData.map((race: RaceCategory) => ({
     category: race.category,
-    results: race.results.map(result =>
+    results: race.results.map((result: RaceParticipantBase) =>
       convertParticipant(result, createHeaderMapping(race.header || {}))
     ),
   }));

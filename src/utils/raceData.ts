@@ -25,7 +25,7 @@ export const createData = (raceData: any, time: number): Scatterplot2D[] => {
     const LengthMeter = length * 1000;
 
     // courseDataをGeoJSON型にキャストして渡す
-    const position = getPositionAtDistance(courseData, LengthMeter);
+    const position = getPositionAtDistance(courseData.features[0], LengthMeter);
     // console.log(position, 'position');
     if (position === null) {
       console.error('Calculated position is null');

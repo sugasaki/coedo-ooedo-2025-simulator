@@ -1,14 +1,11 @@
 /**
  * convertResults.ts の単体テスト
  *
- * 注意: このテストを実行するには、以下のパッケージをインストールする必要があります:
- * npm install @std/expect @std/testing
  */
 
-import { expect } from '@std/expect';
-import { test } from '@std/testing/bdd';
 import { convertResults, getCategoryData } from './convertResults';
 import { RaceData } from '../types/race-json';
+import { expect, test } from 'vitest';
 
 // テスト用のモックデータ
 const mockRaceData: RaceData = [

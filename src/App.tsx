@@ -10,10 +10,12 @@ import { useResultData } from './hooks/useResultData';
 const url = './data/results_coedo_ooedo_2025_short.json';
 
 function App() {
-  const { animationFrameValue } = useStore();
+  const { animationFrameValue, setAnimationFrameMax } = useStore();
   const { createResultData } = useResultData();
 
   useEffect(() => {
+    setAnimationFrameMax(50000);
+
     (async () => {
       console.log(url, 'url');
       await fetchAndStoreRaceData(url);

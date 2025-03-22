@@ -3,8 +3,8 @@
  *
  */
 
-import { convertResults, getCategoryData } from './convertResults';
-import { RaceData } from '../types/race-json';
+import { convertResults, getCategoryData } from '../convertResults';
+import { RaceData } from '../../types/race-json';
 import { expect, test } from 'vitest';
 
 // テスト用のモックデータ

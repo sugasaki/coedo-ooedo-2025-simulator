@@ -2,6 +2,9 @@
  * GeoJSON経路と位置計算に関連する型定義
  */
 
+// 経度・緯度の2次元座標
+export type Coordinate = [number, number]; // [longitude, latitude]
+
 // 経度・緯度・標高の3次元座標
 export type Coordinate3D = [number, number, number]; // [longitude, latitude, elevation]
 

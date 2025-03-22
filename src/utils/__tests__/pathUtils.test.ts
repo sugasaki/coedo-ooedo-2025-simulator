@@ -6,7 +6,7 @@ import {
   getPositionAtDistance,
   getTotalPathDistance,
 } from '../../utils/pathUtils';
-import { Coordinate3D, GeoJSON, PositionAtDistance } from '../types/geo';
+import { Coordinate3D, GeoJSON, PositionAtDistance } from '../../types/geo';
 
 // モックデータの準備
 const mockGeoJSON: GeoJSON = {

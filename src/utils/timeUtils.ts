@@ -30,7 +30,7 @@ export function getDistanceAtTime(
   // 時間が最後のチェックポイント以降の場合
   const lastResult = results[results.length - 1];
   if (timeSeconds >= lastResult.time_second) {
-    return lastResult.leng;
+    return 0;
   }
 
   // バイナリサーチで適切なチェックポイントのインデックスを見つける

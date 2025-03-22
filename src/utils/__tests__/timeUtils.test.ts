@@ -68,15 +68,15 @@ describe('getDistanceAtTime', () => {
     expect(getDistanceAtTime(participant, 5400)).toBe(15);
   });
 
-  test('最後のチェックポイント以降の場合は最後の距離を返す', () => {
+  test('最後のチェックポイント以降の場合は0を返す', () => {
     const participant = createMockParticipant([
       { time_second: 0, leng: 0 },
       { time_second: 3600, leng: 10 },
       { time_second: 7200, leng: 20 },
     ]);
 
-    expect(getDistanceAtTime(participant, 7500)).toBe(20);
-    expect(getDistanceAtTime(participant, 8000)).toBe(20);
+    expect(getDistanceAtTime(participant, 7500)).toBe(0);
+    expect(getDistanceAtTime(participant, 8000)).toBe(0);
   });
 
   test('結果が不足している場合は null を返す', () => {
@@ -98,7 +98,7 @@ describe('getDistanceAtTimeString', () => {
     ]);
 
     expect(getDistanceAtTimeString(participant, '00:30:00')).toBe(5);
-    expect(getDistanceAtTimeString(participant, '01:00:00')).toBe(10);
+    expect(getDistanceAtTimeString(participant, '01:00:00')).toBe(0);
   });
 
   test('不正な時間文字列の場合、convertTimeStringToSecondsが0を返すため最初の距離が返る', () => {

@@ -21,7 +21,7 @@ export const useScatterplotLayer = () => {
       lineWidthMinPixels: 1,
       getPosition: d => d.position,
       getRadius: d => d.size,
-      getFillColor: [255, 0, 0],
+      getFillColor: d => d.color,
       getLineColor: [0, 0, 0],
     });
     return scatterplotLayer;

@@ -14,7 +14,7 @@ function App() {
   const { createResultData } = useResultData();
 
   useEffect(() => {
-    setAnimationFrameMax(50000);
+    setAnimationFrameMax(90000);
 
     (async () => {
       console.log(url, 'url');

@@ -3,6 +3,133 @@
     "category": "小江戸大江戸200km",
     "results": [
       {
+        "順位": "1",
+        "ゼッケン": "2151",
+        "氏名": "石澤　毅士",
+        "所属": "",
+        "部門順位": "男子：1",
+        "pace": "06:35.33",
+        "result": [
+          {
+            "leng": 0,
+            "length_prev": 0,
+            "time": "00:00:00",
+            "time_second": 0,
+            "time_second_prev": 0,
+            "comment": "スタート",
+            "speed": 0
+          },
+          {
+            "leng": 23.0,
+            "length_prev": 0,
+            "time": "02:02:39",
+            "time_second": 7359,
+            "time_second_prev": 0,
+            "comment": "10位",
+            "speed": 11.25
+          },
+          {
+            "leng": 34.6,
+            "length_prev": 23.0,
+            "time": "03:06:03",
+            "time_second": 11163,
+            "time_second_prev": 7359,
+            "comment": "11位",
+            "speed": 10.98
+          },
+          {
+            "leng": 53.3,
+            "length_prev": 34.6,
+            "time": "04:56:49",
+            "time_second": 17809,
+            "time_second_prev": 11163,
+            "comment": "13位",
+            "speed": 10.13
+          },
+          {
+            "leng": 74.3,
+            "length_prev": 53.3,
+            "time": "07:04:45",
+            "time_second": 25485,
+            "time_second_prev": 17809,
+            "comment": "12位",
+            "speed": 9.85
+          },
+          {
+            "leng": 93.3,
+            "length_prev": 74.3,
+            "time": "09:06:03",
+            "time_second": 32763,
+            "time_second_prev": 25485,
+            "comment": "12位",
+            "speed": 9.4
+          },
+          {
+            "leng": 93.4,
+            "length_prev": 93.3,
+            "time": "09:15:08",
+            "time_second": 33308,
+            "time_second_prev": 32763,
+            "comment": "7位",
+            "speed": 0.66
+          },
+          {
+            "leng": 130.2,
+            "length_prev": 93.4,
+            "time": "13:11:42",
+            "time_second": 47502,
+            "time_second_prev": 33308,
+            "comment": "4位",
+            "speed": 9.33
+          },
+          {
+            "leng": 147.7,
+            "length_prev": 130.2,
+            "time": "15:27:30",
+            "time_second": 55650,
+            "time_second_prev": 47502,
+            "comment": "4位",
+            "speed": 7.73
+          },
+          {
+            "leng": 160.2,
+            "length_prev": 147.7,
+            "time": "16:55:24",
+            "time_second": 60924,
+            "time_second_prev": 55650,
+            "comment": "4位",
+            "speed": 8.53
+          },
+          {
+            "leng": 182.1,
+            "length_prev": 160.2,
+            "time": "19:37:58",
+            "time_second": 70678,
+            "time_second_prev": 60924,
+            "comment": "1位",
+            "speed": 8.08
+          },
+          {
+            "leng": 194.0,
+            "length_prev": 182.1,
+            "time": "21:02:35",
+            "time_second": 75755,
+            "time_second_prev": 70678,
+            "comment": "1位",
+            "speed": 8.44
+          },
+          {
+            "leng": 208.5,
+            "length_prev": 194.0,
+            "time": "22:53:47",
+            "time_second": 82427,
+            "time_second_prev": 75755,
+            "comment": "1位",
+            "speed": 7.82
+          }
+        ]
+      },
+      {
         "順位": "2",
         "ゼッケン": "2199",
         "氏名": "芝脇　大貴",
@@ -42922,6 +43049,160 @@
     "category": "小江戸大江戸230km",
     "results": [
       {
+        "順位": "1",
+        "ゼッケン": "156",
+        "氏名": "竹村　直太",
+        "所属": "ユニカ食品",
+        "部門順位": "男子：1",
+        "pace": "06:45.33",
+        "result": [
+          {
+            "leng": 0,
+            "length_prev": 0,
+            "time": "00:00:00",
+            "time_second": 0,
+            "time_second_prev": 0,
+            "comment": "スタート",
+            "speed": 0
+          },
+          {
+            "leng": 23.0,
+            "length_prev": 0,
+            "time": "02:00:03",
+            "time_second": 7203,
+            "time_second_prev": 0,
+            "comment": "1位",
+            "speed": 11.5
+          },
+          {
+            "leng": 34.6,
+            "length_prev": 23.0,
+            "time": "03:00:52",
+            "time_second": 10852,
+            "time_second_prev": 7203,
+            "comment": "1位",
+            "speed": 11.44
+          },
+          {
+            "leng": 53.3,
+            "length_prev": 34.6,
+            "time": "04:42:24",
+            "time_second": 16944,
+            "time_second_prev": 10852,
+            "comment": "1位",
+            "speed": 11.05
+          },
+          {
+            "leng": 74.3,
+            "length_prev": 53.3,
+            "time": "06:39:01",
+            "time_second": 23941,
+            "time_second_prev": 16944,
+            "comment": "1位",
+            "speed": 10.8
+          },
+          {
+            "leng": 93.3,
+            "length_prev": 74.3,
+            "time": "08:42:16",
+            "time_second": 31336,
+            "time_second_prev": 23941,
+            "comment": "1位",
+            "speed": 9.25
+          },
+          {
+            "leng": 93.4,
+            "length_prev": 93.3,
+            "time": "08:54:53",
+            "time_second": 32093,
+            "time_second_prev": 31336,
+            "comment": "1位",
+            "speed": 0.48
+          },
+          {
+            "leng": 130.2,
+            "length_prev": 93.4,
+            "time": "13:06:53",
+            "time_second": 47213,
+            "time_second_prev": 32093,
+            "comment": "1位",
+            "speed": 8.76
+          },
+          {
+            "leng": 147.7,
+            "length_prev": 130.2,
+            "time": "15:22:13",
+            "time_second": 55333,
+            "time_second_prev": 47213,
+            "comment": "1位",
+            "speed": 7.76
+          },
+          {
+            "leng": 160.2,
+            "length_prev": 147.7,
+            "time": "16:53:53",
+            "time_second": 60833,
+            "time_second_prev": 55333,
+            "comment": "1位",
+            "speed": 8.18
+          },
+          {
+            "leng": 182.1,
+            "length_prev": 160.2,
+            "time": "19:36:35",
+            "time_second": 70595,
+            "time_second_prev": 60833,
+            "comment": "1位",
+            "speed": 8.08
+          },
+          {
+            "leng": 194.0,
+            "length_prev": 182.1,
+            "time": "21:12:16",
+            "time_second": 76336,
+            "time_second_prev": 70595,
+            "comment": "1位",
+            "speed": 7.46
+          },
+          {
+            "leng": 208.5,
+            "length_prev": 194.0,
+            "time": "23:04:14",
+            "time_second": 83054,
+            "time_second_prev": 76336,
+            "comment": "1位",
+            "speed": 7.77
+          },
+          {
+            "leng": 208.6,
+            "length_prev": 208.5,
+            "time": "23:10:42",
+            "time_second": 83442,
+            "time_second_prev": 83054,
+            "comment": "1位",
+            "speed": 0.93
+          },
+          {
+            "leng": 223.1,
+            "length_prev": 208.6,
+            "time": "24:57:32",
+            "time_second": 89852,
+            "time_second_prev": 83442,
+            "comment": "1位",
+            "speed": 8.14
+          },
+          {
+            "leng": 237.6,
+            "length_prev": 223.1,
+            "time": "26:45:06",
+            "time_second": 96306,
+            "time_second_prev": 89852,
+            "comment": "1位",
+            "speed": 8.09
+          }
+        ]
+      },
+      {
         "順位": "2",
         "ゼッケン": "163",
         "氏名": "中田　和彦",
@@ -52070,6 +52351,178 @@
     "category": "小江戸大江戸260km",
     "results": [
       {
+        "順位": "1",
+        "ゼッケン": "5",
+        "氏名": "市川　智一",
+        "所属": "セルベサ軍団",
+        "部門順位": "男子：1",
+        "pace": "06:43.35",
+        "result": [
+          {
+            "leng": 0,
+            "length_prev": 0,
+            "time": "00:00:00",
+            "time_second": 0,
+            "time_second_prev": 0,
+            "comment": "スタート",
+            "speed": 0
+          },
+          {
+            "leng": 23.0,
+            "length_prev": 0,
+            "time": "02:10:25",
+            "time_second": 7825,
+            "time_second_prev": 0,
+            "comment": "8位",
+            "speed": 10.58
+          },
+          {
+            "leng": 34.6,
+            "length_prev": 23.0,
+            "time": "03:15:33",
+            "time_second": 11733,
+            "time_second_prev": 7825,
+            "comment": "7位",
+            "speed": 10.69
+          },
+          {
+            "leng": 53.3,
+            "length_prev": 34.6,
+            "time": "05:01:22",
+            "time_second": 18082,
+            "time_second_prev": 11733,
+            "comment": "5位",
+            "speed": 10.6
+          },
+          {
+            "leng": 74.3,
+            "length_prev": 53.3,
+            "time": "07:06:16",
+            "time_second": 25576,
+            "time_second_prev": 18082,
+            "comment": "3位",
+            "speed": 10.09
+          },
+          {
+            "leng": 93.3,
+            "length_prev": 74.3,
+            "time": "09:02:26",
+            "time_second": 32546,
+            "time_second_prev": 25576,
+            "comment": "2位",
+            "speed": 9.81
+          },
+          {
+            "leng": 93.4,
+            "length_prev": 93.3,
+            "time": "09:23:52",
+            "time_second": 33832,
+            "time_second_prev": 32546,
+            "comment": "2位",
+            "speed": 0.28
+          },
+          {
+            "leng": 130.2,
+            "length_prev": 93.4,
+            "time": "13:27:33",
+            "time_second": 48453,
+            "time_second_prev": 33832,
+            "comment": "1位",
+            "speed": 9.06
+          },
+          {
+            "leng": 147.7,
+            "length_prev": 130.2,
+            "time": "15:42:04",
+            "time_second": 56524,
+            "time_second_prev": 48453,
+            "comment": "1位",
+            "speed": 7.81
+          },
+          {
+            "leng": 160.2,
+            "length_prev": 147.7,
+            "time": "17:18:34",
+            "time_second": 62314,
+            "time_second_prev": 56524,
+            "comment": "1位",
+            "speed": 7.77
+          },
+          {
+            "leng": 182.1,
+            "length_prev": 160.2,
+            "time": "19:49:06",
+            "time_second": 71346,
+            "time_second_prev": 62314,
+            "comment": "1位",
+            "speed": 8.73
+          },
+          {
+            "leng": 194.0,
+            "length_prev": 182.1,
+            "time": "21:03:58",
+            "time_second": 75838,
+            "time_second_prev": 71346,
+            "comment": "1位",
+            "speed": 9.54
+          },
+          {
+            "leng": 208.5,
+            "length_prev": 194.0,
+            "time": "22:52:42",
+            "time_second": 82362,
+            "time_second_prev": 75838,
+            "comment": "1位",
+            "speed": 8.0
+          },
+          {
+            "leng": 208.6,
+            "length_prev": 208.5,
+            "time": "23:14:28",
+            "time_second": 83668,
+            "time_second_prev": 82362,
+            "comment": "1位",
+            "speed": 0.28
+          },
+          {
+            "leng": 223.1,
+            "length_prev": 208.6,
+            "time": "24:44:19",
+            "time_second": 89059,
+            "time_second_prev": 83668,
+            "comment": "1位",
+            "speed": 9.68
+          },
+          {
+            "leng": 235.0,
+            "length_prev": 223.1,
+            "time": "26:04:09",
+            "time_second": 93849,
+            "time_second_prev": 89059,
+            "comment": "1位",
+            "speed": 8.94
+          },
+          {
+            "leng": 246.8,
+            "length_prev": 235.0,
+            "time": "27:25:48",
+            "time_second": 98748,
+            "time_second_prev": 93849,
+            "comment": "1位",
+            "speed": 8.67
+          },
+          {
+            "leng": 261.4,
+            "length_prev": 246.8,
+            "time": "29:17:17",
+            "time_second": 105437,
+            "time_second_prev": 98748,
+            "comment": "1位",
+            "speed": 7.86
+          }
+        ]
+      },
+      {
         "順位": "2",
         "ゼッケン": "33",
         "氏名": "吉田　幸徳",
@@ -55097,6 +55550,70 @@
   {
     "category": "小江戸90km",
     "results": [
+      {
+        "順位": "1",
+        "ゼッケン": "9065",
+        "氏名": "中森　勇一",
+        "所属": "TRC",
+        "部門順位": "男子：1",
+        "pace": "05:23.14",
+        "result": [
+          {
+            "leng": 0,
+            "length_prev": 0,
+            "time": "00:00:00",
+            "time_second": 0,
+            "time_second_prev": 0,
+            "comment": "スタート",
+            "speed": 0
+          },
+          {
+            "leng": 21.4,
+            "length_prev": 0,
+            "time": "01:48:51",
+            "time_second": 6531,
+            "time_second_prev": 0,
+            "comment": "2位",
+            "speed": 11.8
+          },
+          {
+            "leng": 32.7,
+            "length_prev": 21.4,
+            "time": "02:45:21",
+            "time_second": 9921,
+            "time_second_prev": 6531,
+            "comment": "2位",
+            "speed": 12.0
+          },
+          {
+            "leng": 52.2,
+            "length_prev": 32.7,
+            "time": "04:20:31",
+            "time_second": 15631,
+            "time_second_prev": 9921,
+            "comment": "2位",
+            "speed": 12.29
+          },
+          {
+            "leng": 72.6,
+            "length_prev": 52.2,
+            "time": "06:19:04",
+            "time_second": 22744,
+            "time_second_prev": 15631,
+            "comment": "1位",
+            "speed": 10.32
+          },
+          {
+            "leng": 91.7,
+            "length_prev": 72.6,
+            "time": "08:13:51",
+            "time_second": 29631,
+            "time_second_prev": 22744,
+            "comment": "1位",
+            "speed": 9.98
+          }
+        ]
+      },
       {
         "順位": "2",
         "ゼッケン": "9084",
@@ -60722,6 +61239,82 @@
   {
     "category": "大江戸ナイトラン115km",
     "results": [
+      {
+        "順位": "1",
+        "ゼッケン": "1025",
+        "氏名": "岡本　敏明",
+        "所属": "ALL OUT・宇都宮トレラン集い",
+        "部門順位": "男子：1",
+        "pace": {
+          "time": "06:46.16",
+          "time_second": 0
+        },
+        "result": [
+          {
+            "leng": 0,
+            "length_prev": 0,
+            "time": "00:00:00",
+            "time_second": 0,
+            "time_second_prev": 0,
+            "comment": "スタート",
+            "speed": 0
+          },
+          {
+            "leng": 36.8,
+            "length_prev": 0,
+            "time": "03:40:02",
+            "time_second": 13202,
+            "time_second_prev": 0,
+            "comment": "2位",
+            "speed": 10.03
+          },
+          {
+            "leng": 54.3,
+            "length_prev": 36.8,
+            "time": "05:38:56",
+            "time_second": 20336,
+            "time_second_prev": 13202,
+            "comment": "1位",
+            "speed": 8.83
+          },
+          {
+            "leng": 66.8,
+            "length_prev": 54.3,
+            "time": "07:06:31",
+            "time_second": 25591,
+            "time_second_prev": 20336,
+            "comment": "1位",
+            "speed": 8.56
+          },
+          {
+            "leng": 88.7,
+            "length_prev": 66.8,
+            "time": "09:48:34",
+            "time_second": 35314,
+            "time_second_prev": 25591,
+            "comment": "1位",
+            "speed": 8.11
+          },
+          {
+            "leng": 100.6,
+            "length_prev": 88.7,
+            "time": "11:06:44",
+            "time_second": 40004,
+            "time_second_prev": 35314,
+            "comment": "1位",
+            "speed": 9.13
+          },
+          {
+            "leng": 115.1,
+            "length_prev": 100.6,
+            "time": "12:59:09",
+            "time_second": 46749,
+            "time_second_prev": 40004,
+            "comment": "1位",
+            "speed": 7.74
+          }
+        ]
+      },
       {
         "順位": "2",
         "ゼッケン": "1068",

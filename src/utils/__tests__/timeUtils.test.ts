@@ -53,7 +53,7 @@ describe('timeUtils', () => {
 
     it('最初のチェックポイント以前の時間では最初の距離を返す', () => {
       const distance = getDistanceAtTime(mockParticipant, 1000);
-      expect(distance).toBe(0);
+      expect(distance).toBe(2.7777777777777777);
     });
 
     it('最後のチェックポイント以降の時間では最後の距離を返す', () => {

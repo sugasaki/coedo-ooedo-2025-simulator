@@ -4,5 +4,8 @@ export type Scatterplot2D = {
   position: Coordinate;
   size: number;
   color?: number[];
-  // color?: [number, number, number];
+  // Additional properties for participant information
+  no?: string;
+  name?: string;
+  category?: string;
 };

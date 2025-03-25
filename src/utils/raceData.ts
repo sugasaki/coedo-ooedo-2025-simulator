@@ -1,84 +1,55 @@
 import { getPositionAtDistance } from '../utils/pathUtils';
 import { getDistanceAtTime } from '../utils/timeUtils';
 import { Scatterplot2D } from '../types/scatterplot';
-import { ConvertedRaceParticipant } from '../types/race';
+import { ConvertedRaceParticipant, ConvertedRaceData } from '../types/race';
 import { featureData } from '../utils/mapDataLoader';
 import { categoryToColor, } from './colorTable';
+import { Coordinate } from '../types/geo';
 
-export const createData = (raceData: any, time: number): Scatterplot2D[] => {
+export const createData = (raceData: ConvertedRaceData, time: number): Scatterplot2D[] => {
   try {
-    // console.log(raceData, 'raceData');
     const thisTime = time * 2;
 
-    const data: (Scatterplot2D)[] = [];
+    return raceData.flatMap((category) => {
+      const color = categoryToColor(category.category);
 
-    raceData.forEach((item: any) => {
-      const categoryName = item.category;
-      // console.log(categoryName, 'categoryName');
-
-      const color = categoryToColor(categoryName);
-      // const color = getRandomColor(10);
-      item.results.forEach((result: any) => {
-        const position = getPosition(
-          featureData,
-          result,
-          thisTime,
-          color
-        );
-        if (position) data.push(position);
-      });
+      return category.results
+        .map((participant: ConvertedRaceParticipant) => getPosition(featureData, participant, thisTime, color))
+        .filter((position: Scatterplot2D | null): position is Scatterplot2D => position !== null);
     });
-
-    // console.log(data, 'data');
-    return data;
   } catch (error) {
-    console.error('raceData is null', error);
+    console.error('Error creating race data:', error);
     return [];
   }
 };
 
 function getPosition(
   feature: any,
-  resultA: ConvertedRaceParticipant,
+  participant: ConvertedRaceParticipant,
   time: number,
   color: number[]
-) {
+): Scatterplot2D | null {
   try {
-    // console.log(time, 'time');
-    // console.log(resultA, 'resultA');
-    const length = getDistanceAtTime(resultA, time);
-    // console.log(length, 'length');
-    if (length === null) {
-      // console.error('Calculated length is null');
-      // console.log(time, 'time');
-      // console.log(resultA, 'resultA');
-      return null;
-    }
+    const distanceKm = getDistanceAtTime(participant, time);
+    if (distanceKm === null) return null;
 
-    const LengthMeter = length * 1000;
+    const distanceMeters = distanceKm * 1000;
+    const position3D = getPositionAtDistance(feature, distanceMeters);
+    if (position3D === null) return null;
 
-    // courseDataをGeoJSON型にキャストして渡す
-    const position = getPositionAtDistance(feature, LengthMeter);
-    // console.log(position, 'position');
-    if (position === null) {
-      console.error('Calculated position is null');
-      return null;
-    }
+    // Convert Coordinate3D to Coordinate by taking only longitude and latitude
+    const position: Coordinate = [position3D[0], position3D[1]];
 
-    // データ作成
-    const data1: Scatterplot2D = {
-      position: position,
+    return {
+      position,
       size: 300,
-      // color: [255,0,0],
-      color: color,
-      no: resultA.ゼッケン,
-      name: resultA.氏名,
-      category: resultA.順位,
+      color,
+      no: participant.ゼッケン,
+      name: participant.氏名,
+      category: participant.順位,
     };
-
-    return data1;
   } catch (error) {
-    console.error('Error in getPosition', error);
+    console.error('Error calculating position:', error);
     return null;
   }
 }

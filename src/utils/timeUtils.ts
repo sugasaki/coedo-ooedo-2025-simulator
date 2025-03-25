@@ -17,23 +17,23 @@ export function getDistanceAtTime(
 ): number | null {
   // const results = participant.result;
   // console.log(participant, 'participant');
-  const results = participant
+  const results = participant.result
 
   // 結果がない、または1つしかない場合はnullを返す
   if (!results || results.length <= 1) {
     return null;
   }
 
-  // // 時間が最初のチェックポイント以前の場合
+  // 時間が最初のチェックポイント以前の場合
   if (timeSeconds <= results[0].time_second) {
     return results[0].leng;
   }
 
-  // // 時間が最後のチェックポイント以降の場合
-  // const lastResult = results[results.length - 1];
-  // if (timeSeconds >= lastResult.time_second) {
-  //   return lastResult.leng;
-  // }
+  // 時間が最後のチェックポイント以降の場合
+  const lastResult = results[results.length - 1];
+  if (timeSeconds >= lastResult.time_second) {
+    return lastResult.leng;
+  }
 
   // 適切なチェックポイントを見つける
   // time_second と time_second_prev を使用して区間を特定

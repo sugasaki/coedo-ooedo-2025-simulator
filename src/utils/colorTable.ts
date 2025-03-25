@@ -57,7 +57,7 @@ export const getColor = (no: number) => {
 };
 
 // カテゴリと色の対応表を定義
-const categoryColors = {
+const categoryColors: { [key: string]: number[] } = {
   '小江戸大江戸200km': [255, 0, 0], // ローズ
   '小江戸大江戸230km': [255, 255, 0], // 黄色
   '小江戸大江戸260km': [255, 0, 255], // マゼンタ
@@ -66,9 +66,9 @@ const categoryColors = {
   // 他のカテゴリと色の対応を追加することができます
 };
 
-export const categoryToColor = (categoryName: string) => {
+export const categoryToColor = (categoryName: keyof typeof categoryColors) => {
   // console.log(categoryName, 'categoryName');
 
   // カテゴリに対応する色を返す、対応する色がない場合はデフォルトの色を返す
-  return categoryColors[categoryName]; // 対応する色がない場合のデフォルトは黒
+  return categoryColors[categoryName] || [255, 255, 255]; // 対応する色がない場合のデフォルトは白
 };

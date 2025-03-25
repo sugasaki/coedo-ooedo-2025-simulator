@@ -3,5 +3,9 @@ import { Coordinate } from './geo';
 export type Scatterplot2D = {
   position: Coordinate;
   size: number;
-  color?: [number, number, number];
+  color?: number[];
+  // Additional properties for participant information
+  no?: string;
+  name?: string;
+  category?: string;
 };

@@ -13,16 +13,16 @@ export const useScatterplotLayer = () => {
       data: personLocation,
       pickable: true,
       opacity: 0.8,
-      stroked: true,
+      stroked: false,
       filled: true,
       radiusScale: 1,
       radiusMinPixels: 1,
       radiusMaxPixels: 100,
-      lineWidthMinPixels: 1,
+      lineWidthMinPixels: 0,
       getPosition: d => d.position,
       getRadius: d => d.size,
       getFillColor: d => d.color,
-      getLineColor: [0, 0, 0],
+      // getLineColor: [0, 0, 0],
     });
     return scatterplotLayer;
   };

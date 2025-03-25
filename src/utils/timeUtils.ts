@@ -6,7 +6,7 @@ import { ConvertedRaceParticipant } from '../types/race';
 
 /**
  * 指定した時間（秒）における距離を線形補間で計算する
- * バイナリサーチを使用して高速に適切なチェックポイントのペアを見つける
+ * チェックポイント間の関係を time_second_prev と length_prev を使用して計算
  * @param participant レース参加者データ
  * @param timeSeconds 計算したい時間（秒）
  * @returns 計算された距離（km）、または未定義の場合は null
@@ -15,7 +15,9 @@ export function getDistanceAtTime(
   participant: ConvertedRaceParticipant,
   timeSeconds: number
 ): number | null {
-  const results = participant.result;
+  // const results = participant.result;
+  // console.log(participant, 'participant');
+  const results = participant.result
 
   // 結果がない、または1つしかない場合はnullを返す
   if (!results || results.length <= 1) {
@@ -33,36 +35,24 @@ export function getDistanceAtTime(
     return lastResult.leng;
   }
 
-  // バイナリサーチで適切なチェックポイントのインデックスを見つける
-  let left = 0;
-  let right = results.length - 2; // 最後のペアのインデックスまで
+  // 適切なチェックポイントを見つける
+  // time_second と time_second_prev を使用して区間を特定
+  for (let i = 1; i < results.length; i++) {
+    const current = results[i];
+    // console.log('current', current);
 
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    const current = results[mid];
-    const next = results[mid + 1];
-
-    if (current.time_second <= timeSeconds && timeSeconds < next.time_second) {
-      // 適切なペアが見つかった場合、線形補間を行う
-      const timeRange = next.time_second - current.time_second;
-      const timeRatio = (timeSeconds - current.time_second) / timeRange;
-      const distanceRange = next.leng - current.leng;
-      return current.leng + distanceRange * timeRatio;
-    }
-
-    if (timeSeconds < current.time_second) {
-      // 探索範囲を左半分に絞る
-      right = mid - 1;
-    } else if (timeSeconds >= next.time_second) {
-      // 探索範囲を右半分に絞る
-      left = mid + 1;
+    if (current.time_second_prev <= timeSeconds && timeSeconds <= current.time_second) {
+      // 線形補間を行う
+      // console.log('線形補間を行う', current);
+      const timeRange = current.time_second - current.time_second_prev;
+      const timeRatio = (timeSeconds - current.time_second_prev) / timeRange;
+      const distanceRange = current.leng - current.length_prev;
+      return current.length_prev + distanceRange * timeRatio;
     }
   }
 
-  // 何らかの理由で見つからなかった場合（通常はここに到達しない）
-  console.warn(
-    '指定された時間に対応するチェックポイントが見つかりませんでした'
-  );
+  // 何らかの理由で見つからなかった場合
+  // console.warn('指定された時間に対応するチェックポイントが見つかりませんでした');
   return null;
 }
 

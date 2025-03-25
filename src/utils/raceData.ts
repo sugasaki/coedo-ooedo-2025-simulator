@@ -1,59 +1,55 @@
 import { getPositionAtDistance } from '../utils/pathUtils';
 import { getDistanceAtTime } from '../utils/timeUtils';
-import { courseData } from '../utils/mapDataLoader';
 import { Scatterplot2D } from '../types/scatterplot';
+import { ConvertedRaceParticipant, ConvertedRaceData } from '../types/race';
+import { featureData } from '../utils/mapDataLoader';
+import { categoryToColor, } from './colorTable';
+import { Coordinate } from '../types/geo';
 
-export const createData = (raceData: any, time: number): Scatterplot2D[] => {
-  // console.log(time, 'time');
-  // console.log(raceData, 'raceData');
-  // console.log(time, 'time');
-  //   if (!sp) return [];
-
+export const createData = (raceData: ConvertedRaceData, time: number): Scatterplot2D[] => {
   try {
-    // console.log(raceData, 'raceData');
-    const resultA = raceData[0].results[0];
-    // console.log(resultA, 'resultA');
     const thisTime = time * 2;
 
-    const length = getDistanceAtTime(resultA, thisTime);
-    // console.log(length, 'length');
-    if (length === null) {
-      console.error('Calculated length is null');
-      return [];
-    }
+    return raceData.flatMap((category) => {
+      const color = categoryToColor(category.category);
 
-    const LengthMeter = length * 1000;
-
-    // courseDataをGeoJSON型にキャストして渡す
-    const position = getPositionAtDistance(courseData.features[0], LengthMeter);
-    // console.log(position, 'position');
-    if (position === null) {
-      console.error('Calculated position is null');
-      return [];
-    }
-
-    // サンプルデータ
-    const data1: Scatterplot2D = {
-      position: [position[0], position[1]],
-      size: 500,
-      color: [255, 0, 0],
-    };
-
-    const data = [data1];
-    return data;
-  } catch {
-    console.error('raceData is null');
+      return category.results
+        .map((participant: ConvertedRaceParticipant) => getPosition(featureData, participant, thisTime, color))
+        .filter((position: Scatterplot2D | null): position is Scatterplot2D => position !== null);
+    });
+  } catch (error) {
+    console.error('Error creating race data:', error);
     return [];
   }
-
-  //   // 座標を計算
-  //   const returndata = iconPersonData
-  //     .map((person: PersonResultParent) => {
-  //       return calcResult(person, time);
-  //     })
-  //     .filter((d): d is PersonInfoType => d !== null && d !== undefined);
-
-  //   // console.log(returndata, 'returndata');
-  //   setPersonLocationData(returndata);
-  //   console.log(time);
 };
+
+function getPosition(
+  feature: any,
+  participant: ConvertedRaceParticipant,
+  time: number,
+  color: number[]
+): Scatterplot2D | null {
+  try {
+    const distanceKm = getDistanceAtTime(participant, time);
+    if (distanceKm === null) return null;
+
+    const distanceMeters = distanceKm * 1000;
+    const position3D = getPositionAtDistance(feature, distanceMeters);
+    if (position3D === null) return null;
+
+    // Convert Coordinate3D to Coordinate by taking only longitude and latitude
+    const position: Coordinate = [position3D[0], position3D[1]];
+
+    return {
+      position,
+      size: 300,
+      color,
+      no: participant.ゼッケン,
+      name: participant.氏名,
+      category: participant.順位,
+    };
+  } catch (error) {
+    console.error('Error calculating position:', error);
+    return null;
+  }
+}

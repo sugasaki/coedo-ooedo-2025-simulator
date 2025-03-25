@@ -61,17 +61,14 @@ export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
 
 
   //ツールチップを生成する
-  const tooltipHandler = (item) => {
+  const tooltipHandler = (item: any): string | null => {
     // console.log('item', item);
-    if (!item) return;
-    if (!item.layer) return;
-    if (!item.layer.id) return;
+    if (!item || !item.layer || !item.layer.id) return null;
 
     // if (object.layer.id != 'aid-layer' && object.layer.id != 'icon-layer') return;
 
     if (item.layer.id.startsWith('aid-layer')) {
-      if (!item.object) return;
-      if (!item.object.properties) return;
+      if (!item.object || !item.object.properties) return null;
       //geojsonレイヤーの場合はpropertiesの値をobjに入れる
       // console.log('item', item);
       const properties = item.object.properties ? item.object.properties : null;
@@ -79,10 +76,12 @@ export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
     }
 
     if (item.layer.id.startsWith('scatterplot-layer')) {
-      if (!item.object) return;
+      if (!item.object) return null;
       console.log('object.object', item.object);
       return `${item.object.no}: ${item.object.name}`;
     }
+
+    return null;
   };
 
   return (

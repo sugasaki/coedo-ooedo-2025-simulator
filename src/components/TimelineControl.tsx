@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Timeline, DataSet } from 'vis-timeline/standalone';
+import { Timeline, DataSet, TimelineTimeAxisScaleType } from 'vis-timeline/standalone';
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import { useStore } from '../store/store';
 
@@ -12,7 +12,6 @@ interface TimelineControlProps {
 export const TimelineControl = ({
     min = 0,
     max = 129600,
-    autoPlay = true
 }: TimelineControlProps) => {
     const timelineRef = useRef<HTMLDivElement>(null);
     const timeline = useRef<Timeline | null>(null);
@@ -76,7 +75,7 @@ export const TimelineControl = ({
                     timeStep: 30,
                     // 目盛線を非表示にする設定
                     showGrid: false,
-                    timeAxis: { scale: 'minute', step: 1 },
+                    timeAxis: { scale: 'minute' as TimelineTimeAxisScaleType, step: 1 },
                     width: '100%',
                     height: '120px'
                 };

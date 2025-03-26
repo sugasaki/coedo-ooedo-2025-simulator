@@ -19,7 +19,7 @@ interface Props {
 
 const mapStyle = getMapStyle(import.meta.env.VITE_MAPTILER_KEY);
 
-export const DeckGLMap = ({ width = '100%', height = '500px' }: Props) => {
+export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
   const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
 
   const { getScatterplotLayer } = useScatterplotLayer();

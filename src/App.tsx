@@ -29,22 +29,32 @@ function App() {
   }, [animationFrameValue]);
 
   return (
-    <div className="p-8 dark:bg-gray-900 dark:text-white">
-      <div className="text-3xl font-bold dark:text-white">
-        小江戸大江戸2025シミュレーター
-      </div>
-
-      <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <AnimationFrame min={0} />
-      </div>
-
-      {/* 地図コンポーネント */}
-      <div className="mt-0">
+    <div className="app-container dark:bg-gray-900 dark:text-white">
+      {/* Map as background */}
+      <div className="map-container">
         <DeckGLMap />
       </div>
-
-      <div className="mt-0 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <TimelineControl min={0} max={69660} />
+      
+      {/* Overlay content */}
+      <div className="overlay-container">
+        {/* Header */}
+        <div className="header">
+          <div className="text-3xl font-bold">
+            小江戸大江戸2025シミュレーター
+          </div>
+        </div>
+        
+        {/* Controls */}
+        <div className="control-panel dark:bg-gray-800 dark:text-white">
+          <AnimationFrame min={0} />
+        </div>
+        
+        {/* Timeline at the bottom */}
+        <div className="timeline-container">
+          <div className="control-panel dark:bg-gray-800 dark:text-white">
+            <TimelineControl min={0} max={69660} customTimeColor="#FF5733" />
+          </div>
+        </div>
       </div>
     </div>
   );

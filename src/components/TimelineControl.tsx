@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Timeline, DataSet, TimelineTimeAxisScaleType } from 'vis-timeline/standalone';
+import { Timeline, DataSet } from 'vis-timeline/standalone';
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import { useStore } from '../store/store';
 
@@ -27,70 +27,68 @@ export const TimelineControl = ({
         return date;
     };
 
-    // Configuration for the Timeline
-    const options = {
-        // min: createDate(min),
-        // max: createDate(max),
-        // start: createDate(min),
-        // end: createDate(max),
-        // zoomMin: 0,
-        // zoomMax: 86400000, // 1日分（ミリ秒）
-        // zoomable: false,
-        showCurrentTime: true,
-        showMajorLabels: true,
-        showMinorLabels: true,
-        // format: {
-        //     minorLabels: {
-        //         minute: 'HH:mm',
-        //         hour: 'HH:mm'
-        //     },
-        //     majorLabels: {
-        //         hour: 'HH:mm',
-        //         day: 'M/D'
-        //     }
-        // },
-        // 30秒間隔で移動するように設定
-        timeStep: 1,
-        // 目盛線を非表示にする設定
-        showGrid: false,
-        // 横スクロールを無効化する設定
-        moveable: false,
-        selectable: true,
-        // timeAxis: { scale: 'minute', step: 1 },
-        width: '100%',
-        height: '100px',
-        snap: function (date: Date) {
-            // snapの値をセットする事で、目盛線の移動をスムーズにできる
-            const hour = 60 * 1000;
-            const snapvalue = Math.round(date.getTime() / hour) * hour
-            // console.log('snapvalue', snapvalue);
-            return snapvalue;
-        }
-    };
-
-    // Create a DataSet with items
-    const items = new DataSet([
-        {
-            id: 1,
-            content: 'レース進行',
-            start: createDate(min),
-            end: createDate(max)
-        },
-        {
-            id: 2,
-            content: '新しいイベント',
-            start: createDate(min + 1800),
-            end: createDate(min + 3600)
-        }
-    ]);
-
-
     useEffect(() => {
         if (timelineRef.current && !timeline.current) {
             try {
-                // カスタムCSSを追加して目盛線を非表示にする
+                // Create a DataSet with items
+                const items = new DataSet([
+                    {
+                        id: 1,
+                        content: 'レース進行',
+                        start: createDate(min),
+                        end: createDate(max)
+                    }
+                ]);
+
+                // Configuration for the Timeline
+                const options = {
+                    min: createDate(min),
+                    max: createDate(max),
+                    start: createDate(min),
+                    end: createDate(max),
+                    // zoomMin: 0,
+                    // zoomMax: 86400000, // 1日分（ミリ秒）
+                    // zoomable: false,
+                    showCurrentTime: true,
+                    showMajorLabels: true,
+                    showMinorLabels: true,
+                    // format: {
+                    //     minorLabels: {
+                    //         minute: 'HH:mm',
+                    //         hour: 'HH:mm'
+                    //     },
+                    //     majorLabels: {
+                    //         hour: 'HH:mm',
+                    //         day: 'M/D'
+                    //     }
+                    // },
+                    // 30秒間隔で移動するように設定
+                    timeStep: 1,
+                    // 目盛線を非表示にする設定
+                    showGrid: false,
+                    // 横スクロールを無効化する設定
+                    moveable: false,
+                    selectable: true,
+                    // timeAxis: { scale: 'minute', step: 1 },
+                    width: '100%',
+                    height: '100px',
+                    snap: function (date: Date) {
+                        // snapの値をセットする事で、目盛線の移動をスムーズにできる
+                        const hour = 60 * 1000;
+                        const snapvalue = Math.round(date.getTime() / hour) * hour
+                        // console.log('snapvalue', snapvalue);
+                        return snapvalue;
+                    }
+                };
+
+                // カスタムCSSを追加
                 const styleElement = document.createElement('style');
                 styleElement.setAttribute('data-timeline-style', 'true');
+                styleElement.textContent = `
+                    .vis-custom-time {
+                        background-color: #ff0000;
+                    }
+                `;
                 document.head.appendChild(styleElement);
 
                 // Create a Timeline

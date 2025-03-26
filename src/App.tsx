@@ -34,7 +34,7 @@ function App() {
       <div className="map-container">
         <DeckGLMap />
       </div>
-      
+
       {/* Overlay content */}
       <div className="overlay-container">
         {/* Header */}
@@ -43,12 +43,12 @@ function App() {
             小江戸大江戸2025シミュレーター
           </div>
         </div>
-        
+
         {/* Controls */}
-        <div className="control-panel dark:bg-gray-800 dark:text-white">
+        <div className="control-panel">
           <AnimationFrame min={0} />
         </div>
-        
+
         {/* Timeline at the bottom */}
         <div className="timeline-container">
           <div className="control-panel dark:bg-gray-800 dark:text-white">

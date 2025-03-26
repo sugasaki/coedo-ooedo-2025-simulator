@@ -1,5 +1,7 @@
 /* Reset default margin and padding */
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -42,11 +44,11 @@ html, body, #root {
 }
 
 .control-panel {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 0.5rem;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* border-radius: 0.5rem; */
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 .dark .control-panel {

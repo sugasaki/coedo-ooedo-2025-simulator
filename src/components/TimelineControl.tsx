@@ -6,17 +6,23 @@ import { useStore } from '../store/store';
 interface TimelineControlProps {
   min?: number;
   max?: number;
+  height?: string;
+  customTimeColor?: string;
 }
 
 export const TimelineControl = ({
   min = 0,
   max = 69660,
+  height = '100px',
+  customTimeColor = '#ffee00',
 }: TimelineControlProps) => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const timeline = useRef<Timeline | null>(null);
   // min, maxの値をuseRefに保存して不要な再レンダリングを防止
   const minRef = useRef(min);
   const maxRef = useRef(max);
+  const heightRef = useRef(height);
+  const customTimeColorRef = useRef(customTimeColor);
 
   const { animationFrameValue, setAnimationFrame } = useStore();
 
@@ -42,8 +48,8 @@ export const TimelineControl = ({
   // タイムラインのオプションを設定する関数
   const getTimelineOptions = useCallback(() => {
     return {
-      min: createDate(minRef.current),
-      max: createDate(maxRef.current),
+      //   min: createDate(minRef.current),
+      //   max: createDate(maxRef.current),
       start: createDate(minRef.current),
       end: createDate(maxRef.current),
       // zoomMin: 0,
@@ -71,7 +77,7 @@ export const TimelineControl = ({
       selectable: true,
       // timeAxis: { scale: 'minute', step: 1 },
       width: '100%',
-      height: '100px',
+      height: heightRef.current,
       snap: function (date: Date) {
         // snapの値をセットする事で、目盛線の移動をスムーズにできる
         const hour = 60 * 1000;
@@ -80,7 +86,7 @@ export const TimelineControl = ({
         return snapvalue;
       },
     };
-  }, [createDate]);
+  }, [createDate, heightRef]);
 
   // カスタムCSSスタイルを追加する関数
   const addCustomTimelineStyle = useCallback(() => {
@@ -91,11 +97,14 @@ export const TimelineControl = ({
     styleElement.setAttribute('data-timeline-style', 'true');
     styleElement.textContent = `
             .vis-custom-time {
-                background-color: #ffee00;
+                background-color: ${customTimeColorRef.current};
+            }
+            .vis-custom-time-marker {
+                background-color: "#000000";
             }
         `;
     document.head.appendChild(styleElement);
-  }, []);
+  }, [customTimeColorRef]);
 
   // タイムラインのイベントリスナーを設定する関数
   const setupTimelineEventListeners = useCallback(
@@ -105,6 +114,12 @@ export const TimelineControl = ({
         createDate(animationFrameValue),
         customTimeId
       );
+
+      //   timelineInstance.setCustomTimeMarker(
+      //     'Enter some text',
+      //     customTimeId,
+      //     true
+      //   );
 
       // イベントリスナーが重複しないように一度削除してから追加
       timelineInstance.off('timechange');
@@ -191,6 +206,8 @@ export const TimelineControl = ({
     // propsの値をrefに保存
     minRef.current = min;
     maxRef.current = max;
+    heightRef.current = height;
+    customTimeColorRef.current = customTimeColor;
 
     // タイムラインを初期化
     initializeTimeline();

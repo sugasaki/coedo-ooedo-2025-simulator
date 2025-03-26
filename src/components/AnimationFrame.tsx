@@ -16,19 +16,17 @@ export const AnimationFrame = ({ min = 0 }: Props) => {
 
   return (
     <div>
-      <div style={{ fontSize: '24px', margin: '20px 0' }}>
+      <div style={{ margin: '0' }} className="text-1x text-gray-500">
         現在のフレーム: {animationFrameValue}
       </div>
-      <div
+      {/* <div
         style={{
-          fontSize: '16px',
-          margin: '10px 0',
+          margin: '0',
           color: isPlaying ? 'green' : 'red',
         }}
       >
         状態: {isPlaying ? '再生中' : '停止中'}
-      </div>
-      <AnimationControls />
+      </div> */}
     </div>
   );
 };

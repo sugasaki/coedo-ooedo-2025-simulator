@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { fetchAndStoreRaceData } from './utils/raceDataLoader';
 import { DeckGLMap } from './components/DeckGLMap';
 import { AnimationFrame } from './components/AnimationFrame';
+import { AnimationControls } from './components/AnimationControls';
 import { TimelineControl } from './components/TimelineControl';
 import { useStore } from './store/store';
 import './App.css';
@@ -39,14 +40,18 @@ function App() {
       <div className="overlay-container">
         {/* Header */}
         <div className="header">
-          <div className="text-3xl font-bold">
-            小江戸大江戸2025シミュレーター
+          <div className="text-1xl font-bold text-gray-500">
+            小江戸大江戸2025
           </div>
         </div>
 
         {/* Controls */}
         <div className="control-panel">
           <AnimationFrame min={0} />
+        </div>
+
+        <div className="play-container">
+          <AnimationControls />
         </div>
 
         {/* Timeline at the bottom */}

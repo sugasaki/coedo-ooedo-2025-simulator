@@ -51,9 +51,12 @@ function App() {
 
         {/* Timeline at the bottom */}
         <div className="timeline-container">
-          <div className="control-panel dark:bg-gray-800 dark:text-white">
-            <TimelineControl min={0} max={69660} customTimeColor="#FF5733" />
-          </div>
+          <TimelineControl
+            min={0}
+            max={69660}
+            height="60px"
+            customTimeColor="#FF5733"
+          />
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ body,
 
 .timeline-container {
   position: fixed;
-  bottom: 1rem;
+  bottom: 2rem;
   left: 1rem;
   right: 1rem;
   z-index: 20; /* Ensure it's above other elements */

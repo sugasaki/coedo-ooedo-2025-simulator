@@ -47,7 +47,7 @@ function App() {
 
         {/* Controls */}
         <div className="control-panel">
-          <AnimationFrame min={0} />
+          <AnimationFrame />
         </div>
 
         <div className="play-container">

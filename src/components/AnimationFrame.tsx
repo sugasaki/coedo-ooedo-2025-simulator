@@ -1,16 +1,14 @@
 import { useStore } from '../store/store';
-import { useAnimationFrame } from '../hooks/useAnimationFrame';
-import { AnimationControls } from './AnimationControls';
 
 interface Props {
-  min: number;
+  // min: number;
 }
 
-export const AnimationFrame = ({ min = 0 }: Props) => {
-  const { isPlaying } = useAnimationFrame({
-    min,
-    autoStart: false,
-  });
+export const AnimationFrame = ({ }: Props) => {
+  // const { isPlaying } = useAnimationFrame({
+  //   min,
+  //   autoStart: false,
+  // });
 
   const animationFrameValue = useStore(state => state.animationFrameValue);
 

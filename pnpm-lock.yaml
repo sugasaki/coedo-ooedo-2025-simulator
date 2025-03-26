@@ -32,6 +32,9 @@ importers:
       react-router:
         specifier: ^7.3.0
         version: 7.3.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      vis-timeline:
+        specifier: ^7.7.3
+        version: 7.7.3(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)(keycharm@0.4.0)(moment@2.30.1)(propagating-hammerjs@2.0.1(@egjs/hammerjs@2.0.17))(uuid@9.0.1)(vis-data@7.1.9(uuid@9.0.1)(vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)))(vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1))(xss@1.0.13)
       vitest:
         specifier: ^3.0.9
         version: 3.0.9(@types/node@22.13.10)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.2)
@@ -227,6 +230,10 @@ packages:
     resolution: {integrity: sha512-+cpNePrKNJ1kbtc0VZpaoiDV+nKUC0yCI9ygfAOHNVEhZ2HCMthIIxpuw/wj2N0YOerdUEVEFhGwY9pqY2bt1g==}
     peerDependencies:
       '@deck.gl/core': ^9.1.0
+
+  '@egjs/hammerjs@2.0.17':
+    resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
+    engines: {node: '>=0.8.0'}
 
   '@esbuild/aix-ppc64@0.25.1':
     resolution: {integrity: sha512-kfYGy8IdzTGy+z0vFGvExZtxkFlA4zAxgKEahG9KE1ScBjpQnFsNOX8KTU5ojNru5ed5CVoJYXFtoxaq5nFbjQ==}
@@ -1048,6 +1055,9 @@ packages:
   '@types/google.maps@3.58.1':
     resolution: {integrity: sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==}
 
+  '@types/hammerjs@2.0.46':
+    resolution: {integrity: sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -1382,6 +1392,9 @@ packages:
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+
+  component-emitter@1.3.1:
+    resolution: {integrity: sha512-T0+barUSQRTUQASh8bx02dl+DhF54GtIDY13Y3m9oWTklKbb3Wv974meRpeZ3lp1JpLVECWWNHC4vaG2XHXouQ==}
 
   composed-offset-position@0.0.6:
     resolution: {integrity: sha512-Q7dLompI6lUwd7LWyIcP66r4WcS9u7AL2h8HaeipiRfCRPLMWqRx8fYsjb4OHi6UQFifO7XtNC2IlEJ1ozIFxw==}
@@ -1922,6 +1935,9 @@ packages:
   kdbush@4.0.2:
     resolution: {integrity: sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA==}
 
+  keycharm@0.4.0:
+    resolution: {integrity: sha512-TyQTtsabOVv3MeOpR92sIKk/br9wxS+zGj4BG7CR8YbK4jM3tyIBaF0zhzeBUMx36/Q/iQLOKKOT+3jOQtemRQ==}
+
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
@@ -2204,6 +2220,11 @@ packages:
 
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
+
+  propagating-hammerjs@2.0.1:
+    resolution: {integrity: sha512-PH3zG5whbSxMocphXJzVtvKr+vWAgfkqVvtuwjSJ/apmEACUoiw6auBAT5HYXpZOR0eGcTAfYG5Yl8h91O5Elg==}
+    peerDependencies:
+      '@egjs/hammerjs': ^2.0.17
 
   protocol-buffers-schema@3.6.0:
     resolution: {integrity: sha512-TdDRD+/QNdrCGCE7v8340QyuXd4kIWIgapsE2+n/SaGiSSbomYl4TjHlvIoCWRpE7wFt02EpB35VVA2ImcBVqw==}
@@ -2509,6 +2530,36 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
+
+  vis-data@7.1.9:
+    resolution: {integrity: sha512-COQsxlVrmcRIbZMMTYwD+C2bxYCFDNQ2EHESklPiInbD/Pk3JZ6qNL84Bp9wWjYjAzXfSlsNaFtRk+hO9yBPWA==}
+    peerDependencies:
+      uuid: ^3.4.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+      vis-util: ^5.0.1
+
+  vis-timeline@7.7.3:
+    resolution: {integrity: sha512-hGMzTttdOFWaw1PPlJuCXU2/4UjnsIxT684Thg9fV6YU1JuKZJs3s3BrJgZ4hO3gu5i1hsMe1YIi96o+eNT0jg==}
+    peerDependencies:
+      '@egjs/hammerjs': ^2.0.0
+      component-emitter: ^1.3.0
+      keycharm: ^0.2.0 || ^0.3.0 || ^0.4.0
+      moment: ^2.24.0
+      propagating-hammerjs: ^1.4.0 || ^2.0.0
+      uuid: ^3.4.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+      vis-data: ^6.3.0 || ^7.0.0
+      vis-util: ^5.0.1
+      xss: ^1.0.0
+
+  vis-util@5.0.7:
+    resolution: {integrity: sha512-E3L03G3+trvc/X4LXvBfih3YIHcKS2WrP0XTdZefr6W6Qi/2nNCqZfe4JFfJU6DcQLm6Gxqj2Pfl+02859oL5A==}
+    engines: {node: '>=8'}
+    peerDependencies:
+      '@egjs/hammerjs': ^2.0.0
+      component-emitter: ^1.3.0 || ^2.0.0
 
   vite-node@3.0.9:
     resolution: {integrity: sha512-w3Gdx7jDcuT9cNn9jExXgOyKmf5UOTb6WMHz8LGAm54eS1Elf5OuBhCxl6zJxGhEeIkgsE1WbHuoL0mj/UXqXg==}
@@ -2925,6 +2976,10 @@ snapshots:
     dependencies:
       '@deck.gl/core': 9.1.5
       preact: 10.26.4
+
+  '@egjs/hammerjs@2.0.17':
+    dependencies:
+      '@types/hammerjs': 2.0.46
 
   '@esbuild/aix-ppc64@0.25.1':
     optional: true
@@ -3802,6 +3857,8 @@ snapshots:
 
   '@types/google.maps@3.58.1': {}
 
+  '@types/hammerjs@2.0.46': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/mapbox__point-geometry@0.1.4': {}
@@ -4230,6 +4287,8 @@ snapshots:
       delayed-stream: 1.0.0
 
   commander@2.20.3: {}
+
+  component-emitter@1.3.1: {}
 
   composed-offset-position@0.0.6(@floating-ui/utils@0.2.9):
     dependencies:
@@ -4785,6 +4844,8 @@ snapshots:
 
   kdbush@4.0.2: {}
 
+  keycharm@0.4.0: {}
+
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
@@ -5050,6 +5111,10 @@ snapshots:
   prelude-ls@1.2.1: {}
 
   process-nextick-args@2.0.1: {}
+
+  propagating-hammerjs@2.0.1(@egjs/hammerjs@2.0.17):
+    dependencies:
+      '@egjs/hammerjs': 2.0.17
 
   protocol-buffers-schema@3.6.0: {}
 
@@ -5330,6 +5395,30 @@ snapshots:
       punycode: 2.3.1
 
   util-deprecate@1.0.2: {}
+
+  uuid@9.0.1: {}
+
+  vis-data@7.1.9(uuid@9.0.1)(vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)):
+    dependencies:
+      uuid: 9.0.1
+      vis-util: 5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)
+
+  vis-timeline@7.7.3(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)(keycharm@0.4.0)(moment@2.30.1)(propagating-hammerjs@2.0.1(@egjs/hammerjs@2.0.17))(uuid@9.0.1)(vis-data@7.1.9(uuid@9.0.1)(vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)))(vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1))(xss@1.0.13):
+    dependencies:
+      '@egjs/hammerjs': 2.0.17
+      component-emitter: 1.3.1
+      keycharm: 0.4.0
+      moment: 2.30.1
+      propagating-hammerjs: 2.0.1(@egjs/hammerjs@2.0.17)
+      uuid: 9.0.1
+      vis-data: 7.1.9(uuid@9.0.1)(vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1))
+      vis-util: 5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1)
+      xss: 1.0.13
+
+  vis-util@5.0.7(@egjs/hammerjs@2.0.17)(component-emitter@1.3.1):
+    dependencies:
+      '@egjs/hammerjs': 2.0.17
+      component-emitter: 1.3.1
 
   vite-node@3.0.9(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2):
     dependencies:

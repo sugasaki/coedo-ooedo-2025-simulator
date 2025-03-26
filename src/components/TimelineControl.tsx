@@ -99,10 +99,28 @@ export const TimelineControl = ({
             .vis-custom-time {
                 background-color: ${customTimeColorRef.current};
             }
-            .vis-custom-time-marker {
-                background-color: "#000000";
+            .vis-timeline {
+                border: 1px solid #575757;
             }
-        `;
+            .vis-panel.vis-center {
+                border: 1px solid #575757;
+            }
+            .vis-panel {
+                border-color: #575757;
+            }
+            .vis-grid.vis-horizontal {
+                border-bottom: 1px solid #575757;
+            }
+            .vis-time-axis .vis-grid.vis-minor {
+                border-color: #575757;
+            }
+            .vis-time-axis .vis-text {
+                color: #575757;
+            }
+            .vis-time-axis .vis-grid.vis-major {
+                border-color: #575757;
+            }
+     `;
     document.head.appendChild(styleElement);
   }, [customTimeColorRef]);
 
@@ -224,9 +242,5 @@ export const TimelineControl = ({
     updateTimelinePosition();
   }, [updateTimelinePosition]);
 
-  return (
-    <div className="timeline-control">
-      <div className="timeline-container" ref={timelineRef}></div>
-    </div>
-  );
+  return <div ref={timelineRef}></div>;
 };

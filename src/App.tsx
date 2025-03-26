@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { fetchAndStoreRaceData } from './utils/raceDataLoader';
 import { DeckGLMap } from './components/DeckGLMap';
 import { AnimationFrame } from './components/AnimationFrame';
+import { AnimationControls } from './components/AnimationControls';
 import { TimelineControl } from './components/TimelineControl';
 import { useStore } from './store/store';
 import './App.css';
@@ -29,22 +30,39 @@ function App() {
   }, [animationFrameValue]);
 
   return (
-    <div className="p-8 dark:bg-gray-900 dark:text-white">
-      <div className="text-3xl font-bold dark:text-white">
-        小江戸大江戸2025シミュレーター
-      </div>
-
-      <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <AnimationFrame min={0} />
-      </div>
-
-      {/* 地図コンポーネント */}
-      <div className="mt-0">
+    <div className="app-container dark:bg-gray-900 dark:text-white">
+      {/* Map as background */}
+      <div className="map-container">
         <DeckGLMap />
       </div>
 
-      <div className="mt-0 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <TimelineControl min={0} max={69660} />
+      {/* Overlay content */}
+      <div className="overlay-container">
+        {/* Header */}
+        <div className="header">
+          <div className="text-1xl font-bold text-gray-500">
+            小江戸大江戸2025
+          </div>
+        </div>
+
+        {/* Controls */}
+        <div className="control-panel">
+          <AnimationFrame />
+        </div>
+
+        <div className="play-container">
+          <AnimationControls />
+        </div>
+
+        {/* Timeline at the bottom */}
+        <div className="timeline-container">
+          <TimelineControl
+            min={0}
+            max={69660}
+            height="60px"
+            customTimeColor="#FF5733"
+          />
+        </div>
       </div>
     </div>
   );

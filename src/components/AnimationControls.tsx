@@ -16,6 +16,7 @@ export const AnimationControls = () => {
           border: 'none',
           borderRadius: '4px',
           cursor: isPlaying ? 'default' : 'pointer',
+          fontSize: '11px',
         }}
       >
         スタート
@@ -30,6 +31,7 @@ export const AnimationControls = () => {
           border: 'none',
           borderRadius: '4px',
           cursor: !isPlaying ? 'default' : 'pointer',
+          fontSize: '11px',
         }}
       >
         ストップ

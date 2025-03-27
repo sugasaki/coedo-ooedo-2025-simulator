@@ -1,5 +1,6 @@
 import { useAnimationFrame } from '../hooks/useAnimationFrame';
 import { useStore } from '../store/store';
+import { Button } from 'antd';
 
 export const AnimationControls = () => {
   const { playingStart, playingStop, setAnimationFrame, raceInfo } = useStore();
@@ -11,52 +12,23 @@ export const AnimationControls = () => {
   return (
     <>
       <div style={{ margin: '10px 0' }}>
-        <button
-          onClick={() => playingStart()}
-          disabled={isPlaying}
+        <Button
+          color={isPlaying ? 'purple' : 'primary'}
+          variant="solid"
+          onClick={() => (isPlaying ? playingStop() : playingStart())}
           style={{
-            padding: '8px 16px',
             marginRight: '10px',
-            backgroundColor: isPlaying ? '#ccc' : '#4CAF50',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: isPlaying ? 'default' : 'pointer',
-            fontSize: '11px',
           }}
         >
-          スタート
-        </button>
-        <button
-          onClick={() => playingStop()}
-          disabled={!isPlaying}
-          style={{
-            padding: '8px 16px',
-            marginRight: '10px',
-            backgroundColor: !isPlaying ? '#ccc' : '#f44336',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: !isPlaying ? 'default' : 'pointer',
-            fontSize: '11px',
-          }}
-        >
-          ストップ
-        </button>
-        <button
+          {isPlaying ? 'ストップ' : 'スタート'}
+        </Button>
+        <Button
+          color="danger"
+          variant="solid"
           onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
-          style={{
-            padding: '8px 16px',
-            backgroundColor: '#00aeff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '11px',
-          }}
         >
           リセット
-        </button>
+        </Button>
       </div>
       {/* <div
         style={{

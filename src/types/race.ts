@@ -40,6 +40,7 @@ export interface RaceInfoCategory {
   category: string;
   start_unixtime_jst: number;
   end_unixtime_jst: number;
+  json_name: string;
 }
 
 export interface RaceInfo {

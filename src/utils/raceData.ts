@@ -2,16 +2,20 @@ import { getPositionAtDistance } from '../utils/pathUtils';
 import { getDistanceAtTime } from '../utils/timeUtils';
 import { Scatterplot2D } from '../types/scatterplot';
 import { ConvertedRaceParticipant, ConvertedRaceData } from '../types/race';
-import { featureData } from '../utils/mapDataLoader';
+import { getFeatureData } from '../utils/mapDataLoader';
 import { categoryToColor } from './colorTable';
 import { Coordinate } from '../types/geo';
 import { RaceInfo } from '../types/race';
+import { GeoJSONFeature } from '../types/geojson';
 
 export const createData = (
   raceData: ConvertedRaceData,
   time: number,
   raceInfo: RaceInfo
 ): Scatterplot2D[] => {
+  // 利用可能なコースを確認（デバッグ用）
+  // console.log('利用可能なコース:', getAvailableCourses());
+
   try {
     return raceData.flatMap(category => {
       const categoryStartTime = raceInfo.category.find(
@@ -24,6 +28,14 @@ export const createData = (
 
       // カテゴリーの色を取得
       const color = categoryToColor(category.category);
+      const featureData = getFeatureData(category.category);
+
+      if (!featureData) {
+        console.error(
+          `Feature data not found for category: ${category.category}`
+        );
+        return [];
+      }
 
       return category.results
         .map((participant: ConvertedRaceParticipant) =>
@@ -41,7 +53,7 @@ export const createData = (
 };
 
 function getPosition(
-  feature: any,
+  feature: GeoJSONFeature,
   participant: ConvertedRaceParticipant,
   time: number,
   color: number[]

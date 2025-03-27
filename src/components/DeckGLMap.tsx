@@ -11,6 +11,10 @@ import {
   getMapStyle,
 } from '../utils/mapDataLoader';
 import { adjustMapBounds } from '../utils/mapHelpers';
+import { PersonInfoType } from '../types/personInfo';
+import { useAnimationStore, useMapStore } from '../store';
+import { containsStringAndNumber } from '../utils/containsNumber';
+import { Tooltip } from './Tooltip';
 
 interface Props {
   width?: string | number;
@@ -19,8 +23,13 @@ interface Props {
 
 const mapStyle = getMapStyle(import.meta.env.VITE_MAPTILER_KEY);
 
+const focusNumberArray = ['2151', '2114', '5', '1008'];
+
 export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
   const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
+  const [tooltipData, setTooltipData] = useState<PersonInfoType[]>([]);
+  const { animationFrameValue } = useAnimationStore();
+  const { personLocation } = useMapStore();
 
   const { getScatterplotLayer } = useScatterplotLayer();
 
@@ -52,13 +61,25 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
     }
   }, [courseData, mapInstance]);
 
+  useEffect(() => {
+    if (!personLocation) return;
+
+    const tooltipData = personLocation
+      .map(d => {
+        return containsStringAndNumber(focusNumberArray, categoryName, d.no)
+          ? d
+          : null;
+      })
+      .filter((d): d => d !== null && d !== undefined);
+    setTooltipData(tooltipData);
+  }, [animationFrameValue]);
+
   // マップコンテナのスタイル
   const mapViewStyle = {
     width,
     height,
     position: 'relative' as const,
   };
-
 
   //ツールチップを生成する
   const tooltipHandler = (item: any): string | null => {
@@ -94,9 +115,14 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
         style={mapViewStyle}
         onLoad={handleLoad}
       >
-        <DeckGLOverlay layers={layers} getTooltip={tooltipHandler}
-        />
+        <DeckGLOverlay layers={layers} getTooltip={tooltipHandler} />
       </Map>
+
+      {tooltipData
+        ? tooltipData.map((data, index) => (
+            <Tooltip key={index} personInfo={data} />
+          ))
+        : null}
     </>
   );
 };

@@ -2,15 +2,21 @@ import { ScatterplotLayer } from 'deck.gl';
 import { useMapStore } from '../store/map/mapStore';
 
 export const useScatterplotLayer = () => {
-  const { personLocation } = useMapStore();
+  const { personLocation, visibleCategories } = useMapStore();
 
   const getScatterplotLayer = () => {
-    //
-    // const id = Math.random().toString(32).substring(2);
-    //
+    // Filter data based on visible categories
+    // 空の配列の場合は何も表示しない
+    const filteredData = personLocation ? 
+      personLocation.filter(person => 
+        typeof person.categoryIndex === 'number' && 
+        visibleCategories.includes(person.categoryIndex)
+      )
+      : [];
+
     const scatterplotLayer = new ScatterplotLayer({
       id: 'scatterplot-layer',
-      data: personLocation,
+      data: filteredData,
       pickable: true,
       opacity: 0.8,
       stroked: false,

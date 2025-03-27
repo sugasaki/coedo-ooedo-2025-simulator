@@ -20,10 +20,10 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      // console.log(race_info_url, 'race_info_url');
+      // レース情報を読み込む
       await fetchAndStoreRaceInfo(race_info_url);
 
-      // console.log(url, 'url');
+      // レースデータを読み込む
       await fetchAndStoreRaceData(url);
     })();
   }, []);

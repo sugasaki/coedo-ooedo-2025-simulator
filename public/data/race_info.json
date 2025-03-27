@@ -4,29 +4,30 @@
   "end": "2025-03-16 20:00:00",
   "start_unixtime_jst": 1741992600,
   "end_unixtime_jst": 1742122800,
-  "category": [
+  "json_name": "大江戸ナイトラン115km",
+  "categories": [
     {
-      "category": "小江戸大江戸200km",
+      "name": "小江戸大江戸200km",
       "start_unixtime_jst": 1741993200,
       "end_unixtime_jst": 1742122800
     },
     {
-      "category": "小江戸大江戸230km",
+      "name": "小江戸大江戸230km",
       "start_unixtime_jst": 1741993200,
       "end_unixtime_jst": 1742122800
     },
     {
-      "category": "小江戸大江戸260km",
+      "name": "小江戸大江戸260km",
       "start_unixtime_jst": 1741993200,
       "end_unixtime_jst": 1742122800
     },
     {
-      "category": "小江戸90km",
+      "name": "小江戸90km",
       "start_unixtime_jst": 1741992600,
       "end_unixtime_jst": 1742122800
     },
     {
-      "category": "大江戸ナイトラン115km",
+      "name": "大江戸ナイトラン115km",
       "start_unixtime_jst": 1742043600,
       "end_unixtime_jst": 1742112000
     }

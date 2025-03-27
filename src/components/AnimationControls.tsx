@@ -15,41 +15,19 @@ export const AnimationControls = () => {
     <>
       <div style={{ margin: '10px 0' }}>
         <Button
-          type="primary"
-          onClick={() => playingStart()}
-          disabled={isPlaying}
+          color={isPlaying ? 'purple' : 'primary'}
+          variant="solid"
+          onClick={() => (isPlaying ? playingStop() : playingStart())}
           style={{
             marginRight: '10px',
-            backgroundColor: isPlaying ? undefined : '#4CAF50',
-            borderColor: isPlaying ? undefined : '#4CAF50',
-            fontSize: '11px',
           }}
-          size="small"
         >
-          スタート
+          {isPlaying ? 'ストップ' : 'スタート'}
         </Button>
         <Button
-          type="primary"
-          danger
-          onClick={() => playingStop()}
-          disabled={!isPlaying}
-          style={{
-            marginRight: '10px',
-            fontSize: '11px',
-          }}
-          size="small"
-        >
-          ストップ
-        </Button>
-        <Button
-          type="primary"
+          color="danger"
+          variant="solid"
           onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
-          style={{
-            backgroundColor: '#00aeff',
-            borderColor: '#00aeff',
-            fontSize: '11px',
-          }}
-          size="small"
         >
           リセット
         </Button>

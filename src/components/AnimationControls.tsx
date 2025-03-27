@@ -2,7 +2,7 @@ import { useAnimationFrame } from '../hooks/useAnimationFrame';
 import { useStore } from '../store/store';
 
 export const AnimationControls = () => {
-  const { playingStart, playingStop } = useStore();
+  const { playingStart, playingStop, setAnimationFrame, raceInfo } = useStore();
   const { isPlaying } = useAnimationFrame({
     min: 0,
     autoStart: true,
@@ -32,6 +32,7 @@ export const AnimationControls = () => {
           disabled={!isPlaying}
           style={{
             padding: '8px 16px',
+            marginRight: '10px',
             backgroundColor: !isPlaying ? '#ccc' : '#f44336',
             color: 'white',
             border: 'none',
@@ -41,6 +42,20 @@ export const AnimationControls = () => {
           }}
         >
           ストップ
+        </button>
+        <button
+          onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: '#00aeff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '11px',
+          }}
+        >
+          リセット
         </button>
       </div>
       {/* <div

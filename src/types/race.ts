@@ -37,10 +37,9 @@ export type ConvertedRaceData = ConvertedRaceCategory[];
 
 // レース情報の型定義
 export interface RaceInfoCategory {
-  category: string;
+  name: string;
   start_unixtime_jst: number;
   end_unixtime_jst: number;
-  json_name: string;
 }
 
 export interface RaceInfo {
@@ -49,5 +48,6 @@ export interface RaceInfo {
   end: string;
   start_unixtime_jst: number;
   end_unixtime_jst: number;
-  category: RaceInfoCategory[];
+  json_name: string;
+  categories: RaceInfoCategory[];
 }

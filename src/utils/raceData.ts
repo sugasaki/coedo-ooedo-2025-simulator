@@ -18,22 +18,22 @@ export const createData = (
 
   try {
     return raceData.flatMap(category => {
-      const categoryStartTime = raceInfo.category.find(
-        c => c.category === category.category
+      const categoryStartTime = raceInfo.categories.find(
+        c => c.name === category.category
       )?.start_unixtime_jst;
+
+      const categoryName = category.category;
 
       // フレームのタイム（実時間）からカテゴリー開始時間（実時間）を引いて、カテゴリー内の経過時間を計算
       // 例えば、スタート時は０になるようにする
       const thisTime = time - (categoryStartTime || 0);
 
       // カテゴリーの色を取得
-      const color = categoryToColor(category.category);
-      const featureData = getFeatureData(category.category);
+      const color = categoryToColor(categoryName);
+      const featureData = getFeatureData(categoryName);
 
       if (!featureData) {
-        console.error(
-          `Feature data not found for category: ${category.category}`
-        );
+        console.error(`Feature data not found for category: ${categoryName}`);
         return [];
       }
 

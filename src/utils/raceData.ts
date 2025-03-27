@@ -23,7 +23,7 @@ export const createData = (
 ): Scatterplot2D[] => {
   try {
     // 各カテゴリごとにデータを処理し、結果を一つの配列に結合
-    return raceData.flatMap(category => {
+    return raceData.flatMap((category, categoryIndex) => {
       // カテゴリ名を取得
       const categoryName = category.category;
 
@@ -50,7 +50,8 @@ export const createData = (
         category.results,
         courseFeature,
         elapsedTimeInCategory,
-        color
+        color,
+        categoryIndex
       );
     });
   } catch (error) {
@@ -77,7 +78,8 @@ function calculateParticipantsPositions(
   participants: ConvertedRaceParticipant[],
   courseFeature: GeoJSONFeature,
   elapsedTime: number,
-  color: number[]
+  color: number[],
+  categoryIndex: number
 ): Scatterplot2D[] {
   // 各参加者の位置を計算し、無効な位置（nullの結果）をフィルタリング
   return participants
@@ -86,7 +88,8 @@ function calculateParticipantsPositions(
         courseFeature,
         participant,
         elapsedTime,
-        color
+        color,
+        categoryIndex
       )
     )
     .filter((position): position is Scatterplot2D => position !== null);
@@ -99,7 +102,8 @@ function calculateParticipantPosition(
   courseFeature: GeoJSONFeature,
   participant: ConvertedRaceParticipant,
   elapsedTime: number,
-  color: number[]
+  color: number[],
+  categoryIndex: number
 ): Scatterplot2D | null {
   try {
     // 経過時間から走行距離を計算（キロメートル単位）
@@ -124,6 +128,7 @@ function calculateParticipantPosition(
       no: participant.ゼッケン,
       name: participant.氏名,
       category: participant.順位,
+      categoryIndex: categoryIndex, // Add category index for filtering
     };
   } catch (error) {
     console.error('位置計算中にエラーが発生しました:', error);

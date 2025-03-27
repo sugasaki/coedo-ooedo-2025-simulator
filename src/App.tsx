@@ -11,6 +11,7 @@ import { useAnimationStore } from './store/animation/animationStore';
 import './App.css';
 import { useResultData } from './hooks/useResultData';
 import { QueryParamHandler } from './components/QueryParamHandler';
+import { CategoryFilter } from './components/CategoryFilter';
 
 const url = './data/results_coedo_ooedo_2025_converted.json';
 const race_info_url = './data/race_info.json';
@@ -40,7 +41,7 @@ function App() {
     <div className="app-container dark:bg-gray-900 dark:text-white">
       {/* QueryParamHandler to handle URL parameters */}
       <QueryParamHandler />
-      
+
       {/* Map as background */}
       <div className="map-container">
         <DeckGLMap />
@@ -55,13 +56,14 @@ function App() {
           </div>
         </div>
 
+        <div className="play-container">
+          <AnimationControls />
+        </div>
+
         {/* Controls */}
         <div className="control-panel">
           <AnimationFrame />
-        </div>
-
-        <div className="play-container">
-          <AnimationControls />
+          <CategoryFilter />
         </div>
 
         {/* Timeline at the bottom */}

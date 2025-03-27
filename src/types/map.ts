@@ -3,4 +3,6 @@
 import { Scatterplot2D } from './scatterplot';
 
 // Export Scatterplot2D as PersonLocation for use in the map store
-export type PersonLocation = Scatterplot2D;
+export interface PersonLocation extends Scatterplot2D {
+  categoryIndex?: number; // Category index for filtering
+}

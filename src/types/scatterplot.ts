@@ -8,4 +8,5 @@ export type Scatterplot2D = {
   no?: string;
   name?: string;
   category?: string;
+  categoryIndex?: number; // Add category index for filtering
 };

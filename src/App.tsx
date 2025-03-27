@@ -62,12 +62,12 @@ function App() {
 
         {/* Controls */}
         <div className="control-panel">
-          <AnimationFrame />
           <CategoryFilter />
         </div>
 
         {/* Timeline at the bottom */}
         <div className="timeline-container">
+          <AnimationFrame />
           <RaceTimeline />
         </div>
       </div>

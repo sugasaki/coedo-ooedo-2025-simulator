@@ -1,12 +1,15 @@
 import { create } from 'zustand';
-import { ConvertedRaceData } from '../types/race';
+import { ConvertedRaceData, RaceInfo } from '../types/race';
 
 type State = {
   runnerIds: string[];
   categoryNo: number;
   raceData: ConvertedRaceData;
+  raceInfo: RaceInfo | null;
   isRaceDataLoading: boolean;
+  isRaceInfoLoading: boolean;
   raceDataError: string | null;
+  raceInfoError: string | null;
   animationFrameValue: number; // アニメーションの現在のフレーム
   animationFrameMax: number; // アニメーションの最大フレーム数
   animationSpeed: number; // アニメーションの速度
@@ -19,8 +22,11 @@ export const useStore = create<
     setRunnerIds: (ids: string[]) => void;
     setCategoryNo: (category: number) => void;
     setRaceData: (data: ConvertedRaceData) => void;
+    setRaceInfo: (data: RaceInfo) => void;
     setRaceDataLoading: (isLoading: boolean) => void;
+    setRaceInfoLoading: (isLoading: boolean) => void;
     setRaceDataError: (error: string | null) => void;
+    setRaceInfoError: (error: string | null) => void;
     setAnimationFrame: (frame: number) => void;
     setAnimationFrameMax: (max: number) => void;
     setPlaying: (isPlaying: boolean) => void;
@@ -33,8 +39,11 @@ export const useStore = create<
   runnerIds: [],
   categoryNo: 0,
   raceData: [],
+  raceInfo: null,
   isRaceDataLoading: true,
+  isRaceInfoLoading: true,
   raceDataError: null,
+  raceInfoError: null,
   animationFrameValue: 0,
   animationFrameMax: 10000,
   isPlaying: false,
@@ -43,8 +52,11 @@ export const useStore = create<
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategoryNo: categoryNo => set({ categoryNo }),
   setRaceData: data => set({ raceData: data }),
+  setRaceInfo: data => set({ raceInfo: data }),
   setRaceDataLoading: isLoading => set({ isRaceDataLoading: isLoading }),
+  setRaceInfoLoading: isLoading => set({ isRaceInfoLoading: isLoading }),
   setRaceDataError: error => set({ raceDataError: error }),
+  setRaceInfoError: error => set({ raceInfoError: error }),
   setAnimationFrame: frame => set({ animationFrameValue: frame }),
   setAnimationFrameMax: max => set({ animationFrameMax: max }),
   setPlaying: isPlaying => set({ isPlaying: isPlaying }),

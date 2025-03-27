@@ -2,7 +2,7 @@
  * レースデータを読み込むためのユーティリティ関数
  */
 import { useStore } from '../store/store';
-import { loadRaceData } from './fetcher';
+import { loadRaceData, loadRaceInfo } from './fetcher';
 
 /**
  * レースデータを読み込み、ストアに保存する
@@ -20,12 +20,46 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
 
     setRaceData(raceData);
 
-    setRaceDataLoading(false);
     setRaceDataError(null);
   } catch (err) {
     setRaceDataError('レースデータの読み込みに失敗しました');
     console.error(err);
   } finally {
     setRaceDataLoading(false);
+  }
+}
+
+/**
+ * レース情報を読み込み、ストアに保存する
+ * @param path JSONファイルのパス
+ */
+export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
+  const store = useStore.getState();
+  const {
+    setRaceInfo,
+    setRaceInfoLoading,
+    setRaceInfoError,
+    setAnimationFrame,
+    setAnimationFrameMax,
+  } = store;
+
+  try {
+    setRaceInfoLoading(true);
+
+    const raceInfo = await loadRaceInfo(path);
+    // console.log('loadRaceInfo', raceInfo);
+
+    setRaceInfo(raceInfo);
+
+    // タイムラインの範囲を設定
+    setAnimationFrame(raceInfo.start_unixtime_jst);
+    setAnimationFrameMax(raceInfo.end_unixtime_jst);
+
+    setRaceInfoError(null);
+  } catch (err) {
+    setRaceInfoError('レース情報の読み込みに失敗しました');
+    console.error(err);
+  } finally {
+    setRaceInfoLoading(false);
   }
 }

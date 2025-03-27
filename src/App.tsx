@@ -1,25 +1,29 @@
 import { useEffect } from 'react';
-import { fetchAndStoreRaceData } from './utils/raceDataLoader';
+import {
+  fetchAndStoreRaceData,
+  fetchAndStoreRaceInfo,
+} from './utils/raceDataLoader';
 import { DeckGLMap } from './components/DeckGLMap';
 import { AnimationFrame } from './components/AnimationFrame';
 import { AnimationControls } from './components/AnimationControls';
-import { TimelineControl } from './components/TimelineControl';
+import { RaceTimeline } from './components/RaceTimeline';
 import { useStore } from './store/store';
 import './App.css';
 import { useResultData } from './hooks/useResultData';
 
-// const url = './data/results_coedo_ooedo_2025_short.json';
 const url = './data/results_coedo_ooedo_2025_converted.json';
+const race_info_url = './data/race_info.json';
 
 function App() {
-  const { animationFrameValue, setAnimationFrameMax } = useStore();
+  const { animationFrameValue } = useStore();
   const { createResultData } = useResultData();
 
   useEffect(() => {
-    setAnimationFrameMax(129600);
-
     (async () => {
-      console.log(url, 'url');
+      // console.log(race_info_url, 'race_info_url');
+      await fetchAndStoreRaceInfo(race_info_url);
+
+      // console.log(url, 'url');
       await fetchAndStoreRaceData(url);
     })();
   }, []);
@@ -56,12 +60,7 @@ function App() {
 
         {/* Timeline at the bottom */}
         <div className="timeline-container">
-          <TimelineControl
-            min={0}
-            max={69660}
-            height="60px"
-            customTimeColor="#FF5733"
-          />
+          <RaceTimeline />
         </div>
       </div>
     </div>

@@ -3,19 +3,36 @@ import { getDistanceAtTime } from '../utils/timeUtils';
 import { Scatterplot2D } from '../types/scatterplot';
 import { ConvertedRaceParticipant, ConvertedRaceData } from '../types/race';
 import { featureData } from '../utils/mapDataLoader';
-import { categoryToColor, } from './colorTable';
+import { categoryToColor } from './colorTable';
 import { Coordinate } from '../types/geo';
+import { RaceInfo } from '../types/race';
 
-export const createData = (raceData: ConvertedRaceData, time: number): Scatterplot2D[] => {
+export const createData = (
+  raceData: ConvertedRaceData,
+  time: number,
+  raceInfo: RaceInfo
+): Scatterplot2D[] => {
   try {
-    const thisTime = time * 2;
+    return raceData.flatMap(category => {
+      const categoryStartTime = raceInfo.category.find(
+        c => c.category === category.category
+      )?.start_unixtime_jst;
 
-    return raceData.flatMap((category) => {
+      // フレームのタイム（実時間）からカテゴリー開始時間（実時間）を引いて、カテゴリー内の経過時間を計算
+      // 例えば、スタート時は０になるようにする
+      const thisTime = time - (categoryStartTime || 0);
+
+      // カテゴリーの色を取得
       const color = categoryToColor(category.category);
 
       return category.results
-        .map((participant: ConvertedRaceParticipant) => getPosition(featureData, participant, thisTime, color))
-        .filter((position: Scatterplot2D | null): position is Scatterplot2D => position !== null);
+        .map((participant: ConvertedRaceParticipant) =>
+          getPosition(featureData, participant, thisTime, color)
+        )
+        .filter(
+          (position: Scatterplot2D | null): position is Scatterplot2D =>
+            position !== null
+        );
     });
   } catch (error) {
     console.error('Error creating race data:', error);

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { ConvertedRaceData, RaceInfo } from '../types/race';
+import { ConvertedRaceData, RaceInfo } from '../../types/race';
 
-type State = {
+type RaceState = {
   runnerIds: string[];
   categoryNo: number;
   raceData: ConvertedRaceData;
@@ -10,15 +10,10 @@ type State = {
   isRaceInfoLoading: boolean;
   raceDataError: string | null;
   raceInfoError: string | null;
-  animationFrameValue: number; // アニメーションの現在のフレーム
-  animationFrameMax: number; // アニメーションの最大フレーム数
-  animationSpeed: number; // アニメーションの速度
-  isPlaying: boolean; // animetionの再生状態
-  personLocation: any;
 };
 
-export const useStore = create<
-  State & {
+export const useRaceStore = create<
+  RaceState & {
     setRunnerIds: (ids: string[]) => void;
     setCategoryNo: (category: number) => void;
     setRaceData: (data: ConvertedRaceData) => void;
@@ -27,13 +22,6 @@ export const useStore = create<
     setRaceInfoLoading: (isLoading: boolean) => void;
     setRaceDataError: (error: string | null) => void;
     setRaceInfoError: (error: string | null) => void;
-    setAnimationFrame: (frame: number) => void;
-    setAnimationFrameMax: (max: number) => void;
-    setPlaying: (isPlaying: boolean) => void;
-    setAnimationSpeed: (speed: number) => void;
-    playingStart: () => void;
-    playingStop: () => void;
-    setPersonLocationData: (value: any) => void;
   }
 >(set => ({
   runnerIds: [],
@@ -44,11 +32,6 @@ export const useStore = create<
   isRaceInfoLoading: true,
   raceDataError: null,
   raceInfoError: null,
-  animationFrameValue: 0,
-  animationFrameMax: 10000,
-  isPlaying: false,
-  animationSpeed: 10,
-  personLocation: null,
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategoryNo: categoryNo => set({ categoryNo }),
   setRaceData: data => set({ raceData: data }),
@@ -57,11 +40,4 @@ export const useStore = create<
   setRaceInfoLoading: isLoading => set({ isRaceInfoLoading: isLoading }),
   setRaceDataError: error => set({ raceDataError: error }),
   setRaceInfoError: error => set({ raceInfoError: error }),
-  setAnimationFrame: frame => set({ animationFrameValue: frame }),
-  setAnimationFrameMax: max => set({ animationFrameMax: max }),
-  setPlaying: isPlaying => set({ isPlaying: isPlaying }),
-  setAnimationSpeed: speed => set({ animationSpeed: speed }),
-  playingStart: () => set({ isPlaying: true }),
-  playingStop: () => set({ isPlaying: false }),
-  setPersonLocationData: (value: any) => set({ personLocation: value }),
 }));

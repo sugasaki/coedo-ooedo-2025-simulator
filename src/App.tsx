@@ -7,15 +7,18 @@ import { DeckGLMap } from './components/DeckGLMap';
 import { AnimationFrame } from './components/AnimationFrame';
 import { AnimationControls } from './components/AnimationControls';
 import { RaceTimeline } from './components/RaceTimeline';
-import { useStore } from './store/store';
+import { useAnimationStore } from './store/animation/animationStore';
 import './App.css';
 import { useResultData } from './hooks/useResultData';
+import { QueryParamHandler } from './components/QueryParamHandler';
 
 const url = './data/results_coedo_ooedo_2025_converted.json';
 const race_info_url = './data/race_info.json';
 
 function App() {
-  const { animationFrameValue } = useStore();
+  const { animationFrameValue } = useAnimationStore();
+  // createResultData is memoized with useCallback in the useResultData hook
+  // to prevent infinite re-renders
   const { createResultData } = useResultData();
 
   useEffect(() => {
@@ -31,10 +34,13 @@ function App() {
   useEffect(() => {
     // animationFrameValueに応じた各選手の位置情報を計算
     createResultData(animationFrameValue);
-  }, [animationFrameValue]);
+  }, [animationFrameValue, createResultData]);
 
   return (
     <div className="app-container dark:bg-gray-900 dark:text-white">
+      {/* QueryParamHandler to handle URL parameters */}
+      <QueryParamHandler />
+      
       {/* Map as background */}
       <div className="map-container">
         <DeckGLMap />

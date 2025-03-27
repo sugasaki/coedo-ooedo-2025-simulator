@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { useStore } from '../store/store';
+import { useEffect, useRef, useCallback } from 'react';
+import { useAnimationStore } from '../store/animation/animationStore';
 
 interface UseAnimationFrameOptions {
   min?: number;
@@ -11,18 +11,10 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
   const { min = 0, autoStart = false, autoStartDelay = 0 } = options;
   const animationRef = useRef<number | undefined>(undefined);
 
-  const isPlaying = useStore(state => state.isPlaying);
-  const setAnimationFrame = useStore(state => state.setAnimationFrame);
-  const setPlaying = useStore(state => state.setPlaying);
+  const { isPlaying, setAnimationFrame, setPlaying } = useAnimationStore();
 
-  const updateAnimationFrame = () => {
-    const store = useStore.getState();
-    const {
-      isPlaying: currentIsPlaying,
-      animationFrameValue,
-      animationSpeed,
-      animationFrameMax,
-    } = store;
+  const updateAnimationFrame = useCallback(() => {
+    const { isPlaying: currentIsPlaying, animationFrameValue, animationSpeed, animationFrameMax } = useAnimationStore.getState();
 
     let nextValue = animationFrameValue + animationSpeed;
     if (nextValue > animationFrameMax) nextValue = min;
@@ -32,7 +24,7 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
     if (currentIsPlaying) {
       animationRef.current = requestAnimationFrame(updateAnimationFrame);
     }
-  };
+  }, [min, setAnimationFrame]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -48,7 +40,7 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
         animationRef.current = undefined;
       }
     };
-  }, [isPlaying]);
+  }, [isPlaying, updateAnimationFrame]);
 
   useEffect(() => {
     if (autoStart) {

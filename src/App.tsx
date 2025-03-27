@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { fetchAndStoreRaceData } from './utils/raceDataLoader';
+import {
+  fetchAndStoreRaceData,
+  fetchAndStoreRaceInfo,
+} from './utils/raceDataLoader';
 import { DeckGLMap } from './components/DeckGLMap';
 import { AnimationFrame } from './components/AnimationFrame';
 import { AnimationControls } from './components/AnimationControls';
@@ -10,6 +13,7 @@ import { useResultData } from './hooks/useResultData';
 
 // const url = './data/results_coedo_ooedo_2025_short.json';
 const url = './data/results_coedo_ooedo_2025_converted.json';
+const race_info_url = './data/race_info.json';
 
 function App() {
   const { animationFrameValue, setAnimationFrameMax } = useStore();
@@ -19,6 +23,9 @@ function App() {
     setAnimationFrameMax(129600);
 
     (async () => {
+      // console.log(race_info_url, 'race_info_url');
+      await fetchAndStoreRaceInfo(race_info_url);
+
       console.log(url, 'url');
       await fetchAndStoreRaceData(url);
     })();

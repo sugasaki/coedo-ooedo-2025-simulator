@@ -34,3 +34,19 @@ export interface ConvertedRaceCategory {
 
 // 変換後のレースデータ全体
 export type ConvertedRaceData = ConvertedRaceCategory[];
+
+// レース情報の型定義
+export interface RaceInfoCategory {
+  category: string;
+  start_unixtime_jst: number;
+  end_unixtime_jst: number;
+}
+
+export interface RaceInfo {
+  name: string;
+  start: string;
+  end: string;
+  start_unixtime_jst: number;
+  end_unixtime_jst: number;
+  category: RaceInfoCategory[];
+}

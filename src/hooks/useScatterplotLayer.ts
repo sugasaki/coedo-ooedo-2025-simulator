@@ -1,8 +1,8 @@
 import { ScatterplotLayer } from 'deck.gl';
-import { useStore } from '../store/store';
+import { useMapStore } from '../store/map/mapStore';
 
 export const useScatterplotLayer = () => {
-  const { personLocation } = useStore();
+  const { personLocation } = useMapStore();
 
   const getScatterplotLayer = () => {
     //

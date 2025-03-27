@@ -1,7 +1,8 @@
 /**
  * レースデータを読み込むためのユーティリティ関数
  */
-import { useStore } from '../store/store';
+import { useRaceStore } from '../store/race/raceStore';
+import { useAnimationStore } from '../store/animation/animationStore';
 import { loadRaceData, loadRaceInfo } from './fetcher';
 
 /**
@@ -9,8 +10,7 @@ import { loadRaceData, loadRaceInfo } from './fetcher';
  * @param path JSONファイルのパス
  */
 export async function fetchAndStoreRaceData(path: string): Promise<void> {
-  const store = useStore.getState();
-  const { setRaceData, setRaceDataLoading, setRaceDataError } = store;
+  const { setRaceData, setRaceDataLoading, setRaceDataError } = useRaceStore.getState();
 
   try {
     setRaceDataLoading(true);
@@ -34,14 +34,8 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
  * @param path JSONファイルのパス
  */
 export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
-  const store = useStore.getState();
-  const {
-    setRaceInfo,
-    setRaceInfoLoading,
-    setRaceInfoError,
-    setAnimationFrame,
-    setAnimationFrameMax,
-  } = store;
+  const { setRaceInfo, setRaceInfoLoading, setRaceInfoError } = useRaceStore.getState();
+  const { setAnimationFrame, setAnimationFrameMax } = useAnimationStore.getState();
 
   try {
     setRaceInfoLoading(true);

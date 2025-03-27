@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useStore } from '../store/store';
+import { useRaceStore } from '../store/race/raceStore';
 import { useSearchParams } from 'react-router';
 
 export const QueryParamHandler = () => {
   const [searchParams] = useSearchParams();
+  const { setRunnerIds, setCategoryNo } = useRaceStore();
 
   useEffect(() => {
-    const store = useStore.getState();
     // URLパラメータから値を取得
     const runnerIds = searchParams.getAll('runnerid');
     const categoryNo = searchParams.get('categoryNo') || '';
@@ -19,12 +19,12 @@ export const QueryParamHandler = () => {
     // });
 
     if (runnerIds.length > 0) {
-      store.setRunnerIds(runnerIds);
+      setRunnerIds(runnerIds);
     }
     if (categoryNo) {
-      store.setCategoryNo(Number(categoryNo));
+      setCategoryNo(Number(categoryNo));
     }
-  }, [searchParams]);
+  }, [searchParams, setRunnerIds, setCategoryNo]);
 
   return null;
 };

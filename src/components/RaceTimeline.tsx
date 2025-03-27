@@ -1,6 +1,7 @@
 import React from 'react';
 import { TimelineControl } from './TimelineControl';
-import { useStore } from '../store/store';
+import { useAnimationStore } from '../store/animation/animationStore';
+import { useRaceStore } from '../store/race/raceStore';
 
 interface RaceTimelineProps {
   height?: string;
@@ -11,7 +12,8 @@ export const RaceTimeline: React.FC<RaceTimelineProps> = ({
   height = '60px',
   customTimeColor = '#FF5733',
 }) => {
-  const { animationFrameValue, setAnimationFrame, raceInfo } = useStore();
+  const { animationFrameValue, setAnimationFrame } = useAnimationStore();
+  const { raceInfo } = useRaceStore();
 
   // レース情報がない場合のデフォルト値
   const defaultMin = 0;

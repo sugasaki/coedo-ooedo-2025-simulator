@@ -1,9 +1,11 @@
 import { useAnimationFrame } from '../hooks/useAnimationFrame';
-import { useStore } from '../store/store';
+import { useAnimationStore } from '../store/animation/animationStore';
+import { useRaceStore } from '../store/race/raceStore';
 import { Button } from 'antd';
 
 export const AnimationControls = () => {
-  const { playingStart, playingStop, setAnimationFrame, raceInfo } = useStore();
+  const { playingStart, playingStop, setAnimationFrame } = useAnimationStore();
+  const { raceInfo } = useRaceStore();
   const { isPlaying } = useAnimationFrame({
     min: 0,
     autoStart: true,
@@ -13,19 +15,41 @@ export const AnimationControls = () => {
     <>
       <div style={{ margin: '10px 0' }}>
         <Button
-          color={isPlaying ? 'purple' : 'primary'}
-          variant="solid"
-          onClick={() => (isPlaying ? playingStop() : playingStart())}
+          type="primary"
+          onClick={() => playingStart()}
+          disabled={isPlaying}
           style={{
             marginRight: '10px',
+            backgroundColor: isPlaying ? undefined : '#4CAF50',
+            borderColor: isPlaying ? undefined : '#4CAF50',
+            fontSize: '11px',
           }}
+          size="small"
         >
-          {isPlaying ? 'ストップ' : 'スタート'}
+          スタート
         </Button>
         <Button
-          color="danger"
-          variant="solid"
+          type="primary"
+          danger
+          onClick={() => playingStop()}
+          disabled={!isPlaying}
+          style={{
+            marginRight: '10px',
+            fontSize: '11px',
+          }}
+          size="small"
+        >
+          ストップ
+        </Button>
+        <Button
+          type="primary"
           onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
+          style={{
+            backgroundColor: '#00aeff',
+            borderColor: '#00aeff',
+            fontSize: '11px',
+          }}
+          size="small"
         >
           リセット
         </Button>

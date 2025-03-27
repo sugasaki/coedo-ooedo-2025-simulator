@@ -1,7 +1,7 @@
-import { useStore } from '../store/store';
+import { useAnimationStore } from '../store/animation/animationStore';
 
 export const AnimationFrame = () => {
-  const { animationFrameValue } = useStore();
+  const { animationFrameValue } = useAnimationStore();
 
   return (
     <div>

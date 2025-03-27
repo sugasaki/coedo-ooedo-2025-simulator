@@ -20,7 +20,6 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
 
     setRaceData(raceData);
 
-    setRaceDataLoading(false);
     setRaceDataError(null);
   } catch (err) {
     setRaceDataError('レースデータの読み込みに失敗しました');
@@ -56,7 +55,6 @@ export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
     setAnimationFrame(raceInfo.start_unixtime_jst);
     setAnimationFrameMax(raceInfo.end_unixtime_jst);
 
-    setRaceInfoLoading(false);
     setRaceInfoError(null);
   } catch (err) {
     setRaceInfoError('レース情報の読み込みに失敗しました');

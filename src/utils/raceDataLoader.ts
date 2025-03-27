@@ -36,7 +36,13 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
  */
 export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
   const store = useStore.getState();
-  const { setRaceInfo, setRaceInfoLoading, setRaceInfoError } = store;
+  const {
+    setRaceInfo,
+    setRaceInfoLoading,
+    setRaceInfoError,
+    setAnimationFrame,
+    setAnimationFrameMax,
+  } = store;
 
   try {
     setRaceInfoLoading(true);
@@ -45,6 +51,10 @@ export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
     // console.log('loadRaceInfo', raceInfo);
 
     setRaceInfo(raceInfo);
+
+    // タイムラインの範囲を設定
+    setAnimationFrame(raceInfo.start_unixtime_jst);
+    setAnimationFrameMax(raceInfo.end_unixtime_jst);
 
     setRaceInfoLoading(false);
     setRaceInfoError(null);

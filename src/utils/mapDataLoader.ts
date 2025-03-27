@@ -1,5 +1,5 @@
-import courseGeoJson from '../data/2025-小江戸大江戸v1.3.json';
-import aidPointsJson from '../data/2025-小江戸大江戸-CP.json';
+import courseGeoJson from '../data/2025/geojson/小江戸大江戸200km.json';
+import aidPointsJson from '../data/2025/2025-小江戸大江戸-CP.json';
 
 /**
  * コースのGeoJSONデータ

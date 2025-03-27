@@ -4,7 +4,7 @@ type AnimationState = {
   animationFrameValue: number; // アニメーションの現在のフレーム
   animationFrameMax: number; // アニメーションの最大フレーム数
   animationSpeed: number; // アニメーションの速度
-  isPlaying: boolean; // animetionの再生状態
+  isPlaying: boolean; // animationの再生状態
 };
 
 export const useAnimationStore = create<

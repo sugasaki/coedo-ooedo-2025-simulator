@@ -1,20 +1,23 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { Timeline, DataSet } from 'vis-timeline/standalone';
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
-import { useStore } from '../store/store';
 
 interface TimelineControlProps {
-  min?: number;
-  max?: number;
+  min: number;
+  max: number;
   height?: string;
   customTimeColor?: string;
+  currentTime: number;
+  onTimeChange: (time: number) => void;
 }
 
 export const TimelineControl = ({
-  min = 0,
-  max = 69660,
+  min,
+  max,
   height = '100px',
   customTimeColor = '#ffee00',
+  currentTime,
+  onTimeChange,
 }: TimelineControlProps) => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const timeline = useRef<Timeline | null>(null);
@@ -23,14 +26,13 @@ export const TimelineControl = ({
   const maxRef = useRef(max);
   const heightRef = useRef(height);
   const customTimeColorRef = useRef(customTimeColor);
+  const currentTimeRef = useRef(currentTime);
 
-  const { animationFrameValue, setAnimationFrame } = useStore();
-
-  // 日付を正しく処理する関数
-  const createDate = useCallback((seconds: number) => {
-    const date = new Date(0); // 1970-01-01T00:00:00.000Z
-    date.setSeconds(seconds);
-    return date;
+  // Unix timestamp (秒)をJavaScript Dateオブジェクトに変換する関数
+  const createDate = useCallback((unixTimestamp: number) => {
+    // Unix timestampは1970年1月1日からの経過秒数なので、
+    // JavaScriptのDateオブジェクトで使用するには1000倍してミリ秒に変換する
+    return new Date(unixTimestamp * 1000);
   }, []);
 
   // タイムラインのデータセットを作成する関数
@@ -68,14 +70,12 @@ export const TimelineControl = ({
       //         day: 'M/D'
       //     }
       // },
-      // 30秒間隔で移動するように設定
-      timeStep: 1,
       // 目盛線を非表示にする設定
       showGrid: false,
       // 横スクロールを無効化する設定
       moveable: false,
       selectable: true,
-      // timeAxis: { scale: 'minute', step: 1 },
+      // timeAxis: { scale: 'minute' as const, step: 1 },
       width: '100%',
       height: heightRef.current,
       snap: function (date: Date) {
@@ -86,7 +86,7 @@ export const TimelineControl = ({
         return snapvalue;
       },
     };
-  }, [createDate, heightRef]);
+  }, [createDate]);
 
   // カスタムCSSスタイルを追加する関数
   const addCustomTimelineStyle = useCallback(() => {
@@ -129,7 +129,7 @@ export const TimelineControl = ({
     (timelineInstance: Timeline) => {
       const customTimeId = 'current';
       timelineInstance.addCustomTime(
-        createDate(animationFrameValue),
+        createDate(currentTimeRef.current),
         customTimeId
       );
 
@@ -144,11 +144,11 @@ export const TimelineControl = ({
       timelineInstance.on('timechange', function (props: any) {
         if (props.id === customTimeId) {
           const timeInSeconds = Math.floor(props.time.getTime() / 1000);
-          setAnimationFrame(timeInSeconds);
+          onTimeChange(timeInSeconds);
         }
       });
     },
-    [animationFrameValue, setAnimationFrame, createDate]
+    [createDate, onTimeChange]
   );
 
   // タイムラインを初期化する関数
@@ -208,7 +208,7 @@ export const TimelineControl = ({
     try {
       const customTimeId = 'current';
       timeline.current.setCustomTime(
-        createDate(animationFrameValue),
+        createDate(currentTimeRef.current),
         customTimeId
       );
     } catch (error) {
@@ -217,7 +217,7 @@ export const TimelineControl = ({
       cleanupTimeline();
       initializeTimeline();
     }
-  }, [animationFrameValue, createDate, initializeTimeline, cleanupTimeline]);
+  }, [createDate, initializeTimeline, cleanupTimeline]);
 
   // コンポーネントのマウント時に一度だけ実行
   useEffect(() => {
@@ -226,6 +226,7 @@ export const TimelineControl = ({
     maxRef.current = max;
     heightRef.current = height;
     customTimeColorRef.current = customTimeColor;
+    currentTimeRef.current = currentTime;
 
     // タイムラインを初期化
     initializeTimeline();
@@ -237,10 +238,29 @@ export const TimelineControl = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // 空の依存配列で一度だけ実行
 
-  // animationFrameValueが変更されたときにタイムラインを更新
+  // min, maxが変更されたときにタイムラインを更新
   useEffect(() => {
+    minRef.current = min;
+    maxRef.current = max;
+    
+    if (timeline.current) {
+      try {
+        // タイムラインの開始と終了時間を更新
+        const startTime = createDate(min);
+        const endTime = createDate(max);
+        
+        timeline.current.setWindow(startTime, endTime, { animation: false });
+      } catch (error) {
+        console.error('Timeline window update error:', error);
+      }
+    }
+  }, [min, max, createDate]);
+
+  // currentTimeが変更されたときにタイムラインを更新
+  useEffect(() => {
+    currentTimeRef.current = currentTime;
     updateTimelinePosition();
-  }, [updateTimelinePosition]);
+  }, [currentTime, updateTimelinePosition]);
 
   return <div ref={timelineRef}></div>;
 };

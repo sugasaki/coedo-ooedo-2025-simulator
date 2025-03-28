@@ -8,7 +8,8 @@ export const AnimationControls = () => {
   const { raceInfo } = useRaceStore();
   const { isPlaying } = useAnimationFrame({
     min: 0,
-    autoStart: true,
+    autoStart: false,
+    autoStartDelay: 1000,
   });
 
   return (

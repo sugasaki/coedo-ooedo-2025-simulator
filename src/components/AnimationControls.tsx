@@ -18,36 +18,38 @@ export const AnimationControls = () => {
 
   return (
     <>
-      <div style={{ margin: '10px 0' }}>
-        <Button
-          ghost
-          type="primary"
-          // shape="circle"
-          // color="primary"
-          onClick={() => (isPlaying ? playingStop() : playingStart())}
-          icon={isPlaying ? <BorderOuterOutlined /> : <CaretRightOutlined />}
-          size="small" // large | middle | small
-        >
-          {isPlaying ? 'Stop' : 'Start'}
-        </Button>
-        <Button
-          ghost
-          type="primary"
-          onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
-          icon={<DoubleLeftOutlined />}
-          size="small" // large | middle | small
-        >
-          先頭
-        </Button>
-      </div>
-      {/* <div
+      <div className="fixed bottom-22 left-5  z-10">
+        <div style={{ margin: '10px 0' }}>
+          <Button
+            ghost
+            type="primary"
+            // shape="circle"
+            // color="primary"
+            onClick={() => (isPlaying ? playingStop() : playingStart())}
+            icon={isPlaying ? <BorderOuterOutlined /> : <CaretRightOutlined />}
+            size="small" // large | middle | small
+          >
+            {isPlaying ? 'Stop' : 'Start'}
+          </Button>
+          <Button
+            ghost
+            type="primary"
+            onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
+            icon={<DoubleLeftOutlined />}
+            size="small" // large | middle | small
+          >
+            先頭
+          </Button>
+        </div>
+        {/* <div
         style={{
           margin: '0',
           color: isPlaying ? 'green' : 'red',
-        }}
-      >
-        状態: {isPlaying ? '再生中' : '停止中'}
-      </div> */}
+          }}
+          >
+          状態: {isPlaying ? '再生中' : '停止中'}
+          </div> */}
+      </div>
     </>
   );
 };

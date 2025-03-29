@@ -5,11 +5,13 @@ interface MapState {
   personLocation: PersonLocation[] | null;
   visibleCategories: number[];
   isTextLayerVisible: boolean;
+  pointSize: number;
   setPersonLocationData: (data: PersonLocation[] | null) => void;
   setVisibleCategories: (categories: number[]) => void;
   toggleCategoryVisibility: (category: number) => void;
   toggleTextLayerVisibility: () => void;
   setTextLayerVisibility: (isVisible: boolean) => void;
+  setPointSize: (size: number) => void;
   fontSize: number;
   setFontSize: (size: number) => void;
 }
@@ -18,6 +20,7 @@ export const useMapStore = create<MapState>(set => ({
   personLocation: null,
   visibleCategories: [], // Initially all categories are visible (empty array means all visible)
   isTextLayerVisible: true, // Text layer is visible by default
+  pointSize: 100, // Default point size
   fontSize: 14,
   setPersonLocationData: data => set({ personLocation: data }),
 
@@ -46,6 +49,8 @@ export const useMapStore = create<MapState>(set => ({
     set(state => ({ isTextLayerVisible: !state.isTextLayerVisible })),
     
   setTextLayerVisibility: isVisible => set({ isTextLayerVisible: isVisible }),
+  
+  setPointSize: size => set({ pointSize: size }),
     
   setFontSize: size => set({ fontSize: size }),
 }));

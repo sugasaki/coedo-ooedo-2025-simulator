@@ -2,7 +2,7 @@ import { ScatterplotLayer } from 'deck.gl';
 import { useMapStore } from '../store/map/mapStore';
 
 export const useScatterplotLayer = () => {
-  const { personLocation, visibleCategories } = useMapStore();
+  const { personLocation, visibleCategories, pointSize } = useMapStore();
 
   const getScatterplotLayer = () => {
     // Filter data based on visible categories
@@ -11,7 +11,10 @@ export const useScatterplotLayer = () => {
       personLocation.filter(person => 
         typeof person.categoryIndex === 'number' && 
         visibleCategories.includes(person.categoryIndex)
-      )
+      ).map(person => ({
+        ...person,
+        size: pointSize // Apply the global point size to each point
+      }))
       : [];
 
     const scatterplotLayer = new ScatterplotLayer({

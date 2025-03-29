@@ -10,4 +10,5 @@ export type Scatterplot2D = {
   name?: string;
   category?: string;
   categoryIndex?: number; // Add category index for filtering
+  distanceMeters?: number;
 };

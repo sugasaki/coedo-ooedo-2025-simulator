@@ -135,6 +135,7 @@ function calculateParticipantPosition(
       name: participant.氏名,
       category: participant.順位,
       categoryIndex: categoryIndex, // Add category index for filtering
+      distanceMeters: distanceKm,
     };
   } catch (error) {
     console.error('位置計算中にエラーが発生しました:', error);

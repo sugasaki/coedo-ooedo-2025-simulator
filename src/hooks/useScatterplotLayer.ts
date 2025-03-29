@@ -7,19 +7,23 @@ export const useScatterplotLayer = () => {
   const getScatterplotLayer = () => {
     // Filter data based on visible categories
     // 空の配列の場合は何も表示しない
-    const filteredData = personLocation ? 
-      personLocation.filter(person => 
-        typeof person.categoryIndex === 'number' && 
-        visibleCategories.includes(person.categoryIndex)
-      ).map(person => ({
-        ...person,
-        size: pointSize // Apply the global point size to each point
-      }))
+    const filteredData = personLocation
+      ? personLocation
+          .filter(
+            person =>
+              typeof person.categoryIndex === 'number' &&
+              visibleCategories.includes(person.categoryIndex)
+          )
+          .map(person => ({
+            ...person,
+            size: pointSize, // Apply the global point size to each point
+          }))
       : [];
 
     const scatterplotLayer = new ScatterplotLayer({
       id: 'scatterplot-layer',
       data: filteredData,
+      billboard: true, // trueの場合、レンダリングされた円は常にカメラの方向を向きます。
       pickable: true,
       opacity: 0.8,
       stroked: false,
@@ -29,9 +33,11 @@ export const useScatterplotLayer = () => {
       radiusMaxPixels: 100,
       lineWidthMinPixels: 0,
       getPosition: d => d.position,
-      getRadius: d => d.size,
+      getRadius: d => (d.distanceMeters > 210 ? d.size * 2 : d.size),
       getFillColor: d => d.color,
-      // getLineColor: [0, 0, 0],
+      getLineColor: d =>
+        d.distanceMeters > 210 ? [0, 0, 0, 255] : [255, 0, 0, 0],
+      getLineWidth: d => (d.distanceMeters > 210 ? 4 : 0),
     });
     return scatterplotLayer;
   };

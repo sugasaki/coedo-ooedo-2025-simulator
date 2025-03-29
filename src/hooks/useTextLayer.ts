@@ -20,7 +20,8 @@ export const useTextLayer = (noOverlap = false) => {
         person =>
           typeof person.categoryIndex === 'number' &&
           visibleCategories.includes(person.categoryIndex) &&
-          containsStringAndNumber(focusNumberArray, person.name!, person.no!)
+          (focusNumberArray.length === 0 ||
+            containsStringAndNumber(focusNumberArray, person.name!, person.no!))
       )
     : [];
 

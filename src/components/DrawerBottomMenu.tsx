@@ -1,11 +1,16 @@
-import { Drawer, Space, Button, Switch, Divider } from 'antd';
+import { Drawer, Space, Button, Switch, Divider, Slider } from 'antd';
 import { CategoryFilter } from './CategoryFilter';
 import { useAppStore } from '../store';
 import { useMapStore } from '../store';
 
 export const DrawerBottomMenu = () => {
   const { isDrawerMenuOpen, setIsDrawerMenuOpen } = useAppStore();
-  const { isTextLayerVisible, toggleTextLayerVisibility } = useMapStore();
+  const {
+    isTextLayerVisible,
+    toggleTextLayerVisibility,
+    pointSize,
+    setPointSize,
+  } = useMapStore();
 
   const onClose = () => {
     setIsDrawerMenuOpen(false);
@@ -36,6 +41,23 @@ export const DrawerBottomMenu = () => {
                 onChange={toggleTextLayerVisibility}
                 checkedChildren="ON"
                 unCheckedChildren="OFF"
+              />
+            </div>
+
+            <div className="mb-4">
+              <div className="mb-1">ポイントサイズ</div>
+              <Slider
+                min={50}
+                max={500}
+                value={pointSize}
+                onChange={setPointSize}
+                marks={{
+                  50: '特小',
+                  100: '小',
+                  200: '中',
+                  350: '大',
+                  500: '特大',
+                }}
               />
             </div>
           </div>

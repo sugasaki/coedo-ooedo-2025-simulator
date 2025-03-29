@@ -1,74 +1,91 @@
-# 小江戸大江戸シミュレータ
+# 小江戸大江戸 2025 シミュレータ
 
-## data
+小江戸大江戸マラソン 2025のレース進行をシミュレートするための可視化ツールです。ランナーの位置情報をリアルタイムで地図上に表示し、レースの進行状況を時系列で確認できます。
 
-データ取得は以下から行う
+## 機能
 
-https://github.com/sugasaki/simulator-data-geter
+- **インタラクティブな地図表示**: MapLibreとdeck.glを使用した高性能な地図表示
+- **レース進行のアニメーション**: タイムライン上でレースの進行をアニメーション表示
+- **カテゴリフィルタリング**: 特定のカテゴリ（例：男子、女子など）のランナーのみを表示
+- **ランナー検索**: ゼッケン番号や名前で特定のランナーを検索・フォーカス
+- **カスタマイズ可能な表示**: ポイントサイズ、フォントサイズなどの調整
+- **レスポンシブデザイン**: Tailwind CSSを使用したモバイル対応デザイン
 
+## 技術スタック
 
-## Deploy
+- **フロントエンド**: React + TypeScript
+- **状態管理**: Zustand
+- **地図表示**: deck.gl + MapLibre GL
+- **スタイリング**: Tailwind CSS
+- **ビルドツール**: Vite
+- **テスト**: Vitest
 
-Github Pagesへデプロイしています。
+## 開発環境のセットアップ
 
-編集は以下
+### 前提条件
+
+- Node.js (v18以上)
+- pnpm
+
+### インストール
+
+```bash
+# リポジトリのクローン
+git clone https://github.com/sugasaki/coedo-ooedo-2025-simulator.git
+cd coedo-ooedo-2025-simulator
+
+# 依存関係のインストール
+pnpm install
+```
+
+### 開発サーバーの起動
+
+```bash
+pnpm dev
+```
+
+### ビルド
+
+```bash
+pnpm build
+```
+
+### テスト実行
+
+```bash
+pnpm test
+```
+
+## データソース
+
+シミュレーションに使用されるデータは以下のリポジトリから取得・加工されています：
+
+[https://github.com/sugasaki/simulator-data-geter](https://github.com/sugasaki/simulator-data-geter)
+
+## デプロイ
+
+GitHub Pagesへ自動デプロイしています。デプロイ設定は以下のファイルで管理されています：
 
 ```
 .github/workflows/deploy-gh-pages.yml
 ```
 
+## プロジェクト構成
 
-# React + TypeScript + Vite
+- `src/components/`: UIコンポーネント
+- `src/hooks/`: カスタムReactフック
+- `src/store/`: Zustandを使用した状態管理
+- `src/utils/`: ユーティリティ関数
+- `src/data/`: シミュレーションデータ
+- `src/types/`: TypeScript型定義
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 主要コンポーネント
 
-Currently, two official plugins are available:
+- **DeckGLMap**: 地図とランナー位置の表示
+- **AnimationFrame**: アニメーションのフレーム管理
+- **RaceTimeline**: レース進行のタイムライン表示
+- **DrawerMenu**: 設定・フィルタリングメニュー
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ライセンス
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+このプロジェクトは[MITライセンス](LICENSE)の下で公開されています。

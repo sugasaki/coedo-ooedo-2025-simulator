@@ -66,7 +66,7 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
 
     const tooltipData = personLocation
       .map(d => {
-        return containsStringAndNumber(focusNumberArray, categoryName, d.no)
+        return containsStringAndNumber(focusNumberArray, d.name!, d.no!)
           ? d
           : null;
       })
@@ -115,7 +115,13 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
         style={mapViewStyle}
         onLoad={handleLoad}
       >
-        <DeckGLOverlay layers={layers} getTooltip={tooltipHandler} />
+        <DeckGLOverlay
+          layers={layers}
+          getTooltip={tooltipHandler}
+          onViewStateChange={({ viewState }) => {
+            console.log('viewState', viewState);
+          }}
+        />
       </Map>
 
       {tooltipData

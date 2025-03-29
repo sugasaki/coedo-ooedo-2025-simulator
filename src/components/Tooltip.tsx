@@ -12,15 +12,19 @@ export const Tooltip = ({ personInfo }: Props) => {
   const { fontSize, viewport } = useMapStore();
 
   useEffect(() => {
-    //WebMercatorViewportOptionsに変換するオプションが見つからないので、viewStateをそのままセット
-    const [x, y] = viewport.project(personInfo.coordinates);
+    // WebMercatorViewportOptionsに変換するオプションが見つからないので、viewStateをそのままセット
+    // console.log(personInfo, 'personinfo');
+    if (!personInfo) return;
+
+    const [x, y] = viewport.project(personInfo.position);
+
+    console.log(viewport, 'viewport');
+    console.log(x, 'x', y, 'y');
 
     setPosition({ left: x, top: y });
-  }, [viewport, personInfo.coordinates]);
+  }, [viewport, personInfo.position]);
 
   const name = personInfo.name.split(' ')[0]; // + personInfo.name.split(' ')[1];
-  // const name = personInfo.name.replace('　', ' ');
-  // const distance = personInfo.distance.toFixed(2) + 'km';
 
   return (
     <div

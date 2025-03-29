@@ -21,7 +21,7 @@ export const containsString = (numberArray: string[], target: string) => {
   try {
     // 文字列を空白で分割して数字の配列に変換
     // 配列に特定の数字が含まれているか判定
-    const ret = numberArray.find((d) => target.indexOf(d) > -1);
+    const ret = numberArray.find(d => target.indexOf(d) > -1);
     if ((ret?.length ?? 0) > 0) return true;
   } catch (e) {
     console.log(e, 'error1');
@@ -35,7 +35,11 @@ export const containsString = (numberArray: string[], target: string) => {
  * @param target
  * @returns
  */
-export const containsStringAndNumber = (numbers: string[], name: string, no: string) => {
+export const containsStringAndNumber = (
+  numbers: string[],
+  name: string,
+  no: string
+) => {
   if (!numbers) return false;
   if (numbers[0] == '') return false;
   // console.log(numbers, name, no);

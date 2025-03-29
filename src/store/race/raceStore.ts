@@ -34,7 +34,7 @@ export const useRaceStore = create<
   isRaceInfoLoading: true,
   raceDataError: null,
   raceInfoError: null,
-  focusNumberArray: [],
+  focusNumberArray: ['2151', '2114', '5', '1008'],
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategoryNo: categoryNo => set({ categoryNo }),
   setRaceData: data => set({ raceData: data }),

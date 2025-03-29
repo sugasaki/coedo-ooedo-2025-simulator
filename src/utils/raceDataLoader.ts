@@ -4,6 +4,7 @@
 import { useRaceStore } from '../store/race/raceStore';
 import { useAnimationStore } from '../store/animation/animationStore';
 import { loadRaceData, loadRaceInfo } from './fetcher';
+import { ConvertedRaceData } from '../types/race';
 
 /**
  * レースデータを読み込み、ストアに保存する
@@ -19,7 +20,35 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
     const raceData = await loadRaceData(path);
     // console.log('loadRaceData', raceData);
 
-    setRaceData(raceData);
+    // 姓名を分割して firstName と lastName を追加
+    const processedRaceData: ConvertedRaceData = raceData.map(category => {
+      return {
+        ...category,
+        results: category.results.map(participant => {
+          // 全角スペース「　」で名前を分割
+          const nameParts = participant.氏名.split('　');
+          let lastName = '';
+          let firstName = '';
+
+          if (nameParts.length >= 2) {
+            // 姓と名が分割できた場合
+            lastName = nameParts[0];
+            firstName = nameParts[1];
+          } else {
+            // 分割できなかった場合は名前全体を姓として扱う
+            lastName = participant.氏名;
+          }
+
+          return {
+            ...participant,
+            firstName,
+            lastName,
+          };
+        }),
+      };
+    });
+
+    setRaceData(processedRaceData);
 
     setRaceDataError(null);
   } catch (err) {

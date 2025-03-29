@@ -20,6 +20,8 @@ export interface ConvertedRaceParticipant {
   順位: string;
   ゼッケン: string;
   氏名: string;
+  firstName: string;
+  lastName: string;
   所属: string;
   部門順位: string;
   result: RaceTimeResult[]; // チェックポイントごとの記録

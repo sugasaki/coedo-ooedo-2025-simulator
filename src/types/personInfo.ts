@@ -22,6 +22,8 @@ export type PersonResultParent = {
   ranking?: string;
   isDnf: boolean;
   name: string;
+  firstName: string;
+  lastName: string;
   no: string;
   category: string;
   種目: string;

@@ -135,7 +135,7 @@ function calculateParticipantPosition(
       color,
       fontColor: fontColor,
       no: participant.ゼッケン,
-      name: participant.氏名,
+      name: participant.lastName,
       category: participant.順位,
       categoryIndex: categoryIndex, // Add category index for filtering
       distanceMeters: distanceKm,

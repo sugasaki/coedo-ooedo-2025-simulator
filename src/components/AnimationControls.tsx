@@ -18,7 +18,7 @@ export const AnimationControls = () => {
 
   return (
     <>
-      <div className="fixed bottom-22 left-5  z-10">
+      <div className="fixed bottom-26 left-5  z-10">
         <div style={{ margin: '10px 0' }}>
           <Button
             ghost
@@ -27,7 +27,8 @@ export const AnimationControls = () => {
             // color="primary"
             onClick={() => (isPlaying ? playingStop() : playingStart())}
             icon={isPlaying ? <BorderOuterOutlined /> : <CaretRightOutlined />}
-            size="small" // large | middle | small
+            size="middle" // large | middle | small
+            style={{ marginRight: '10px' }}
           >
             {isPlaying ? 'Stop' : 'Start'}
           </Button>
@@ -36,7 +37,7 @@ export const AnimationControls = () => {
             type="primary"
             onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
             icon={<DoubleLeftOutlined />}
-            size="small" // large | middle | small
+            size="middle" // large | middle | small
           >
             先頭
           </Button>

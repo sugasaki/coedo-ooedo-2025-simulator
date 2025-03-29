@@ -1,10 +1,13 @@
 import { TextLayer } from '@deck.gl/layers';
 import { useMapStore } from '../store/map/mapStore';
+import { containsStringAndNumber } from '../utils/containsNumber';
+import { useRaceStore } from '../store';
 // import { CollisionFilterExtension } from '@deck.gl/extensions';
 // import type { CollisionFilterExtensionProps } from '@deck.gl/extensions';
 
 export const useTextLayer = (noOverlap = false) => {
   const { personLocation, visibleCategories, fontSize } = useMapStore();
+  const { focusNumberArray } = useRaceStore();
 
   // const [zoom, setZoom] = useState<number>(10);
   // const scale = 2 ** zoom;
@@ -16,7 +19,8 @@ export const useTextLayer = (noOverlap = false) => {
     ? personLocation.filter(
         person =>
           typeof person.categoryIndex === 'number' &&
-          visibleCategories.includes(person.categoryIndex)
+          visibleCategories.includes(person.categoryIndex) &&
+          containsStringAndNumber(focusNumberArray, person.name!, person.no!)
       )
     : [];
 

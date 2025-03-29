@@ -19,7 +19,6 @@ const race_info_url = './data/race_info.json';
 export const Map = () => {
   const { animationFrameValue } = useAnimationStore();
   const { createResultData } = useResultData();
-  const { setFocusNumberArray } = useRaceStore();
 
   const { raceInfo } = useRaceStore();
   const { setVisibleCategories } = useMapStore();
@@ -33,9 +32,6 @@ export const Map = () => {
   }, [raceInfo, setVisibleCategories]);
 
   useEffect(() => {
-    // sample
-    setFocusNumberArray(['2151', '2114', '5', '1008']);
-
     (async () => {
       // レース情報を読み込む
       await fetchAndStoreRaceInfo(race_info_url);

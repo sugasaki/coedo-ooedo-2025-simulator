@@ -29,13 +29,15 @@ export const RaceTimeline: React.FC<RaceTimelineProps> = ({
   };
 
   return (
-    <TimelineControl
-      min={min}
-      max={max}
-      currentTime={animationFrameValue}
-      onTimeChange={handleTimeChange}
-      height={height}
-      customTimeColor={customTimeColor}
-    />
+    <>
+      <TimelineControl
+        min={min}
+        max={max}
+        currentTime={animationFrameValue}
+        onTimeChange={handleTimeChange}
+        height={height}
+        customTimeColor={customTimeColor}
+      />
+    </>
   );
 };

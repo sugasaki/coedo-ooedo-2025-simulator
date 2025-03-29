@@ -62,6 +62,8 @@ function createMockParticipant(size: number): ConvertedRaceParticipant {
     順位: '1',
     ゼッケン: '101',
     氏名: 'テスト太郎',
+    firstName: '太郎',
+    lastName: 'テスト',
     所属: 'テストチーム',
     部門順位: '1',
     pace: '5:00',

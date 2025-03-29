@@ -58,14 +58,13 @@ export const CategoryFilter = () => {
         カテゴリー表示
       </Title>
       <Checkbox
+        style={{ marginBottom: '15px' }}
         indeterminate={indeterminate}
         onChange={onCheckAllChange}
         checked={checkAll}
       >
         すべて選択
       </Checkbox>
-
-      <Divider />
 
       {/* 縦並びのチェックボックス */}
       <Space direction="vertical" style={{ width: '100%' }}>

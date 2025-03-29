@@ -1,4 +1,4 @@
-import { TextLayer } from 'deck.gl';
+import { TextLayer } from '@deck.gl/layers';
 import { useMapStore } from '../store/map/mapStore';
 // import { CollisionFilterExtension } from '@deck.gl/extensions';
 // import type { CollisionFilterExtensionProps } from '@deck.gl/extensions';
@@ -35,8 +35,8 @@ export const useTextLayer = (noOverlap = false) => {
       getColor: d => d.fontColor, //[255, 255, 255],
       getTextAnchor: 'start', // 'start'、'middle'、'end'
       getAlignmentBaseline: 'bottom', // 'top', 'center', 'bottom'
-      getSize: 1,
-      sizeScale: fontSize,
+      getSize: fontSize, // Using fontSize from mapStore
+      sizeScale: 1,
       // sizeMaxPixels,
       // sizeMinPixels,
       maxWidth: 64 * 12,

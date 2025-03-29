@@ -12,6 +12,8 @@ describe('timeUtils', () => {
     順位: '3',
     ゼッケン: '1234',
     氏名: 'テストランナー',
+    firstName: 'ランナー',
+    lastName: 'テスト',
     所属: 'テストチーム',
     部門順位: '男子：3',
     pace: '05:00.00',
@@ -49,7 +51,14 @@ describe('timeUtils', () => {
   describe('getDistanceAtTime', () => {
     it('空の結果配列に対してnullを返す', () => {
       const emptyParticipant: ConvertedRaceParticipant = {
-        ...mockParticipant,
+        順位: '',
+        ゼッケン: '',
+        氏名: '',
+        firstName: '',
+        lastName: '',
+        所属: '',
+        部門順位: '',
+        pace: '',
         result: [],
       };
       expect(getDistanceAtTime(emptyParticipant, 1800)).toBeNull();

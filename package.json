@@ -11,6 +11,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.0.0",
     "@deck.gl/core": "^9.1.8",
     "@deck.gl/extensions": "^9.1.8",
     "@deck.gl/layers": "^9.1.8",

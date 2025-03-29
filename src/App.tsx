@@ -12,6 +12,7 @@ import './App.css';
 import { useResultData } from './hooks/useResultData';
 import { QueryParamHandler } from './components/QueryParamHandler';
 import { CategoryFilter } from './components/CategoryFilter';
+import { useRaceStore } from './store/race/raceStore';
 
 const url = './data/results_coedo_ooedo_2025_converted.json';
 const race_info_url = './data/race_info.json';
@@ -21,8 +22,12 @@ function App() {
   // createResultData is memoized with useCallback in the useResultData hook
   // to prevent infinite re-renders
   const { createResultData } = useResultData();
+  const { setFocusNumberArray } = useRaceStore();
 
   useEffect(() => {
+    // sample
+    setFocusNumberArray(['2151', '2114', '5', '1008']);
+
     (async () => {
       // レース情報を読み込む
       await fetchAndStoreRaceInfo(race_info_url);

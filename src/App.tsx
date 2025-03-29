@@ -3,6 +3,7 @@ import { DrawerBottomMenu } from './components/DrawerBottomMenu';
 import { QueryParamHandler } from './components/QueryParamHandler';
 import { DrawerOpenButton } from './components/DrawerOpenButton';
 import './App.css';
+import { Title } from './components/Title';
 
 function App() {
   return (
@@ -13,15 +14,7 @@ function App() {
       <DrawerOpenButton />
       <DrawerBottomMenu />
 
-      {/* Overlay content */}
-      <div className="overlay-container">
-        {/* Header */}
-        <div className="header">
-          <div className="text-1xl font-bold text-gray-500">
-            小江戸大江戸2025
-          </div>
-        </div>
-      </div>
+      <Title />
 
       <Map />
     </>

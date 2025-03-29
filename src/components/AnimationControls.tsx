@@ -1,3 +1,8 @@
+import {
+  BorderOuterOutlined,
+  CaretRightOutlined,
+  DoubleLeftOutlined,
+} from '@ant-design/icons';
 import { useAnimationFrame } from '../hooks/useAnimationFrame';
 import { useAnimationStore } from '../store/animation/animationStore';
 import { useRaceStore } from '../store/race/raceStore';
@@ -15,21 +20,24 @@ export const AnimationControls = () => {
     <>
       <div style={{ margin: '10px 0' }}>
         <Button
-          color={isPlaying ? 'purple' : 'primary'}
-          variant="solid"
+          ghost
+          type="primary"
+          // shape="circle"
+          // color="primary"
           onClick={() => (isPlaying ? playingStop() : playingStart())}
-          style={{
-            marginRight: '10px',
-          }}
+          icon={isPlaying ? <BorderOuterOutlined /> : <CaretRightOutlined />}
+          size="small" // large | middle | small
         >
-          {isPlaying ? 'ストップ' : 'スタート'}
+          {isPlaying ? 'Stop' : 'Start'}
         </Button>
         <Button
-          color="danger"
-          variant="solid"
+          ghost
+          type="primary"
           onClick={() => setAnimationFrame(raceInfo?.start_unixtime_jst || 0)}
+          icon={<DoubleLeftOutlined />}
+          size="small" // large | middle | small
         >
-          リセット
+          先頭
         </Button>
       </div>
       {/* <div

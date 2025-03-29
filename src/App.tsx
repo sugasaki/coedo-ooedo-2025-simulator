@@ -9,11 +9,9 @@ function App() {
     <>
       {/* QueryParamHandler to handle URL parameters */}
       <QueryParamHandler />
-      <DrawerBottomMenu />
 
       <DrawerOpenButton />
-
-      <Map />
+      <DrawerBottomMenu />
 
       {/* Overlay content */}
       <div className="overlay-container">
@@ -24,6 +22,8 @@ function App() {
           </div>
         </div>
       </div>
+
+      <Map />
     </>
   );
 }

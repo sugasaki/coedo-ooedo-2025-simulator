@@ -53,7 +53,16 @@ export const Map = () => {
         </div>
 
         {/* Timeline at the bottom */}
-        <div className="timeline-container">
+        <div
+          className="timeline-container"
+          style={{
+            position: 'fixed',
+            bottom: '0.5rem',
+            left: '1rem',
+            right: '1rem',
+            zIndex: 20,
+          }}
+        >
           <AnimationFrame />
           <RaceTimeline />
         </div>

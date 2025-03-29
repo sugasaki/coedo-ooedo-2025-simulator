@@ -26,13 +26,15 @@ export function getDistanceAtTime(
 
   // 時間が最初のチェックポイント以前の場合
   if (timeSeconds <= results[0].time_second) {
-    return null; // results[0].leng;
+    // 最初のチェックポイントの距離を返す（線形補間）
+    const ratio = timeSeconds / Math.max(1, results[0].time_second);
+    return results[0].leng * ratio;
   }
 
   // 時間が最後のチェックポイント以降の場合
   const lastResult = results[results.length - 1];
   if (timeSeconds >= lastResult.time_second) {
-    return null; // lastResult.leng;
+    return lastResult.leng; // 最後のチェックポイントの距離を返す
   }
 
   // 適切なチェックポイントを見つける
@@ -71,6 +73,10 @@ export function getDistanceAtTimeString(
 ): number | null {
   // 時:分:秒形式から秒に変換
   const timeSeconds = convertTimeStringToSeconds(timeString);
+  // 無効な時間文字列の場合はnullを返す
+  if (timeSeconds === 0 && timeString !== '' && timeString !== '00:00:00') {
+    return null;
+  }
   return getDistanceAtTime(participant, timeSeconds);
 }
 

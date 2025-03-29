@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Map } from 'react-map-gl/maplibre';
+import {
+  FullscreenControl,
+  Map,
+  NavigationControl,
+} from 'react-map-gl/maplibre';
 import { DeckGLOverlay } from './DeckGLOverlay';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useScatterplotLayer } from '../hooks/useScatterplotLayer';
@@ -101,6 +105,9 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
         style={mapViewStyle}
         onLoad={handleLoad}
       >
+        {/* <GeolocateControl position="top-right" /> */} {/* 現在位置 */}
+        <FullscreenControl position="top-right" />
+        <NavigationControl position="top-right" />
         <DeckGLOverlay layers={layers} getTooltip={tooltipHandler} />
       </Map>
     </>

@@ -3,6 +3,7 @@ import { Checkbox, Typography, Space, Divider } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useRaceStore } from '../store/race/raceStore';
 import { useMapStore } from '../store/map/mapStore';
+import { createCategoryOptions } from '../utils/categoryUtils';
 
 const { Title } = Typography;
 
@@ -19,10 +20,7 @@ export const CategoryFilter = () => {
   // Initialize options and checked list when raceInfo is loaded
   useEffect(() => {
     if (raceInfo && raceInfo.categories) {
-      const categoryOptions = raceInfo.categories.map((category, index) => ({
-        label: category.name,
-        value: index,
-      }));
+      const categoryOptions = createCategoryOptions(raceInfo);
       setOptions(categoryOptions);
 
       // Initially set all categories as checked

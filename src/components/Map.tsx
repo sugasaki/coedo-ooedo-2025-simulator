@@ -10,16 +10,27 @@ import { RaceTimeline } from '../components/RaceTimeline';
 import { useResultData } from '../hooks/useResultData';
 import { useAnimationStore } from '../store/animation/animationStore';
 import { useRaceStore } from '../store/race/raceStore';
+import { useMapStore } from '../store';
+import { getAllCategoryIndices } from '../utils/categoryUtils';
 
 const url = './data/results_coedo_ooedo_2025_converted.json';
 const race_info_url = './data/race_info.json';
 
 export const Map = () => {
   const { animationFrameValue } = useAnimationStore();
-  // createResultData is memoized with useCallback in the useResultData hook
-  // to prevent infinite re-renders
   const { createResultData } = useResultData();
   const { setFocusNumberArray } = useRaceStore();
+
+  const { raceInfo } = useRaceStore();
+  const { setVisibleCategories } = useMapStore();
+
+  useEffect(() => {
+    if (raceInfo && raceInfo.categories) {
+      // Initially set all categories as checked
+      const allCategoryIndices = getAllCategoryIndices(raceInfo);
+      setVisibleCategories(allCategoryIndices);
+    }
+  }, [raceInfo, setVisibleCategories]);
 
   useEffect(() => {
     // sample

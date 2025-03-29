@@ -24,17 +24,16 @@ export function getDistanceAtTime(
     return null;
   }
 
-  // 時間が最初のチェックポイント以前の場合
+  // 時間が最初のチェックポイント以前の場合はnullを返す
   if (timeSeconds <= results[0].time_second) {
     // 最初のチェックポイントの距離を返す（線形補間）
-    const ratio = timeSeconds / Math.max(1, results[0].time_second);
-    return results[0].leng * ratio;
+    return null;
   }
 
-  // 時間が最後のチェックポイント以降の場合
+  // 時間が最後のチェックポイント以降の場合はnullを返す
   const lastResult = results[results.length - 1];
   if (timeSeconds >= lastResult.time_second) {
-    return lastResult.leng; // 最後のチェックポイントの距離を返す
+    return null;
   }
 
   // 適切なチェックポイントを見つける

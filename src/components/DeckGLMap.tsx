@@ -12,6 +12,7 @@ import {
 } from '../utils/mapDataLoader';
 import { adjustMapBounds } from '../utils/mapHelpers';
 import { useTextLayer } from '../hooks/useTextLayer';
+import { useMapStore } from '../store';
 
 interface Props {
   width?: string | number;
@@ -22,6 +23,7 @@ const mapStyle = getMapStyle(import.meta.env.VITE_MAPTILER_KEY);
 
 export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
   const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
+  const { isTextLayerVisible } = useMapStore();
 
   const { getScatterplotLayer } = useScatterplotLayer();
   const scatterplotLayer = getScatterplotLayer();
@@ -37,7 +39,9 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
     200
   );
 
-  const layers = [textLayer, scatterplotLayer, geojsonLayer, aidIconLayer];
+  // Create base layers array and conditionally add text layer
+  const baseLayers = [scatterplotLayer, geojsonLayer, aidIconLayer];
+  const layers = isTextLayerVisible ? [textLayer, ...baseLayers] : baseLayers;
 
   // マップ読み込み完了時
   const handleLoad = (event: any) => {

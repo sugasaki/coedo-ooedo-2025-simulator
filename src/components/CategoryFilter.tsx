@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, Typography, Space } from 'antd';
+import { Checkbox, Typography, Space, Divider } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useRaceStore } from '../store/race/raceStore';
 import { useMapStore } from '../store/map/mapStore';
@@ -55,23 +55,19 @@ export const CategoryFilter = () => {
   }
 
   return (
-    <div
-      style={{
-        margin: '10px 0',
-        padding: '10px',
-      }}
-    >
-      <Title level={5} style={{ margin: '0 0 8px 0', color: 'white' }}>
+    <div>
+      <Title level={5} style={{ margin: '0 0 8px 0' }}>
         カテゴリー表示
       </Title>
       <Checkbox
         indeterminate={indeterminate}
         onChange={onCheckAllChange}
         checked={checkAll}
-        style={{ color: 'white' }}
       >
         すべて選択
       </Checkbox>
+
+      <Divider />
 
       {/* 縦並びのチェックボックス */}
       <Space direction="vertical" style={{ width: '100%' }}>
@@ -87,7 +83,6 @@ export const CategoryFilter = () => {
 
               onChange(newCheckedList);
             }}
-            style={{ color: 'white' }}
           >
             {option.label}
           </Checkbox>

@@ -62,11 +62,3 @@ body,
 .dark .control-panel {
   background-color: rgba(31, 41, 55, 0.8);
 }
-
-.timeline-container {
-  position: fixed;
-  bottom: 2rem;
-  left: 1rem;
-  right: 1rem;
-  z-index: 20; /* Ensure it's above other elements */
-}

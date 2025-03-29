@@ -10,6 +10,7 @@ type RaceState = {
   isRaceInfoLoading: boolean;
   raceDataError: string | null;
   raceInfoError: string | null;
+  focusNumberArray: string[];
 };
 
 export const useRaceStore = create<
@@ -22,6 +23,7 @@ export const useRaceStore = create<
     setRaceInfoLoading: (isLoading: boolean) => void;
     setRaceDataError: (error: string | null) => void;
     setRaceInfoError: (error: string | null) => void;
+    setFocusNumberArray: (numbers: string[]) => void;
   }
 >(set => ({
   runnerIds: [],
@@ -32,6 +34,7 @@ export const useRaceStore = create<
   isRaceInfoLoading: true,
   raceDataError: null,
   raceInfoError: null,
+  focusNumberArray: [],
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategoryNo: categoryNo => set({ categoryNo }),
   setRaceData: data => set({ raceData: data }),
@@ -40,4 +43,6 @@ export const useRaceStore = create<
   setRaceInfoLoading: isLoading => set({ isRaceInfoLoading: isLoading }),
   setRaceDataError: error => set({ raceDataError: error }),
   setRaceInfoError: error => set({ raceInfoError: error }),
+  setFocusNumberArray: (numbers: string[]) =>
+    set({ focusNumberArray: numbers }),
 }));

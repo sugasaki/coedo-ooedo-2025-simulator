@@ -58,11 +58,20 @@ export const getColor = (no: number) => {
 
 // カテゴリと色の対応表を定義
 const categoryColors: { [key: string]: number[] } = {
-  '小江戸大江戸200km': [255, 0, 0], // ローズ
-  '小江戸大江戸230km': [255, 255, 0], // 黄色
-  '小江戸大江戸260km': [255, 0, 255], // マゼンタ
-  '小江戸90km': [127, 255, 0], // 春の緑
-  '大江戸ナイトラン115km': [0, 255, 255], // シアン
+  小江戸大江戸200km: [255, 0, 0], // ローズ
+  小江戸大江戸230km: [255, 255, 0], // 黄色
+  小江戸大江戸260km: [255, 0, 255], // マゼンタ
+  小江戸90km: [127, 255, 0], // 春の緑
+  大江戸ナイトラン115km: [0, 255, 255], // シアン
+  // 他のカテゴリと色の対応を追加することができます
+};
+
+const categoryFontColors: { [key: string]: number[] } = {
+  小江戸大江戸200km: [255, 200, 200], // ローズ
+  小江戸大江戸230km: [255, 255, 200], // 黄色
+  小江戸大江戸260km: [255, 200, 255], // マゼンタ
+  小江戸90km: [127, 255, 200], // 春の緑
+  大江戸ナイトラン115km: [150, 255, 255], // シアン
   // 他のカテゴリと色の対応を追加することができます
 };
 
@@ -71,4 +80,13 @@ export const categoryToColor = (categoryName: keyof typeof categoryColors) => {
 
   // カテゴリに対応する色を返す、対応する色がない場合はデフォルトの色を返す
   return categoryColors[categoryName] || [255, 255, 255]; // 対応する色がない場合のデフォルトは白
+};
+
+export const categoryToFontColor = (
+  categoryName: keyof typeof categoryColors
+) => {
+  // console.log(categoryName, 'categoryName');
+
+  // カテゴリに対応する色を返す、対応する色がない場合はデフォルトの色を返す
+  return categoryFontColors[categoryName] || [255, 255, 255]; // 対応する色がない場合のデフォルトは白
 };

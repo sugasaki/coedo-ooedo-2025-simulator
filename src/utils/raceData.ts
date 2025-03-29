@@ -3,7 +3,7 @@ import { getDistanceAtTime } from '../utils/timeUtils';
 import { Scatterplot2D } from '../types/scatterplot';
 import { ConvertedRaceParticipant, ConvertedRaceData } from '../types/race';
 import { getFeatureData } from '../utils/mapDataLoader';
-import { categoryToColor } from './colorTable';
+import { categoryToColor, categoryToFontColor } from './colorTable';
 import { Coordinate } from '../types/geo';
 import { RaceInfo } from '../types/race';
 import { GeoJSONFeature } from '../types/geojson';
@@ -35,6 +35,7 @@ export const createData = (
 
       // カテゴリの色を取得
       const color = categoryToColor(categoryName);
+      const fontColor = categoryToFontColor(categoryName);
 
       // カテゴリに対応するコースデータを取得
       const courseFeature = getFeatureData(categoryName);
@@ -51,6 +52,7 @@ export const createData = (
         courseFeature,
         elapsedTimeInCategory,
         color,
+        fontColor,
         categoryIndex
       );
     });
@@ -79,6 +81,7 @@ function calculateParticipantsPositions(
   courseFeature: GeoJSONFeature,
   elapsedTime: number,
   color: number[],
+  fontColor: number[],
   categoryIndex: number
 ): Scatterplot2D[] {
   // 各参加者の位置を計算し、無効な位置（nullの結果）をフィルタリング
@@ -89,6 +92,7 @@ function calculateParticipantsPositions(
         participant,
         elapsedTime,
         color,
+        fontColor,
         categoryIndex
       )
     )
@@ -103,6 +107,7 @@ function calculateParticipantPosition(
   participant: ConvertedRaceParticipant,
   elapsedTime: number,
   color: number[],
+  fontColor: number[],
   categoryIndex: number
 ): Scatterplot2D | null {
   try {
@@ -123,8 +128,9 @@ function calculateParticipantPosition(
     // 散布図データを作成して返す
     return {
       position,
-      size: 300,
+      size: 100,
       color,
+      fontColor: fontColor,
       no: participant.ゼッケン,
       name: participant.氏名,
       category: participant.順位,

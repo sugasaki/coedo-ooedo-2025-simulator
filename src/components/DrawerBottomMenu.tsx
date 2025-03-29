@@ -39,9 +39,15 @@ export const DrawerBottomMenu = () => {
         }
       >
         <>
+          <Divider orientation="center">検索</Divider>
+
+          <FocusNumberInput />
+
+          <Divider orientation="center">カテゴリー</Divider>
+
           <CategoryFilter />
 
-          <Divider orientation="left">名前表示</Divider>
+          <Divider orientation="center">名前表示</Divider>
 
           <div className="mb-4">
             <div className="flex items-center gap-4 mb-2">
@@ -53,13 +59,8 @@ export const DrawerBottomMenu = () => {
                 unCheckedChildren="OFF"
               />
             </div>
-            <Divider orientation="left"></Divider>
 
-            <Divider orientation="left">表示対象</Divider>
-            
-            <FocusNumberInput />
-
-            <Divider orientation="left">ボールサイズ</Divider>
+            <Divider orientation="center">ボールサイズ</Divider>
 
             <div className="mb-4">
               <Slider
@@ -77,7 +78,7 @@ export const DrawerBottomMenu = () => {
               />
             </div>
 
-            <Divider orientation="left">フォントサイズ</Divider>
+            <Divider orientation="center">フォントサイズ</Divider>
 
             <div className="mb-4">
               <Slider
@@ -95,7 +96,7 @@ export const DrawerBottomMenu = () => {
               />
             </div>
 
-            <Divider orientation="left">アニメーション速度</Divider>
+            <Divider orientation="center">アニメーション速度</Divider>
 
             <div className="mb-4">
               <Slider

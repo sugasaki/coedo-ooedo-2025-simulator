@@ -54,9 +54,6 @@ export const CategoryFilter = () => {
 
   return (
     <div>
-      <Title level={5} style={{ margin: '0 0 8px 0' }}>
-        カテゴリー表示
-      </Title>
       <Checkbox
         style={{ marginBottom: '15px' }}
         indeterminate={indeterminate}

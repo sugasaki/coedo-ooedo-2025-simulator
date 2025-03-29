@@ -12,8 +12,8 @@ export const AnimationControls = () => {
   const { playingStart, playingStop, setAnimationFrame } = useAnimationStore();
   const { raceInfo } = useRaceStore();
   const { isPlaying } = useAnimationFrame({
-    min: 0,
     autoStart: true,
+    autoStartDelay: 1000,
   });
 
   return (

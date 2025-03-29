@@ -2,30 +2,39 @@ import { useEffect, useRef, useCallback } from 'react';
 import { useAnimationStore } from '../store/animation/animationStore';
 
 interface UseAnimationFrameOptions {
-  min?: number;
   autoStart?: boolean;
   autoStartDelay?: number;
 }
 
-export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
-  const { min = 0, autoStart = false, autoStartDelay = 0 } = options;
+export const useAnimationFrame = ({
+  autoStart = false,
+  autoStartDelay = 0,
+}: UseAnimationFrameOptions = {}) => {
   const animationRef = useRef<number | undefined>(undefined);
-
   const { isPlaying, setAnimationFrame, setPlaying } = useAnimationStore();
 
+  // アニメーションフレームの更新
   const updateAnimationFrame = useCallback(() => {
-    const { isPlaying: currentIsPlaying, animationFrameValue, animationSpeed, animationFrameMax } = useAnimationStore.getState();
+    const {
+      isPlaying: currentIsPlaying,
+      animationFrameValue,
+      animationSpeed,
+      animationFrameMin,
+      animationFrameMax,
+    } = useAnimationStore.getState();
 
     let nextValue = animationFrameValue + animationSpeed;
-    if (nextValue > animationFrameMax) nextValue = min;
+    if (nextValue > animationFrameMax) nextValue = animationFrameMin;
+    if (nextValue < animationFrameMin) nextValue = animationFrameMin;
 
     setAnimationFrame(nextValue);
 
     if (currentIsPlaying) {
       animationRef.current = requestAnimationFrame(updateAnimationFrame);
     }
-  }, [min, setAnimationFrame]);
+  }, [setAnimationFrame]);
 
+  // アニメーションの開始と停止
   useEffect(() => {
     if (isPlaying) {
       animationRef.current = requestAnimationFrame(updateAnimationFrame);
@@ -42,6 +51,7 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
     };
   }, [isPlaying, updateAnimationFrame]);
 
+  // 自動開始
   useEffect(() => {
     if (autoStart) {
       const timer = setTimeout(() => setPlaying(true), autoStartDelay);
@@ -49,10 +59,17 @@ export const useAnimationFrame = (options: UseAnimationFrameOptions = {}) => {
     }
   }, [autoStart, autoStartDelay, setPlaying]);
 
+  // アニメーションフレームのリセット
+  const resetAnimation = () => {
+    const { animationFrameMin } = useAnimationStore.getState();
+
+    setAnimationFrame(animationFrameMin);
+  };
+
   return {
     startAnimation: () => setPlaying(true),
     stopAnimation: () => setPlaying(false),
-    resetAnimation: () => setAnimationFrame(min),
+    resetAnimation,
     isPlaying,
   };
 };

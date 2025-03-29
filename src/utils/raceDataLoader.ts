@@ -10,7 +10,8 @@ import { loadRaceData, loadRaceInfo } from './fetcher';
  * @param path JSONファイルのパス
  */
 export async function fetchAndStoreRaceData(path: string): Promise<void> {
-  const { setRaceData, setRaceDataLoading, setRaceDataError } = useRaceStore.getState();
+  const { setRaceData, setRaceDataLoading, setRaceDataError } =
+    useRaceStore.getState();
 
   try {
     setRaceDataLoading(true);
@@ -34,8 +35,10 @@ export async function fetchAndStoreRaceData(path: string): Promise<void> {
  * @param path JSONファイルのパス
  */
 export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
-  const { setRaceInfo, setRaceInfoLoading, setRaceInfoError } = useRaceStore.getState();
-  const { setAnimationFrame, setAnimationFrameMax } = useAnimationStore.getState();
+  const { setRaceInfo, setRaceInfoLoading, setRaceInfoError } =
+    useRaceStore.getState();
+  const { setAnimationFrame, setAnimationFrameMin, setAnimationFrameMax } =
+    useAnimationStore.getState();
 
   try {
     setRaceInfoLoading(true);
@@ -47,6 +50,7 @@ export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
 
     // タイムラインの範囲を設定
     setAnimationFrame(raceInfo.start_unixtime_jst);
+    setAnimationFrameMin(raceInfo.start_unixtime_jst);
     setAnimationFrameMax(raceInfo.end_unixtime_jst);
 
     setRaceInfoError(null);

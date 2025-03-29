@@ -1,7 +1,7 @@
 import React from 'react';
 import { TimelineControl } from './TimelineControl';
 import { useAnimationStore } from '../store/animation/animationStore';
-import { useRaceStore } from '../store/race/raceStore';
+import { useRaceStore } from '../store';
 
 interface RaceTimelineProps {
   height?: string;

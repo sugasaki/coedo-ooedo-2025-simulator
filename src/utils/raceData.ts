@@ -113,7 +113,10 @@ function calculateParticipantPosition(
   try {
     // 経過時間から走行距離を計算（キロメートル単位）
     const distanceKm = getDistanceAtTime(participant, elapsedTime);
+    // console.log(distanceKm, 'distanceKm');
+
     if (distanceKm === null) return null;
+    if (distanceKm === 0) return null;
 
     // キロメートルをメートルに変換
     const distanceMeters = distanceKm * 1000;

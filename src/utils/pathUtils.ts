@@ -219,8 +219,9 @@ export const getPositionAtDistance = (
     const { coordinates, lookup, totalDistance } = getOrCreatePathData(feature);
 
     // 距離が範囲外の場合は端点を返す
-    if (distance <= 0) return coordinates[0];
-    if (distance >= totalDistance) return coordinates[coordinates.length - 1];
+    if (distance <= 0) return null; // coordinates[0];
+    // if (distance >= totalDistance) return coordinates[coordinates.length - 1];
+    if (distance >= totalDistance) return null;
 
     // バイナリサーチでセグメントを特定
     const segmentIndex = findSegmentIndexBinarySearch(lookup, distance);

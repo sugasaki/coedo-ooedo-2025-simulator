@@ -17,7 +17,7 @@ export function getDistanceAtTime(
 ): number | null {
   // const results = participant.result;
   // console.log(participant, 'participant');
-  const results = participant.result
+  const results = participant.result;
 
   // 結果がない、または1つしかない場合はnullを返す
   if (!results || results.length <= 1) {
@@ -26,13 +26,13 @@ export function getDistanceAtTime(
 
   // 時間が最初のチェックポイント以前の場合
   if (timeSeconds <= results[0].time_second) {
-    return results[0].leng;
+    return null; // results[0].leng;
   }
 
   // 時間が最後のチェックポイント以降の場合
   const lastResult = results[results.length - 1];
   if (timeSeconds >= lastResult.time_second) {
-    return lastResult.leng;
+    return null; // lastResult.leng;
   }
 
   // 適切なチェックポイントを見つける
@@ -41,7 +41,10 @@ export function getDistanceAtTime(
     const current = results[i];
     // console.log('current', current);
 
-    if (current.time_second_prev <= timeSeconds && timeSeconds <= current.time_second) {
+    if (
+      current.time_second_prev <= timeSeconds &&
+      timeSeconds <= current.time_second
+    ) {
       // 線形補間を行う
       // console.log('線形補間を行う', current);
       const timeRange = current.time_second - current.time_second_prev;

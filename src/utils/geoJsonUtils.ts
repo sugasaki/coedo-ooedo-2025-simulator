@@ -19,15 +19,17 @@ export const createGeoJsonLayer = (
     stroked: false,
     filled: true,
     extruded: true,
-    lineWidthScale: 4,
-    lineWidthMinPixels: 2,
+    lineWidthScale: 1,
+    lineWidthMinPixels: 1,
     autoHighlight: true,
     getLineColor: [255, 255, 0, 150],
-    highlightColor: [255, 200, 0],
+    // highlightColor: [255, 200, 0],
     getPointRadius: 100,
     getLineWidth: 20,
-    opacity: 0.5,
-    lineCapRounded: true,
+    // opacity: 0.5,
+    lineCapRounded: true, //丸いキャップを描画します。
+    lineJointRounded: true, //丸いジョイントを描画します。
+    // lineBillboard: true, //
     extensions: [],
     ...options, // カスタムオプションで上書き可能
   });

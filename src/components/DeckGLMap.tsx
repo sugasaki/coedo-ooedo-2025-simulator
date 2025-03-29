@@ -11,6 +11,7 @@ import {
   getMapStyle,
 } from '../utils/mapDataLoader';
 import { adjustMapBounds } from '../utils/mapHelpers';
+import { useTextLayer } from '../hooks/useTextLayer';
 
 interface Props {
   width?: string | number;
@@ -23,8 +24,11 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
   const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
 
   const { getScatterplotLayer } = useScatterplotLayer();
-
   const scatterplotLayer = getScatterplotLayer();
+
+  const { getTextLayer } = useTextLayer();
+  const textLayer = getTextLayer();
+
   const geojsonLayer = createGeoJsonLayer(courseData);
   const aidIconLayer = createAidPointLayer(
     aidPointsData,
@@ -33,7 +37,7 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
     200
   );
 
-  const layers = [scatterplotLayer, geojsonLayer, aidIconLayer];
+  const layers = [textLayer, scatterplotLayer, geojsonLayer, aidIconLayer];
 
   // マップ読み込み完了時
   const handleLoad = (event: any) => {
@@ -59,7 +63,6 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
     position: 'relative' as const,
   };
 
-
   //ツールチップを生成する
   const tooltipHandler = (item: any): string | null => {
     // console.log('item', item);
@@ -77,7 +80,7 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
 
     if (item.layer.id.startsWith('scatterplot-layer')) {
       if (!item.object) return null;
-      console.log('object.object', item.object);
+      // console.log('object.object', item.object);
       return `${item.object.no}: ${item.object.name}`;
     }
 
@@ -94,8 +97,7 @@ export const DeckGLMap = ({ width = '100%', height = '100%' }: Props) => {
         style={mapViewStyle}
         onLoad={handleLoad}
       >
-        <DeckGLOverlay layers={layers} getTooltip={tooltipHandler}
-        />
+        <DeckGLOverlay layers={layers} getTooltip={tooltipHandler} />
       </Map>
     </>
   );

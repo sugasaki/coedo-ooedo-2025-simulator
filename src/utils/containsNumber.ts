@@ -1,5 +1,5 @@
 /**
- * 文字列を空白で分割して数字の配列に変換
+ * 数字の配列に特定の数字が含まれているか判定
  * @param numbers
  * @param target
  * @returns

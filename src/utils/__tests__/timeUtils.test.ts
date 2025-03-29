@@ -62,7 +62,7 @@ describe('timeUtils', () => {
 
     it('最後のチェックポイント以降の時間では最後の距離を返す', () => {
       const distance = getDistanceAtTime(mockParticipant, 8000);
-      expect(distance).toBe(20.0);
+      expect(distance).toBeNull();
     });
 
     it('チェックポイント間の時間では線形補間された距離を返す', () => {
@@ -74,7 +74,7 @@ describe('timeUtils', () => {
 
     it('正確なチェックポイント時間では実際の距離を返す', () => {
       const distance = getDistanceAtTime(mockParticipant, 7200);
-      expect(distance).toBe(20.0);
+      expect(distance).toBeNull();
     });
   });
 

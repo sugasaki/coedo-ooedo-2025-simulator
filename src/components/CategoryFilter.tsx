@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, Typography, Space, Divider } from 'antd';
+import { Checkbox, Typography, Space } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useRaceStore } from '../store/race/raceStore';
 import { useMapStore } from '../store/map/mapStore';

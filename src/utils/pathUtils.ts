@@ -216,7 +216,7 @@ export const getPositionAtDistance = (
 ): PositionAtDistance => {
   try {
     // パスデータを取得（キャッシュから、または新規計算）
-    const { coordinates, lookup, totalDistance } = getOrCreatePathData(feature);
+    const { lookup, totalDistance } = getOrCreatePathData(feature);
 
     // 距離が範囲外の場合は端点を返す
     if (distance <= 0) return null; // coordinates[0];

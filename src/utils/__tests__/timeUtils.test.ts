@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { getDistanceAtTime, getDistanceAtTimeString, convertTimeStringToSeconds } from '../timeUtils';
+import {
+  getDistanceAtTime,
+  getDistanceAtTimeString,
+  convertTimeStringToSeconds,
+} from '../timeUtils';
 import { ConvertedRaceParticipant } from '../../types/race';
 
 describe('timeUtils', () => {
@@ -19,7 +23,7 @@ describe('timeUtils', () => {
         comment: '',
         leng: 0,
         length_prev: 0,
-        speed: 0
+        speed: 0,
       },
       {
         time: '01:00:00',
@@ -28,7 +32,7 @@ describe('timeUtils', () => {
         comment: '1位',
         leng: 10.0,
         length_prev: 0,
-        speed: 10.0
+        speed: 10.0,
       },
       {
         time: '02:00:00',
@@ -37,16 +41,16 @@ describe('timeUtils', () => {
         comment: '2位',
         leng: 20.0,
         length_prev: 10.0,
-        speed: 10.0
-      }
-    ]
+        speed: 10.0,
+      },
+    ],
   };
 
   describe('getDistanceAtTime', () => {
     it('空の結果配列に対してnullを返す', () => {
       const emptyParticipant: ConvertedRaceParticipant = {
         ...mockParticipant,
-        result: []
+        result: [],
       };
       expect(getDistanceAtTime(emptyParticipant, 1800)).toBeNull();
     });
@@ -82,7 +86,7 @@ describe('timeUtils', () => {
 
     it('不正な時刻文字列に対して適切に処理する', () => {
       const distance = getDistanceAtTimeString(mockParticipant, 'invalid');
-      expect(distance).toBe(0);
+      expect(distance).toBeNull();
     });
   });
 

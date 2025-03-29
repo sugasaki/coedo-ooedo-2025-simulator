@@ -216,12 +216,11 @@ export const getPositionAtDistance = (
 ): PositionAtDistance => {
   try {
     // パスデータを取得（キャッシュから、または新規計算）
-    const { lookup, totalDistance } = getOrCreatePathData(feature);
+    const { lookup, totalDistance, coordinates } = getOrCreatePathData(feature);
 
     // 距離が範囲外の場合は端点を返す
-    if (distance <= 0) return null; // coordinates[0];
-    // if (distance >= totalDistance) return coordinates[coordinates.length - 1];
-    if (distance >= totalDistance) return null;
+    if (distance <= 0) return coordinates[0];
+    if (distance >= totalDistance) return coordinates[coordinates.length - 1];
 
     // バイナリサーチでセグメントを特定
     const segmentIndex = findSegmentIndexBinarySearch(lookup, distance);

@@ -23,6 +23,8 @@ export const IMPERIAL_PALACE_LOCATION = {
   longitude: 139.482339983806,
   latitude: 35.91942991130054,
   zoom: 13,
+  bearing: 0,
+  pitch: 20,
 };
 
 /**

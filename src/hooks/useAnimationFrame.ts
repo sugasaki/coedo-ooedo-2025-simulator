@@ -23,12 +23,9 @@ export const useAnimationFrame = ({
       animationFrameMax,
     } = useAnimationStore.getState();
 
-    const maxFrameUnixTime = animationFrameMax + 1800; //0.5時間足す
-    const startFrameUnixTime = animationFrameMin - 1800; //0.5時間引く
-
     let nextValue = animationFrameValue + animationSpeed;
-    if (nextValue > maxFrameUnixTime) nextValue = startFrameUnixTime;
-    if (nextValue < startFrameUnixTime) nextValue = startFrameUnixTime;
+    if (nextValue > animationFrameMax) nextValue = animationFrameMin;
+    if (nextValue < animationFrameMin) nextValue = animationFrameMin;
 
     setAnimationFrame(nextValue);
 

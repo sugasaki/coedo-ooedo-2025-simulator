@@ -49,9 +49,10 @@ export async function fetchAndStoreRaceInfo(path: string): Promise<void> {
     setRaceInfo(raceInfo);
 
     // タイムラインの範囲を設定
-    setAnimationFrame(raceInfo.start_unixtime_jst - 1800);
-    setAnimationFrameMin(raceInfo.start_unixtime_jst);
-    setAnimationFrameMax(raceInfo.end_unixtime_jst);
+    const yohaku = 1800;
+    setAnimationFrame(raceInfo.start_unixtime_jst - 0);
+    setAnimationFrameMin(raceInfo.start_unixtime_jst - yohaku);
+    setAnimationFrameMax(raceInfo.end_unixtime_jst + yohaku);
 
     setRaceInfoError(null);
   } catch (err) {

@@ -20,8 +20,9 @@ export const RaceTimeline: React.FC<RaceTimelineProps> = ({
   const defaultMax = 100;
 
   // レース情報から開始時間と終了時間を取得
-  const min = raceInfo ? raceInfo.start_unixtime_jst : defaultMin;
-  const max = raceInfo ? raceInfo.end_unixtime_jst : defaultMax;
+  const yohaku = 1800;
+  const min = raceInfo ? raceInfo.start_unixtime_jst - yohaku : defaultMin;
+  const max = raceInfo ? raceInfo.end_unixtime_jst + yohaku : defaultMax;
 
   // タイムラインの時間が変更されたときのハンドラー
   const handleTimeChange = (time: number) => {

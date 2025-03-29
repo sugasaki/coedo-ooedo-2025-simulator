@@ -2,6 +2,7 @@ import { Drawer, Space, Button, Switch, Divider, Slider } from 'antd';
 import { CategoryFilter } from './CategoryFilter';
 import { useAppStore } from '../store';
 import { useMapStore } from '../store';
+import { useAnimationStore } from '../store';
 
 export const DrawerBottomMenu = () => {
   const { isDrawerMenuOpen, setIsDrawerMenuOpen } = useAppStore();
@@ -13,6 +14,8 @@ export const DrawerBottomMenu = () => {
     fontSize,
     setFontSize,
   } = useMapStore();
+  
+  const { animationSpeed, setAnimationSpeed } = useAnimationStore();
 
   const onClose = () => {
     setIsDrawerMenuOpen(false);
@@ -84,6 +87,23 @@ export const DrawerBottomMenu = () => {
                 //   20: '特大',
                 //   24: '極大',
                 // }}
+              />
+            </div>
+            
+            <Divider orientation="left">アニメーション速度</Divider>
+            
+            <div className="mb-4">
+              <Slider
+                min={1}
+                max={50}
+                value={animationSpeed}
+                onChange={setAnimationSpeed}
+                marks={{
+                  1: '遅い',
+                  10: '普通',
+                  30: '速い',
+                  50: '最速'
+                }}
               />
             </div>
           </div>

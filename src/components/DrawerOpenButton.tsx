@@ -6,7 +6,7 @@ export const DrawerOpenButton = () => {
   const { setIsDrawerMenuOpen } = useAppStore();
 
   return (
-    <div className="fixed bottom-22 left-1/2 transform -translate-x-1/2 z-10">
+    <div className="fixed bottom-22 right-5  z-10">
       <Button
         shape="circle"
         type="default"

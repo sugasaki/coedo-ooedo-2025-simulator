@@ -5,7 +5,7 @@ export type PersonInfoType = {
   no: string;
   color: number[];
   category: string;
-  coordinates: Position;
+  position: Position;
   distance: number;
 };
 

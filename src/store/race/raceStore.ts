@@ -34,7 +34,31 @@ export const useRaceStore = create<
   isRaceInfoLoading: true,
   raceDataError: null,
   raceInfoError: null,
-  focusNumberArray: ['2151', '2114', '5', '1008'],
+  focusNumberArray: [
+    '2151', // 200 1位
+    '2262', // 竹内 竜也
+    '2114', // 200 最後尾 なおっぺ
+    '2221', // 200 杉 登紀子
+    '2292', // 寺田 泰宏
+    '2276', // 田村 篤史
+    '156', // 230 1位 竹村 直太
+    '門脇', // 230 122 門脇
+    '186', // 三谷 享
+    '144', // 庄司 光国
+    '176', // スラ
+    '179', // 230 一杉 岳春
+    '181', // 230 平野 智彦
+    '167', // 230	成田 玲司
+    '運天', // 230 運天 均 114
+    '5', // 260 1位 市川 智一
+    '33', // 260 吉田 幸徳
+    '13', // 260 川上 真也
+    '1025', // 115 1位 岡本 敏明
+    '1008', // 女将
+    '1003', // 朝生 文子
+    '1088', // 谷川 幸乃
+    '1048', // 小淵 康子
+  ],
   setRunnerIds: ids => set({ runnerIds: ids }),
   setCategoryNo: categoryNo => set({ categoryNo }),
   setRaceData: data => set({ raceData: data }),

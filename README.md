@@ -4,6 +4,8 @@
 
 ## scree shot
 
+![screenshot](screenshot.gif)
+
 ## 機能
 
 - **インタラクティブな地図表示**: MapLibre と deck.gl を使用した高性能な地図表示

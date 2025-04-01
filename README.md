@@ -80,6 +80,7 @@ GitHub Pages へ自動デプロイしています。デプロイ設定は以下�
 - `src/utils/`: ユーティリティ関数
 - `src/data/`: シミュレーションデータ
 - `src/types/`: TypeScript 型定義
+- `CLAUDE.md`: 開発ガイドラインとClaude AIアシスタント用の設定ファイル
 
 ## 主要コンポーネント
 

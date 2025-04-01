@@ -1,5 +1,23 @@
 # CLAUDE.md - Guidelines for Coedo-Ooedo 2025 Simulator
 
+## Project Overview
+小江戸大江戸マラソン2025のレース進行をシミュレートする可視化ツールです。ランナー位置を地図上にリアルタイムで表示し、レース進行を時系列で確認できます。
+
+### 主な機能
+- 複数コース対応（200km/230km/260km/90km/115km）
+- ランナー位置のアニメーション表示
+- タイムラインによるレース進行確認
+- カテゴリ別フィルタリング
+- ランナー検索・フォーカス機能
+
+### 技術スタック
+- React + TypeScript
+- deck.gl + MapLibre GL
+- Zustand（状態管理）
+- Tailwind CSS
+- Vite（ビルドツール）
+- Vitest（テスト）
+
 ## Commands
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production

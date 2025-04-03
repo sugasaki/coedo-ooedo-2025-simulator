@@ -7,7 +7,8 @@ import { FocusNumberInput } from './FocusNumberInput';
 export const DrawerMenu = () => {
   // タッチイベントの拡大を防止するための関数
   const preventZoom = (e: React.TouchEvent) => {
-    if (e.touches.length > 1) {
+    // マルチタッチジェスチャー時のみ拡大を防止
+    if (e.touches && e.touches.length > 1) {
       e.preventDefault();
       e.stopPropagation();
     }

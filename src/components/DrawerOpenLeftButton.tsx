@@ -4,8 +4,17 @@ import { MenuOutlined } from '@ant-design/icons';
 export const DrawerOpenLeftButton = () => {
   const { setIsLeftDrawerMenuOpen } = useAppStore();
 
-  const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
+  // マウスクリック用ハンドラー
+  const handleMouseClick = (e: React.MouseEvent) => {
     // クリックイベントの伝播を止めてズームを防止
+    e.preventDefault();
+    e.stopPropagation();
+    setIsLeftDrawerMenuOpen(true);
+  };
+
+  // タッチ用ハンドラー
+  const handleTouch = (e: React.TouchEvent) => {
+    // タッチイベントの伝播を止めてズームを防止
     e.preventDefault();
     e.stopPropagation();
     setIsLeftDrawerMenuOpen(true);
@@ -15,8 +24,8 @@ export const DrawerOpenLeftButton = () => {
     <div className="fixed top-2 left-2 z-10">
       <MenuOutlined
         style={{ fontSize: '18px', color: '#fff' }}
-        onClick={handleClick}
-        onTouchEnd={handleClick}
+        onClick={handleMouseClick}
+        onTouchEnd={handleTouch}
       />
     </div>
   );

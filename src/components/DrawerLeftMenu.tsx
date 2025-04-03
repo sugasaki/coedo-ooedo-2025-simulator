@@ -5,11 +5,8 @@ import { DrawerMenu } from './DrawerMenu';
 export const DrawerLeftMenu = () => {
   const { isLeftDrawerMenuOpen, setIsLeftDrawerMenuOpen } = useAppStore();
 
-  const onClose = (e?: React.MouseEvent | React.TouchEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  // DrawerコンポーネントのonCloseを処理する関数
+  const onClose = () => {
     setIsLeftDrawerMenuOpen(false);
   };
 

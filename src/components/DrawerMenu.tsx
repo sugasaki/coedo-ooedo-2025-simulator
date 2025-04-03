@@ -5,6 +5,13 @@ import { useAnimationStore } from '../store';
 import { FocusNumberInput } from './FocusNumberInput';
 
 export const DrawerMenu = () => {
+  // タッチイベントの拡大を防止するための関数
+  const preventZoom = (e: React.TouchEvent) => {
+    if (e.touches.length > 1) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
   const {
     isTextLayerVisible,
     toggleTextLayerVisibility,
@@ -17,7 +24,10 @@ export const DrawerMenu = () => {
   const { animationSpeed, setAnimationSpeed } = useAnimationStore();
 
   return (
-    <>
+    <div 
+      onTouchStart={preventZoom}
+      onTouchMove={preventZoom}
+    >
       <Divider orientation="center">検索</Divider>
 
       <FocusNumberInput />
@@ -92,6 +102,6 @@ export const DrawerMenu = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
